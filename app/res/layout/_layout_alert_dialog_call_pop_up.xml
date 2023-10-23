@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:background="@null"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/yes_no_call"
+            layout="@layout/_layout_professional_call_yes_no" />
+
+        <include
+            android:id="@+id/opportunity_or_cp"
+            layout="@layout/_layout_who_was_it_for"
+            android:visibility="gone"/>
+
+        <include
+            android:id="@+id/yes_no_call_detail"
+            layout="@layout/_layout_professional_call_detail"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/close_lost"
+            layout="@layout/_layout_close_lost"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/campaign_approval_detail_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginVertical="4dp"
+            android:background="#F1F1F1">
+
+            <ImageButton
+                android:id="@+id/thinBackBtn"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/background_color"
+                android:contentDescription="@string/image_desc"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:onClick="onClick"
+                android:src="@drawable/ic_thin_back" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/WiseOpportunityHeadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/backBtnMargin"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/campaign_approval_detail_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layoutAnimation="@anim/recycler_animation"
+                    tools:listitem="@layout/card_view_campaign_approval" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

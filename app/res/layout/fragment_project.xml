@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:orientation="vertical"
+        tools:context=".fragment.ProjectFragment">
+
+        <LinearLayout
+            android:id="@+id/stage_wise_opportunity_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="12dp">
+
+            <TextView
+                android:id="@+id/specific_type_opportunity_specific_type"
+                style="@style/HeadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/project_details"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+<!--                <Spinner-->
+<!--                    android:id="@+id/cities_spinner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@color/background_color"-->
+<!--                    android:gravity="center" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="10dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_toStartOf="@+id/cityClick"-->
+<!--                    android:background="@color/background_color" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/cityClick"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:drawablePadding="4dp"-->
+<!--                    android:fontFamily="@font/myriad_pro_regular"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/city"-->
+<!--                    app:drawableStartCompat="@drawable/ic_filter" />-->
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/recycler_animation"
+            tools:listitem="@layout/card_view_projects" />
+
+    </LinearLayout>
+</layout>

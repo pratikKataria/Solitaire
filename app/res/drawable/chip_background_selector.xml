@@ -1,0 +1,9 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Selected state -->
+    <item android:state_checked="true" android:drawable="@color/selected_chip_background_color" />
+
+    <!-- Default state -->
+    <item android:drawable="@color/default_chip_background_color" />
+
+</selector>

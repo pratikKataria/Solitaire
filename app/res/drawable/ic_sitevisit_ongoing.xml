@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="26dp"
+    android:viewportWidth="22"
+    android:viewportHeight="26">
+
+    <path
+        android:fillColor="#6DDFEE"
+        android:pathData="M 0 13 H 16 V 26 H 0 V 13 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#11A9BE"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M2 11.8V23L6.9 20.2L12.5 23L17.4 20.2V9L12.5 11.8L6.9 9L2 11.8Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#11A9BE"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M6.90002 9V20.2" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#11A9BE"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M12.5 11.8V23" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#11A9BE"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M21.1538 5.90909C21.1538 9.72727 16.0769 13 16.0769 13C16.0769 13 11 9.72727 11 5.90909C11 4.60712 11.5349 3.35847 12.487 2.43784C13.4391 1.51721 14.7304 1 16.0769 1C17.4234 1 18.7147 1.51721 19.6668 2.43784C20.619 3.35847 21.1538 4.60712 21.1538 5.90909Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#11A9BE"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M16.0769 7.46149C16.8416 7.46149 17.4615 6.84158 17.4615 6.07688C17.4615 5.31217 16.8416 4.69226 16.0769 4.69226C15.3122 4.69226 14.6923 5.31217 14.6923 6.07688C14.6923 6.84158 15.3122 7.46149 16.0769 7.46149Z" />
+</vector>

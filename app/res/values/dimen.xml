@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="def_margin_right">@dimen/_12sdp</dimen>
+
+    <dimen name="image_dimen_menu_fragment">35dp</dimen>
+    <dimen name="image_profile">24dp</dimen>
+    <dimen name="thin_back_btn">35dp</dimen>
+
+    <dimen name="margin_frm_thin_back_btn">14dp</dimen>
+    <dimen name="image_view_cl_ws_em_etc">0dp</dimen>
+
+    <dimen name="layout_padding">2dp</dimen>
+    <dimen name="progress_bar_size">35dp</dimen>
+
+    <dimen name="backBtnMargin">6dp</dimen>
+
+    <dimen name="design_bottom_navigation_elevation" tools:override="true">8dp</dimen>
+    <dimen name="design_bottom_navigation_shadow_height" tools:override="true">1dp</dimen>
+    <dimen name="design_bottom_navigation_icon_size" tools:override="true">24dp</dimen>
+    <dimen tools:override="true" name="design_navigation_icon_padding">16dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">56dp</dimen>
+    <dimen name="design_bottom_navigation_margin" tools:override="true">8dp</dimen>
+    <dimen name="design_bottom_navigation_label_padding" tools:override="true">10dp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">14sp</dimen>
+    <dimen name="design_bottom_navigation_item_min_width" tools:override="true">56dp</dimen>
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">96dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">168dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_min_width" tools:override="true">96dp</dimen>
+</resources>

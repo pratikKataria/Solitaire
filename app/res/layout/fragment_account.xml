@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/account_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/HeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="@dimen/def_margin_right"
+            android:text="@string/profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:contentDescription="@string/image_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/user_def" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="@dimen/image_profile"
+                android:layout_height="@dimen/image_profile"
+                android:contentDescription="@string/image_desc"
+                android:scaleX=".7"
+                android:scaleY=".8"
+                android:src="@drawable/ic_person_new" />
+
+            <TextView
+                android:id="@+id/account_user_full_name"
+                style="@style/AccountActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                tools:text="Mohammed Aslam K" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/def_margin_right"
+            android:background="#E5E5E5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/image_desc"
+                android:scaleType="fitXY"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:src="@drawable/ic_handset"
+                app:tint="#acb1c2" />
+
+            <TextView
+                android:id="@+id/account_mobile_num"
+                style="@style/AccountActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                tools:text="+91 3983937447" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/def_margin_right"
+            android:background="#E5E5E5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="@dimen/image_profile"
+                android:layout_height="@dimen/image_profile"
+                android:contentDescription="@string/image_desc"
+                android:scaleX="0.8"
+                android:scaleY="0.7"
+                android:src="@drawable/ic_envelope" />
+
+            <TextView
+                android:id="@+id/account_email_id"
+                style="@style/AccountActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                tools:text="mohammed.k@solitaire.com" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/def_margin_right"
+            android:background="#E5E5E5" />
+        <LinearLayout
+            android:id="@+id/linearLayoutLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:paddingVertical="17dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="12dp"
+                android:contentDescription="@string/image_desc"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_logout" />
+
+            <TextView
+                style="@style/AccountActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="@string/logout"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

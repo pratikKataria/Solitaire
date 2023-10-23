@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+<!--    <string name="remoteAccessConsumerKey">3MVG9d8..z.hDcPKSBlTLCBm5sjKCaLiMVZ5fNu8g4HSFtKiCoQS9CaD.rtxPHdk_q1z8D8cD.bYYa_Hng5kH</string>-->
+<!--    <string name="oauthRedirectURI">loginsfdc:///mobilesdk/sobhacallsync/oauth/login</string>-->
+
+    <!--    B392D064DCF2AB33A1D91BCC24165B6F93DDBD7F2D192564520CC2BA383C4709-->
+    <string name="remoteAccessConsumerKey">3MVG9D6vJTURvMythwnFptfwb8zorRr5e62oJhCSzGYBvQFvTgGImZGk68zbQ5T_aXxM1yt_yYfwZEXcDyFhl</string>
+    <string name="oauthRedirectURI">solitairecallsync://auth/success</string>
+
+    <string-array name="oauthScopes">
+        <item>api</item>
+        <item>web</item>
+    </string-array>
+</resources>

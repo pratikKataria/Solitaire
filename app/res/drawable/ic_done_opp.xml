@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="24dp"
+    android:viewportWidth="22"
+    android:viewportHeight="24">
+
+    <path
+        android:fillColor="#7EF8BD"
+        android:pathData="M 0 11 H 16 V 24 H 0 V 11 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#02A959"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M2 8H6.8C7.64869 8 8.46263 8.33714 9.06274 8.93726C9.66286 9.53737 10 10.3513 10 11.2V22.4C10 21.7635 9.74714 21.153 9.29706 20.7029C8.84697 20.2529 8.23652 20 7.6 20H2V8Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#02A959"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M18 8H13.2C12.3513 8 11.5374 8.33714 10.9373 8.93726C10.3371 9.53737 10 10.3513 10 11.2V22.4C10 21.7635 10.2529 21.153 10.7029 20.7029C11.153 20.2529 11.7635 20 12.4 20H18V8Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#02A959"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M21 5.08857V5.50257C20.9994 6.47296 20.6852 7.41718 20.1042 8.19439C19.5232 8.97161 18.7065 9.54019 17.7759 9.81533C16.8453 10.0905 15.8508 10.0574 14.9405 9.72114C14.0303 9.38484 13.2531 8.76332 12.7249 7.94925C12.1968 7.13519 11.9459 6.1722 12.0098 5.20392C12.0736 4.23563 12.4487 3.31392 13.0792 2.57626C13.7097 1.83859 14.5618 1.3245 15.5083 1.11064C16.4548 0.896785 17.4451 0.994627 18.3315 1.38958" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#02A959"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M21 1.90259L16.5 6.40709L15.15 5.05709" />
+</vector>

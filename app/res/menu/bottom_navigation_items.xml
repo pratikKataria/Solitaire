@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    <item-->
+    <!--        android:id="@+id/uncheckedItem"-->
+    <!--        android:visible="false"-->
+    <!--        android:title="" />-->
+    <item
+        android:id="@+id/createdtask"
+        android:icon="@drawable/ic_task"
+        android:checked="false"
+        android:title="Task" />
+    <item
+        android:id="@+id/projectFragment"
+        android:icon="@drawable/ic_project"
+        android:checked="false"
+        android:title="Projects" />
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:checked="false"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_person"
+        android:checked="false"
+        android:title="Account" />
+    <item
+        android:id="@+id/menuFragment"
+        android:icon="@drawable/ic_menu"
+        android:checked="false"
+        android:title="Menu" />
+</menu>

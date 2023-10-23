@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.stetig.solitaire.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_opportunityFragment"
+            app:destination="@id/opportunityFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sitevisitFragment"
+            app:destination="@+id/sitevisitFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/sitevisitFragment"
+        android:name="com.stetig.solitaire.fragment.SitevisitFragment"
+        android:label="fragment_sitevisit"
+        tools:layout="@layout/fragment_sitevisit"
+        >
+        <action
+            android:id="@+id/action_sitivisitFragment_to_feedbackForm"
+            app:destination="@+id/Feedbackform"
+            />
+        <action
+            android:id="@+id/action_sitevisitFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Feedbackform"
+        android:name="com.stetig.solitaire.fragment.FeedBackFragment"
+        android:label="fragment_feedbackform"
+        tools:layout="@layout/feedback_form"
+        />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.stetig.solitaire.fragment.ProjectFragment"
+        android:label="fragment_project"
+        tools:layout="@layout/fragment_project" >
+        <action
+            android:id="@+id/action_projectFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.stetig.solitaire.fragment.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+
+        <action
+            android:id="@+id/action_menuFragment_to_stageWiseOpportunityFragment"
+            app:destination="@id/stageWiseOpportunityFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_allActiveOpportunityFragment"
+            app:destination="@id/allActiveOpportunityFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_opportunityFragment"
+            app:destination="@id/opportunityFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_approvalFragment"
+            app:destination="@+id/approvalFragment"
+            />
+        <action
+            android:id="@+id/action_menuFragment_to_campaignApprovalDetailFragment"
+            app:destination="@id/campaignApprovalDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/approvalFragment"
+        android:name="com.stetig.solitaire.fragment.ApprovalFragment"
+        android:label="ApprovalFragment"
+        >
+        <action
+            android:id="@+id/action_approvalFragment_to_approvalDetailFragment"
+            app:destination="@id/approvalDetailFragment" />
+        <action
+            android:id="@+id/action_approvalFragment_to_campaignApprovalDetailFragment"
+            app:destination="@id/campaignApprovalDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.stetig.solitaire.fragment.AccountFragment"
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/opportunityFragment"
+        android:name="com.stetig.solitaire.fragment.OpportunityFragment"
+        android:label="OpportunityFragment" >
+        <action
+            android:id="@+id/action_opportunityFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment" />
+        <action
+            android:id="@+id/action_opportunityFragment_to_timeLineFragment"
+            app:destination="@id/timeLineFragment" />
+        <action
+            android:id="@+id/action_opportunityFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stageWiseOpportunityFragment"
+        android:name="com.stetig.solitaire.fragment.StageWiseOpportunityFragment"
+        android:label="StageWiseOpportunityFragment" >
+        <action
+            android:id="@+id/action_stageWiseOpportunityFragment_to_opportunityFragment"
+            app:destination="@id/opportunityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/campaignApprovalDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CampaignApprovalDetailFragment"
+        android:label="fragment_campaign_approval_detail"
+        tools:layout="@layout/fragment_campaign_approval_detail">
+        <action
+            android:id="@+id/action_campaignApprovalDetailFragment_to_campaignApprovalSubDetailFragment"
+            app:destination="@id/campaignApprovalSubDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/campaignApprovalSubDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CampaignApprovalSubDetailFragment"
+        android:label="fragment_campaign_approval_subdetail"
+        tools:layout="@layout/fragment_campaign_approval_subdetail"
+        ></fragment>
+    <fragment
+        android:id="@+id/approvalDetailFragment"
+        android:name="com.stetig.solitaire.fragment.ApprovalDetailFragment"
+        android:label="fragment_approval_detail"
+        tools:layout="@layout/fragment_approval_detail">
+        <action
+            android:id="@+id/action_approvalDetailFragment_to_approvalSubdetailFragment"
+            app:destination="@id/approvalSubdetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/approvalSubdetailFragment"
+        android:name="com.stetig.solitaire.fragment.ApprovalSubdetailFragment"
+        android:label="ApprovalSubdetailFragment"
+        tools:layout="@layout/fragment_approval_subdetail" />
+    <fragment
+        android:id="@+id/projectDetailFragment"
+        android:name="com.stetig.solitaire.fragment.ProjectDetailFragment"
+        android:label="fragment_project_detail"
+        tools:layout="@layout/fragment_project_detail" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.stetig.solitaire.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.stetig.solitaire.fragment.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timeLineFragment"
+        android:name="com.stetig.solitaire.fragment.TimeLineFragment"
+        android:label="TimeLineFragment" />
+    <fragment
+        android:id="@+id/opportunityDetailFragment"
+        android:name="com.stetig.solitaire.fragment.OpportunityDetailFragment"
+        android:label="OpportunityDetailFragment" >
+        <action
+            android:id="@+id/action_opportunityDetailFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment" />
+        <action
+            android:id="@+id/action_opportunityDetailFragment_to_timeLineFragment"
+            app:destination="@id/timeLineFragment" />
+        <action
+            android:id="@+id/action_opportunityDetailFragment_to_UpdateOpportunityFragment"
+            app:destination="@id/UpdateOpportunityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allActiveOpportunityFragment"
+        android:name="com.stetig.solitaire.fragment.AllActiveOpportunityFragment"
+        android:label="AllActiveOpportunityFragment" >
+        <action
+            android:id="@+id/action_allActiveOpportunityFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+        <action
+            android:id="@+id/action_allActiveOpportunityFragment_to_timeLineFragment"
+            app:destination="@id/timeLineFragment" />
+        <action
+            android:id="@+id/action_allActiveOpportunityFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.stetig.solitaire.fragment.TaskFragment"
+        android:label="TaskFragment" >
+        <action
+            android:id="@+id/action_taskFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createdtask"
+        android:name="com.stetig.solitaire.fragment.CreateTaskFragment"
+        android:label="CreateTaskFragment"
+        tools:layout="@layout/fragment_create_task"
+        >
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/projectCalendar"-->
+<!--        android:name="com.stetig.solitaire.fragment.CalenderFragment"-->
+<!--        android:label="CalenderFragment" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_projectCalendar_to_calendarDetailFragment"-->
+<!--            app:destination="@id/calendarDetailFragment" />-->
+<!--    </fragment>-->
+    <fragment
+        android:id="@+id/calendarDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CalendarDetailFragment"
+        android:label="CalendarDetailFragment" >
+        <action
+            android:id="@+id/action_calendarDetailFragment_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/UpdateOpportunityFragment"
+        android:name="com.stetig.solitaire.fragment.UpdateOpportunityFragment"
+        android:label="UpdateOpportunityFragment" >
+
+    </fragment>
+</navigation>

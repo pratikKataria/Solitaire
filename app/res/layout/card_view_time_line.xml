@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/topLine"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/line_color" />
+
+            <FrameLayout
+                android:layout_width="42dp"
+                android:layout_height="20dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="#DEDEDE"
+                    android:scaleType="centerInside"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/iconImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#858585"
+                    android:scaleType="centerInside"
+                    android:padding="8dp"
+                    tools:src="@drawable/ic_proposal"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+
+            <View
+                android:id="@+id/bottomLine"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/line_color" />
+        </LinearLayout>
+
+        <!-- views at the right of the blue line -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:text="Monday"
+                android:textColor="#4A4A4A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text=""
+                android:textColor="#848484"
+                android:textSize="10sp"
+                tools:text="hello"
+                tools:ignore="SmallSp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

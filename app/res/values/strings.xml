@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_type">com.stetig.solitaire.login</string>
+    <string name="app_name"><b>Solitaire</b></string>
+    <string name="app_package">com.stetig.solitaire</string>
+    <string name="welcome">Welcome %s</string>
+    <string name="logout_button">Logout</string>
+    <string name="fetch_contacts_button">Fetch Contacts</string>
+    <string name="fetch_accounts_button">Fetch Accounts</string>
+    <string name="clear_button">Clear</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="needs_analysis">Open</string>
+    <string name="negotiation">Booked</string>
+    <string name="proposal">Lost</string>
+
+    <string name="scheduled_visit">Scheduled</string>
+    <string name="ongoing_visit">Ongoing</string>
+    <string name="past_visit">Past</string>
+
+    <string name="bip">BIP</string>
+    <string name="opportunities_in_qualification">Opportunities in Qualification</string>
+    <string name="_0">0</string>
+    <string name="left_image">left_image</string>
+    <string name="tasks_for_today">Today\'s Task</string>
+    <string name="site_visit">Proposed Site Visit</string>
+    <string name="follow_up">Follow Up</string>
+    <string name="face_to_face">Aloted Site Visit</string>
+    <string name="all_tasks">All tasks</string>
+    <string name="stage_wise_opportunities">Stage-wise opportunities</string>
+    <string name="status_wise_opportunities">Status-wise opportunities</string>
+    <string name="site_visits">Site Visit</string>
+    <string name="my_task_for_today">My task for today</string>
+    <string name="image_desc">image_desc</string>
+    <string name="active_opportunities">Active opportunities</string>
+    <string name="expiring_opportunities_for_next_7_days">Expiring opportunities for next 7 days</string>
+    <string name="logout">Logout</string>
+    <string name="profile">profile</string>
+    <string name="qualification">Qualification</string>
+    <string name="project_details">project details</string>
+    <string name="city">City</string>
+    <string name="name">Name</string>
+
+    <string name="CONSUMER_KEY">3MVG9D6vJTURvMythwnFptfwb8zorRr5e62oJhCSzGYBvQFvTgGImZGk68zbQ5T_aXxM1yt_yYfwZEXcDyFhl</string>
+    <string name="CONSUMER_URI">solitairecallsync://auth/success</string>
+
+    <string name="no_collaterals_found">No Collaterals Found</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="email">Email</string>
+    <string name="feedback">Feedback</string>
+    <string name="viewdetails">View Details</string>
+    <string name="search_here">Search here...</string>
+    <string name="project">Project:</string>
+    <string name="customer_facing_team_test_project">Customer facing Team Test Project</string>
+    <string name="project_c">Project: </string>
+    <string name="createdDate_c">Created Date: </string>
+    <string name="configuration">Configuration</string>
+    <string name="status_c">Status: </string>
+    <string name="sitevisit_type">Site Visit Type</string>
+    <string name="sitevisit_enquiry_type">Enquiry Type</string>
+    <string name="sitevisit_sourcingManager">Sourcing Manager</string>
+    <string name="name_c">Name: </string>
+    <string name="mobile_no_c">Mobile No: </string>
+    <string name="email_c">Email: </string>
+    <string name="task_history">Task History</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="update">Update</string>
+    <string name="is_it_a_professional_call">Is it a professional call?</string>
+    <string name="new_version">Update Available!</string>
+    <string name="new_version_desc">New version of app is available on playstore.</string>
+    <string name="opportunity_stage">Opportunity Stage</string>
+    <string name="stage">Stage</string>
+    <string name="reason_for_closed_lost">Reason for closed lost</string>
+    <string name="submit">Submit</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="greetings">Greetings</string>
+    <string name="custom">Custom</string>
+    <string name="choose_a_message_type">choose a message type</string>
+    <string name="send">SEND</string>
+    <string name="templates">Templates</string>
+    <string name="action_opportunity_for_today">Action opportunity for today</string>
+    <string name="approval">Approvals</string>
+    <string name="approvalpending">Approval Pending</string>
+    <string name="new_booking_approval_req">New Booking approval requests</string>
+    <string name="campaign_approval_req">Campaign approval requests</string>
+    <string name="source_change_approval_req">Source Change approval requests</string>
+    <string name="channel_partner_creation_approval_req">Channel Partner creation approval requests</string>
+
+</resources>

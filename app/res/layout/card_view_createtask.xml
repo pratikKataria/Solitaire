@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/header_parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:minWidth="150dp"
+                    android:text="Opp Name: "
+                    android:textColor="#848484"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/SpecificTaskDetail"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="6dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:paddingTop="@dimen/layout_padding"-->
+            <!--                android:paddingBottom="@dimen/layout_padding">-->
+
+            <!--                <TextView-->
+            <!--                    style="@style/SpecificTaskDetail"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:fontFamily="@font/myriad_pro_regular"-->
+            <!--                    android:minWidth="150dp"-->
+            <!--                    android:text="Project: "-->
+            <!--                    android:textColor="#848484"-->
+            <!--                    android:textSize="12sp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/projectName"-->
+            <!--                    style="@style/SpecificTaskDetail"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text=""-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="12sp" />-->
+            <!--            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding">
+
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:minWidth="150dp"
+                    android:text="Subject: "
+                    android:textColor="#848484"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding">
+
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:minWidth="150dp"
+                    android:text="Due date: "
+                    android:textColor="#848484"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/due_date"
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding">
+
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="150dp"
+                    android:text="Task Type: "
+                    android:textColor="#848484"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/task_type"
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginVertical="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mark_as_complete"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#070707"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:includeFontPadding="false"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Mark as complete"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    app:cornerRadius="6dp"
+                    app:elevation="0dp" />
+
+<!--                <View-->
+<!--                    android:layout_width="10dp"-->
+<!--                    android:layout_height="2dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/opportunityDetail"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:backgroundTint="#F1F1F1"-->
+<!--                    android:fontFamily="@font/myriad_pro_regular"-->
+<!--                    android:includeFontPadding="false"-->
+<!--                    android:insetTop="0dp"-->
+<!--                    android:insetBottom="0dp"-->
+<!--                    android:text="Opportunity Details"-->
+<!--                    android:textColor="#040404"-->
+<!--                    android:textSize="10sp"-->
+<!--                    app:cornerRadius="6dp"-->
+<!--                    app:elevation="0dp" />-->
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="4dp"
+                android:background="#989898" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>
