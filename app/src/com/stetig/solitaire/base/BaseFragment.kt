@@ -74,4 +74,6 @@ abstract class BaseFragment : Fragment(), View.OnClickListener, OnRefreshListene
             mActivity = context
         }
     }
+
+    abstract fun setContentView(activityMain: Int)
 }

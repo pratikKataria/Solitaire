@@ -132,8 +132,7 @@ class CreateTaskFragment : BaseFragment() {
             autoCompleteTextView.threshold = 3
             autoCompleteTextView.setAdapter(adapter)
             autoCompleteTextView.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view_, position, _ ->
-                    val item = listOfOpportunities.get(position)
+                AdapterView.OnItemClickListener { parent, view_, position, _ -> val item = listOfOpportunities.get(position)
                     createTaskRequest.opp_Id = item.oppId;
                 }
 

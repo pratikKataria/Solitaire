@@ -49,7 +49,6 @@ class TaskFragment : BaseFragment() {
         binding.headerText.text = if (isToday) "Task for Today" else "All Task"
         pos = arguments?.getInt(Keys.TASK_TYPE, 0) ?: 0
         initTabBar()
-
         val arrayAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, categories)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.totalActiveOpportunitiesSpinnerSortType.adapter = arrayAdapter

@@ -30,7 +30,7 @@ data class Opportunity(
         @SerializedName("CloseDate")
         val closeDate: String,
         @SerializedName("Project_Type__c")
-        val projectTypeC: Any,
+        val projectTypeC: String,
         @SerializedName("Booking__r")
         val bookingR: BookingR,
         @SerializedName("Project__c")

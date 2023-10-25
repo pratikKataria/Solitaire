@@ -86,4 +86,14 @@
     <string name="source_change_approval_req">Source Change approval requests</string>
     <string name="channel_partner_creation_approval_req">Channel Partner creation approval requests</string>
 
+
+    <string-array name="visitedat_dropdown_values">
+        <item>--None--</item>
+        <item>Site</item>
+        <item>Outbound</item>
+        <item>Outbound-Outstation</item>
+        <item>E-Visit</item>
+    </string-array>
+
+
 </resources>

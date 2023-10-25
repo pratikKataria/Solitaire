@@ -10,6 +10,7 @@ interface Keys {
         const val OPP_NAME = "opp_name"
         const val FROM_MENU = "from_menu"
         const val TASK_TYPE = "task_type"
+        const val TASK_TAB_NAME = "None"
         const val IS_TODAY = "is_today"
         const val QUERY_PARA = "not found"
         const val EXP_OPP = "exp_opportunity"

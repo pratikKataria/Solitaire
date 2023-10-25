@@ -11,6 +11,7 @@ import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.CardViewTaskBinding
 import com.stetig.solitaire.utils.Utils
+import org.acra.ACRA.log
 
 /**
  * Created by Pratik Kataria on 27-11-2020.
