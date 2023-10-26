@@ -2,7 +2,6 @@ package com.stetig.solitaire.data
 
 import com.google.gson.annotations.SerializedName
 
-
   data class Task(
     @SerializedName("done")
     val done: Boolean?,
@@ -27,7 +26,9 @@ import com.google.gson.annotations.SerializedName
         @SerializedName("Site_Visit_Stage__c")
         val siteVisitStageC: String?,
         @SerializedName("What")
-        val what: What?
+        val what: What?,
+        @SerializedName("Type_of_Enquiry__c ")
+        val typeofEnquiry: String?,
     ) {
         data class Attributes(
             @SerializedName("type")

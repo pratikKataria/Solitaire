@@ -78,7 +78,7 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
             "Something went wrong!"
         }
         commonClassForQuery.getTask(query, onDataCommonClassForQuery)
-
+        log.e("query error", query )
     }
 
     private fun initRecycler() {
@@ -119,7 +119,9 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
         override fun onDataReceive(data: Any) {
             if (data is Task) {
                 projectList.clear()
-                data?.records?.let { projectList.addAll(it) }
+                data?.records?.let {
+                    log.e("query error ---", it.toString())
+                    projectList.addAll(it) }
                 adapter.notifyDataSetChanged()
 //                activity.checkListIsEmpty(projectList)
             }

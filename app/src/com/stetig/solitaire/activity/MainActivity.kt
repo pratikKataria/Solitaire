@@ -458,7 +458,6 @@ class MainActivity : BaseActivity() {
         layoutProfessionalCallDetailBinding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId != View.NO_ID) {
 
-
                 // A chip has been selected
                 val selectedChip = group.findViewById<Chip>(checkedId)
 
@@ -470,12 +469,10 @@ class MainActivity : BaseActivity() {
                 when (selectedText) {
                     "Hot" -> {
                         val listOfDisposition = statusMap["Hot"]
-
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
                             listOfDisposition?: arrayOf())
-
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
@@ -484,9 +481,7 @@ class MainActivity : BaseActivity() {
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
                             }
-
                     }
-
                     "Warm" -> {
                         val listOfDisposition = statusMap["Warm"]
 

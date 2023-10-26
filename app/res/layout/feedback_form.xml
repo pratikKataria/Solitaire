@@ -131,25 +131,61 @@
                     android:text="No" />
             </RadioGroup>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">>
+                android:text="Visit Rating" />
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/feedbackchipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipSpacing="8dp"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:singleLine="true"
+                app:singleSelection="true">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autovisitrating"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="none"
-                    android:text="Visit Rating" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHot"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_background_selector"
+                    android:text="Hot" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWarm"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_background_selector"
+                    android:text="Warm" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCold"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_background_selector"
+                    android:text="Cold" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipBooked"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_background_selector"
+                    android:text="Booked" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipLost"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_background_selector"
+                    android:text="Lost" />
+
+            </com.google.android.material.chip.ChipGroup>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -261,11 +297,185 @@
                 android:background="@drawable/box_inputfield"
                 android:textColorHint="#AFAFAF"
                 android:hint="Next Action Date" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/autowholesalerretailer1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">>
 
+                <AutoCompleteTextView
+                    android:id="@+id/autowholesalerretailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="Wholesaler/Retailer" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/autosubcategory1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">>
+
+                <AutoCompleteTextView
+                    android:id="@+id/autosubcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="Sub-category" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/autoshopownship1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">>
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoshopownship"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="Shop Ownship" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/current_shop_size1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Shop Size(carpet)" />
+
+            <EditText
+                android:id="@+id/current_shop_size"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Current Shop Size(carpet)" />
+
+
+            <TextView
+                android:id="@+id/rental1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rental(pm)" />
+
+            <EditText
+                android:id="@+id/rental"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Rental(pm)" />
+            <TextView
+                android:id="@+id/dailybusiness1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily Business(Avg)" />
+
+            <EditText
+                android:id="@+id/dailybusiness"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Daily Business(Avg)" />
+            <TextView
+                android:id="@+id/employeesize1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Employee Size" />
+
+            <EditText
+                android:id="@+id/employeesize"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Employee Size" />
+
+
+            <TextView
+                android:id="@+id/totaloutlets1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Outlets" />
+
+            <EditText
+                android:id="@+id/totaloutlets"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Total Outlets" />
+
+            <TextView
+                android:id="@+id/outletslocation1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outlets Location" />
+
+            <EditText
+                android:id="@+id/outletslocation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/box_inputfield"
+                android:textColorHint="#AFAFAF"
+                android:hint="Outlets Location" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/autoleasing1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">>
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoleasing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="Leasing(Interseted)" />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/viewDetailsBtn"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginVertical="@dimen/_30sdp"
                 android:layout_marginHorizontal="@dimen/_80sdp"
                 android:layout_height="30dp"
                 android:backgroundTint="@color/black"

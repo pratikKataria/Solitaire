@@ -5,6 +5,7 @@ package com.stetig.solitaire.api
  */
 interface Keys {
     companion object {
+        const val TYPE_ENQUIRY = "Outright"
         const val CURRENT_STAGE = "current_stage"
         const val PROJECT_ID = "project_id"
         const val OPP_NAME = "opp_name"
