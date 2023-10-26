@@ -26,10 +26,10 @@
         android:label="fragment_sitevisit"
         tools:layout="@layout/fragment_sitevisit"
         >
-        <action
-            android:id="@+id/action_sitivisitFragment_to_feedbackForm"
-            app:destination="@+id/Feedbackform"
-            />
+<!--        <action-->
+<!--            android:id="@+id/action_sitivisitFragment_to_feedbackForm"-->
+<!--            app:destination="@+id/Feedbackform"-->
+<!--            />-->
         <action
             android:id="@+id/action_sitevisitFragment_to_opportunityDetailFragment"
             app:destination="@id/opportunityDetailFragment" />
@@ -209,6 +209,9 @@
         <action
             android:id="@+id/action_taskFragment_to_opportunityDetailFragment"
             app:destination="@id/opportunityDetailFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_Feedbackform"
+            app:destination="@id/Feedbackform" />
     </fragment>
     <fragment
         android:id="@+id/createdtask"

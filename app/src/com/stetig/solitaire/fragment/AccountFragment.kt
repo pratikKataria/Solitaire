@@ -74,4 +74,5 @@ class AccountFragment : BaseFragment() {
         if (context is MainActivity) activity = context
         super.onAttach(context)
     }
+
 }

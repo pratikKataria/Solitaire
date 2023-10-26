@@ -22,8 +22,7 @@ abstract class TaskRecyclerAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val cardViewProjectsBinding =
-            CardViewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val cardViewProjectsBinding = CardViewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProjectDetailCardViewHolder(cardViewProjectsBinding)
     }
 
@@ -38,8 +37,15 @@ abstract class TaskRecyclerAdapter(
         projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = Utils.getFormattedDateSF(record?.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateSF(record?.createdDate)
 
+
+
+        projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.text = if (record?.attributes?.type == "Site_Visit__c") "FEEDBACK" else "MARK AS COMPLETE"
+
+
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.setOnClickListener {
-            projectList[position].id?.let { completeTask(it) }
+            if (record?.attributes?.type == "Site_Visit__c")
+                if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform)
+                else projectList[position].id?.let { completeTask(it) }
         }
 
         projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {
