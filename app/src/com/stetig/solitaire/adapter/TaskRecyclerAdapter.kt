@@ -48,7 +48,7 @@ abstract class TaskRecyclerAdapter(
             val bundle = Bundle()
             bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
             if (record?.attributes?.type == "Site_Visit__c")
-                if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform)
+                if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform, bundle)
                 else projectList[position].id?.let { completeTask(it) }
         }
 
@@ -58,10 +58,7 @@ abstract class TaskRecyclerAdapter(
 
             val bundle = Bundle()
             bundle.putString(Keys.OPP_ID, id)
-            if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(
-                R.id.action_taskFragment_to_opportunityDetailFragment,
-                bundle
-            )
+            if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_opportunityDetailFragment, bundle)
         }
     }
 

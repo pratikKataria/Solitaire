@@ -103,7 +103,7 @@ interface Query {
         val FOLLOW_UP_LIST = "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null"
 
         val ALOTED_SITE_VISIT_LIST_TODAY = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation' $AND CreatedDate=Today"
-        val ALOTED_SITE_VISIT_LIST = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation'"
+        val ALOTED_SITE_VISIT_LIST = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Type_of_Enquiry__c != Null AND Site_Visit_Stage__c!='Pending Sales Manager Allocation'"
 
         val PROJECT_LINK_FETCH = "SELECT Id, ContentDocumentId FROM ContentDocumentLink $WHERE linkedEntityId ="
         val PROJECT_LINK = "SELECT Id, LatestPublishedVersion.Title,LatestPublishedVersion.Public_URL__c from ContentDocument $WHERE Id ="

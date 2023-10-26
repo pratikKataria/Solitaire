@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
         val siteVisitStageC: String?,
         @SerializedName("What")
         val what: What?,
-        @SerializedName("Type_of_Enquiry__c ")
+        @SerializedName("Type_of_Enquiry__c")
         val typeofEnquiry: String?,
     ) {
         data class Attributes(

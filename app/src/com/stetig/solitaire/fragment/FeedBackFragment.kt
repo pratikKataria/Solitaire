@@ -3,6 +3,8 @@ package com.stetig.solitaire.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -25,8 +27,14 @@ class FeedBackFragment : BaseFragment() {
 
     lateinit var activity: MainActivity
     lateinit var binding: FeedbackFormBinding
+    lateinit var typeofenq:String
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = inflate(inflater, R.layout.feedback_form, container, false)
+
+        val typeofenq = arguments?.getString(Keys.TYPE_ENQUIRY)
+        log.e("TYPE OF ENQUIRY====", typeofenq.toString())
         initView(binding.root)
         return binding.root
     }
@@ -123,9 +131,6 @@ class FeedBackFragment : BaseFragment() {
 
 
     override fun initView(rootView: View?) {
-        val bundle = Bundle()
-        val typeofenq = bundle.getString(Keys.TYPE_ENQUIRY)
-        log.e("TYPE OF ENQUIRY====", typeofenq.toString())
         if (typeofenq == "Leasing") {
             binding.autosubcategory.visibility = View.VISIBLE
             binding.autowholesalerretailer.visibility = View.VISIBLE
