@@ -328,23 +328,12 @@ class MainActivity : BaseActivity() {
             val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
             val auth = "Bearer " + account.authToken
             if (account.username != null) {
-                val updateTokenReq = UpdateTokenReq(
-                    account.username,
-                    BuildConfig.VERSION_NAME,
-                    token,
-                    account.username,
-                    getDeviceName()
-                )
-                commonClassForApi?.updateTokenInSalesForce(
-                    updateTokenResDisposableObserver,
-                    updateTokenReq,
-                    auth
-                )
+                val updateTokenReq = UpdateTokenReq(token, account.username)
+                commonClassForApi?.updateTokenInSalesForce(updateTokenResDisposableObserver, updateTokenReq, auth)
                 Log.e(javaClass.name, "onComplete: 115 firebase fcm token $token")
             }
 
         })
-
     }
 
     private fun getDeviceName(): String {
@@ -472,7 +461,8 @@ class MainActivity : BaseActivity() {
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            listOfDisposition?: arrayOf())
+                            listOfDisposition ?: arrayOf()
+                        )
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
@@ -482,13 +472,15 @@ class MainActivity : BaseActivity() {
 //                                createTaskRequest.opp_Id = item.oppId;
                             }
                     }
+
                     "Warm" -> {
                         val listOfDisposition = statusMap["Warm"]
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            listOfDisposition?: arrayOf())
+                            listOfDisposition ?: arrayOf()
+                        )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
@@ -499,13 +491,15 @@ class MainActivity : BaseActivity() {
 //                                createTaskRequest.opp_Id = item.oppId;
                             }
                     }
+
                     "Cold" -> {
                         val listOfDisposition = statusMap["Cold"]
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            listOfDisposition?: arrayOf())
+                            listOfDisposition ?: arrayOf()
+                        )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
@@ -516,13 +510,15 @@ class MainActivity : BaseActivity() {
 //                                createTaskRequest.opp_Id = item.oppId;
                             }
                     }
+
                     "Booked" -> {
                         val listOfDisposition = statusMap["Booked"]
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            listOfDisposition?: arrayOf())
+                            listOfDisposition ?: arrayOf()
+                        )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
@@ -533,13 +529,15 @@ class MainActivity : BaseActivity() {
 //                                createTaskRequest.opp_Id = item.oppId;
                             }
                     }
+
                     "Lost" -> {
                         val listOfDisposition = statusMap["Lost"]
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            listOfDisposition?: arrayOf())
+                            listOfDisposition ?: arrayOf()
+                        )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
@@ -556,7 +554,7 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        layoutProfessionalCallDetailBinding.submitCalldisposition.setOnClickListener{
+        layoutProfessionalCallDetailBinding.submitCalldisposition.setOnClickListener {
 
         }
 
@@ -872,8 +870,6 @@ class MainActivity : BaseActivity() {
             }
         }
     }
-
-
 
 
     var taskType = ""

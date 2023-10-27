@@ -129,7 +129,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String authToken = "Bearer " + account.getAuthToken();
 
 
-        CommonClassForApi.Companion.getInstance(null).updateTokenInSalesForce(updateTokenInSalesForce, new UpdateTokenReq(salesuserid, BuildConfig.VERSION_NAME, token, salesuserid, getDeviceName()), authToken);
+        CommonClassForApi.Companion.getInstance(null).updateTokenInSalesForce(updateTokenInSalesForce, new UpdateTokenReq(token, salesuserid), authToken);
     }
 
     public static String getDeviceName() {

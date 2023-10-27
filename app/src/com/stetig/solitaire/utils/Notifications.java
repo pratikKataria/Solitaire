@@ -24,8 +24,7 @@ public class Notifications {
 
     public static void notify(Context context, String text, String taskID, String task, String opportunityName) {
 
-        NotificationManager notificationManager = (NotificationManager)
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel mChannel = new NotificationChannel(
                     REMINDER_NOTIFICATION_CHANNEL_ID,

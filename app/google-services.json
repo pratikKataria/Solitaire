@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "796682334699",
-    "project_id": "solitaire-d8060",
-    "storage_bucket": "solitaire-d8060.appspot.com"
+    "project_number": "14857244519",
+    "project_id": "stetig-87a0e",
+    "storage_bucket": "stetig-87a0e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:796682334699:android:5f3b82ba456846c3c769ae",
+        "mobilesdk_app_id": "1:14857244519:android:5edb0f92027175aad7a9c2",
         "android_client_info": {
           "package_name": "com.stetig.solitaire"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCJkqSAMmEtSfhesXYPXaelqdDxu2UO4EQ"
+          "current_key": "AIzaSyAoCiUGlxqU4Ou57VgRypHAYBHgCoA7i_A"
         }
       ],
       "services": {

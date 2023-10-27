@@ -79,6 +79,7 @@ public class OpportunityNotifications {
                 context,
                 REMINDER_PENDING_INTENT_ID,
                 startActivityIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT // setting the mutability flag
+        );
     }
 }

@@ -15,7 +15,7 @@ public interface Endpoints {
         const val UPDATE_OPPORTUNITIES  =  "UpdateAPI/"
         const val NOTIFICATION_LIST     =  "NotificationList/"
         const val MARK_AS_COMPLETE      =  "Taskcomplete/"
-        const val REGISTER_TOKEN        =  "deviceToken/"
+        const val REGISTER_TOKEN        =  "Call_Sync_App/deviceToken/*"
         const val MARK_AS_READ          =  "MarkRead/"
         const val APP_VERSION           =  "AppVersion/"
         const val GET_ALL_OPTY          =  "opportunities/005C3000001MbbRIAS"

@@ -8,6 +8,7 @@
 	android:installLocation="internalOnly">
 
 
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 	<uses-permission android:name="android.permission.CALL_PHONE" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
@@ -73,9 +74,19 @@
 			android:exported="false"
 			android:name="com.stetig.solitaire.utils.ReminderBroadcastReceiver"/>
 
+		<receiver
+			android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+			android:exported="true"
+			android:permission="com.google.android.c2dm.permission.SEND" >
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+			</intent-filter>
+		</receiver>
+
 		<service
 			android:name="com.stetig.solitaire.utils.MyFirebaseMessagingService"
-			android:exported="false">
+			android:exported="false"
+			android:enabled="true">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT" />
 			</intent-filter>
