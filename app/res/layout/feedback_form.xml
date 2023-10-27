@@ -298,7 +298,9 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 android:background="@drawable/box_inputfield"
                 android:textColorHint="#AFAFAF"
-                android:hint="Anniversary Date" />
+                android:hint="Anniversary Date"
+                android:focusable="false"
+                android:editable="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -313,7 +315,9 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 android:background="@drawable/box_inputfield"
                 android:textColorHint="#AFAFAF"
-                android:hint="Next Action Date" />
+                android:hint="Next Action Date"
+                android:focusable="false"
+                android:editable="false"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/autowholesalerretailer1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"

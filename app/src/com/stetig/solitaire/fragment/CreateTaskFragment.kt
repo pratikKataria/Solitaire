@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,18 +27,13 @@ import com.stetig.solitaire.adapter.TaskListRecyclerAdapyer
 import com.stetig.solitaire.api.CommonClassForApi
 import com.stetig.solitaire.api.CommonClassForQuery
 import com.stetig.solitaire.api.Query
-import com.stetig.solitaire.api.Query.Companion.TASK_LIST
 import com.stetig.solitaire.data.AllOpportunityDto
-import com.stetig.solitaire.data.AllOptyRequest
 import com.stetig.solitaire.data.CreateTask
-import com.stetig.solitaire.data.CreateTaskFromCallResponse
 import com.stetig.solitaire.data.CreateTaskResponse
 import com.stetig.solitaire.data.ManualTaskListResponse
-import com.stetig.solitaire.data.SolitaireCreateTask
 import com.stetig.solitaire.databinding.FragmentCreateTaskBinding
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
-import org.acra.ACRA.log
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -103,15 +97,20 @@ class CreateTaskFragment : BaseFragment() {
             val builder = AlertDialog.Builder(this.activity)
             builder.setTitle("Add Task")
             val inflater = layoutInflater
-            val dialogView: View =
-                inflater.inflate(com.stetig.solitaire.R.layout.create_task_form, null)
+            val dialogView: View = inflater.inflate(com.stetig.solitaire.R.layout.create_task_form, null)
 
-            val editText =
-                dialogView.findViewById(com.stetig.solitaire.R.id.task_type_c) as EditText
-//            createTaskRequest.tasktype = editText.text.toString()
-            editText.addTextChangedListener { text: Editable? ->
-                createTaskRequest.tasktype = text.toString()
-            }
+            val listOfTaskTypes = arrayOf("CRM Interaction", "Sales Call", "Feedback Call")
+            val taskTypeAutoCompleteView = dialogView.findViewById(R.id.task_dropdown) as AutoCompleteTextView
+            val taskTypeAutoCompleteAdapter = ArrayAdapter(
+                activity, android.R.layout.simple_spinner_item, listOfTaskTypes
+            )
+            taskTypeAutoCompleteView.threshold = 3
+            taskTypeAutoCompleteView.setAdapter(taskTypeAutoCompleteAdapter)
+            taskTypeAutoCompleteView.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                    createTaskRequest.tasktype = listOfTaskTypes[position]
+                }
+
 
             val editTextSubject =
                 dialogView.findViewById(com.stetig.solitaire.R.id.subject_c) as EditText
@@ -121,7 +120,7 @@ class CreateTaskFragment : BaseFragment() {
             }
             val datePickerEditText = dialogView.findViewById(com.stetig.solitaire.R.id.due_date_c) as EditText
             datePickerEditText.setOnClickListener {
-                showDatePickerDialog()
+                showDatePickerDialog(datePickerEditText)
             }
 
             val adapter = ArrayAdapter(
@@ -132,7 +131,8 @@ class CreateTaskFragment : BaseFragment() {
             autoCompleteTextView.threshold = 3
             autoCompleteTextView.setAdapter(adapter)
             autoCompleteTextView.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view_, position, _ -> val item = listOfOpportunities.get(position)
+                AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                    val item = listOfOpportunities.get(position)
                     createTaskRequest.opp_Id = item.oppId;
                 }
 
@@ -183,7 +183,7 @@ class CreateTaskFragment : BaseFragment() {
         }
 
 
-    private fun showDatePickerDialog() {
+    private fun showDatePickerDialog(datePickerEditText: EditText) {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
         val month = currentDate.get(Calendar.MONTH)
@@ -192,9 +192,7 @@ class CreateTaskFragment : BaseFragment() {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
-                val selectedDate =
-                    "$selectedYear-${(monthOfYear + 1).toString().padStart(2, '0')}-" +
-                            "${dayOfMonth.toString().padStart(2, '0')}"
+                val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
 
                 // Get the current date in the "yyyy-MM-dd" format
                 val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
@@ -203,6 +201,7 @@ class CreateTaskFragment : BaseFragment() {
                 // Check if the selected date is not a past date
                 if (selectedDate >= currentDateFormatted) {
                     createTaskRequest.duedate = selectedDate
+                    datePickerEditText.setText(selectedDate)
                     // Update your UI element with the selected date
 //                    dateTextView.text = selectedDate
                 } else {

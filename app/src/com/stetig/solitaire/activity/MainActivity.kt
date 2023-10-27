@@ -25,6 +25,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
@@ -38,14 +39,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.salesforce.androidsdk.app.SalesforceSDKManager
-import com.stetig.solitaire.BuildConfig
 import com.stetig.solitaire.R
 import com.stetig.solitaire.api.CommonClassForApi
 import com.stetig.solitaire.api.CommonClassForQuery
@@ -54,6 +53,7 @@ import com.stetig.solitaire.base.BaseActivity
 import com.stetig.solitaire.callutilities.CallStateandRecordingService
 import com.stetig.solitaire.data.AppVersionResponse
 import com.stetig.solitaire.data.CallDispositionRequest
+import com.stetig.solitaire.data.CallTaskRequest
 import com.stetig.solitaire.data.CreateTaskFromCall
 import com.stetig.solitaire.data.CreateTaskFromCallResponse
 import com.stetig.solitaire.data.Event
@@ -73,9 +73,9 @@ import com.stetig.solitaire.utils.UpcommingNotificationPrefs
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
 import java.text.SimpleDateFormat
-import java.util.ArrayList
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import java.util.Random
 import java.util.Timer
 import java.util.TimerTask
@@ -201,6 +201,7 @@ class MainActivity : BaseActivity() {
     var opportunityId = ""
 
     var selected = ""
+    var callTaskRequest = CallTaskRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -429,6 +430,15 @@ class MainActivity : BaseActivity() {
             popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
         }
 
+        popUpBinding.yesNoCallDetail.date.setOnClickListener {
+            showDatePickerDialog(popUpBinding.yesNoCallDetail.date)
+        }
+
+        popUpBinding.yesNoCallDetail.time.setOnClickListener {
+            showTimePickerDialog(popUpBinding.yesNoCallDetail.time)
+        }
+
+
         val layoutProfessionalCallDetailBinding = popUpBinding.yesNoCallDetail
 
         layoutProfessionalCallDetailBinding.callStatusGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -442,6 +452,7 @@ class MainActivity : BaseActivity() {
 //                else -> hideBoth()
 //            }
             action = chipText
+            callTaskRequest.callAttemptStatus = chipText
         }
 
         layoutProfessionalCallDetailBinding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -555,7 +566,19 @@ class MainActivity : BaseActivity() {
         }
 
         layoutProfessionalCallDetailBinding.submitCalldisposition.setOnClickListener {
+            val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+            val auth = "Bearer " + account.authToken
+            callTaskRequest.callDate = "2023-10-19"
+            callTaskRequest.calltime = "00:00:00"
+            callTaskRequest.mobileNumber = mMobilNumber
+            callTaskRequest.recordType = "Opportunity"
+            callTaskRequest.communicationtype = "Inbound call"
+            callTaskRequest.rating = "Hot"
+            callTaskRequest.dispositionPicklist = "Partial Swipe Done"
+            callTaskRequest.comment = popUpBinding.yesNoCallDetail.desc.text.toString()
 
+
+            commonClassForApi?.salesCallTaskRequest(disposableObserverCallTaskObserver, callTaskRequest, auth)
         }
 
 
@@ -698,6 +721,44 @@ class MainActivity : BaseActivity() {
             )
         }
     }
+
+    private fun showDatePickerDialog(datePickerEditText: EditText) {
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this@MainActivity,
+            { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
+                val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
+
+                // Get the current date in the "yyyy-MM-dd" format
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val currentDateFormatted = sdf.format(currentDate.time)
+
+                // Check if the selected date is not a past date
+                if (selectedDate >= currentDateFormatted) {
+                    datePickerEditText.setText(selectedDate)
+                    // Update your UI element with the selected date
+//                    dateTextView.text = selectedDate
+                } else {
+                    // Show an error message for selecting a past date
+//                    dateTextView.text = "Please select a future date"
+                }
+            },
+            year,
+            month,
+            day
+        )
+
+        // Set the minimum date to the current date to restrict past dates
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        // Show the date picker dialog
+        datePickerDialog.show()
+    }
+
 
     fun updateDialog() {
         val builder = MaterialAlertDialogBuilder(this, R.style.AlertDialog)
@@ -985,6 +1046,43 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    private fun showTimePickerDialog(date: AutoCompleteTextView) {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        // Create a TimePickerDialog and show it
+        val timePickerDialog = TimePickerDialog(
+            this,
+            { view, hourOfDay, minute ->
+
+                var time: String = hourOfDay.toString() + ":" + minute;
+                print("Time selected$time");
+                date.setText(convertTo12HourFormat(time))
+            },
+            hour,
+            minute,
+            false
+        )
+
+        timePickerDialog.show()
+
+    }
+
+    fun convertTo12HourFormat(time24Hour: String): String {
+        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+
+        var formattedTime = ""
+        try {
+            val date = inputFormat.parse(time24Hour)
+            formattedTime = outputFormat.format(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedTime
+    }
+
 
     var customTimePicker =
         OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
@@ -1191,6 +1289,26 @@ class MainActivity : BaseActivity() {
                 try {
                     alertDialog.dismiss()
                 } catch (e: Exception) {
+                }
+            }
+
+            override fun onError(e: Throwable) {
+                Log.e(javaClass.name, "onError: 337 " + e.message)
+            }
+
+            override fun onComplete() {}
+        }
+
+
+    private var disposableObserverCallTaskObserver: DisposableObserver<CreateTaskFromCallResponse> =
+        object : DisposableObserver<CreateTaskFromCallResponse>() {
+            override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
+
+                try {
+                    Utils.setToast(this@MainActivity, "Successful")
+                    alertDialog.dismiss()
+                } catch (e: Exception) {
+
                 }
             }
 

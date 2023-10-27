@@ -1,5 +1,6 @@
 package com.stetig.solitaire.fragment
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +13,11 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.DatePicker
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.*
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.annotations.SerializedName
@@ -29,6 +33,9 @@ import com.stetig.solitaire.databinding.FeedbackFormBinding
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
 import org.acra.ACRA.log
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class FeedBackFragment : BaseFragment() {
@@ -55,9 +62,7 @@ class FeedBackFragment : BaseFragment() {
         feedback.smFeedback = binding.smFeedback.text.toString()
         feedback.placeofwork = binding.placeOfWork.text.toString()
         feedback.designation = binding.designation.text.toString()
-        feedback.pincode = binding.workLocationPincode.text.toString()
-        feedback.anniversarydate = binding.anniversaryDate.text.toString()
-        feedback.nextactiondate =binding.nextActionDate.text.toString()
+        feedback.pincode = "a2IC30000002VkTMAU"
 
         log.e("error dekho", typeofenq.toString())
         if (typeofenq == "Leasing") {
@@ -202,6 +207,15 @@ class FeedBackFragment : BaseFragment() {
 
 
     override fun initView(rootView: View?) {
+        commonClassForApi = CommonClassForApi.getInstance(activity)
+
+        binding.anniversaryDate.setOnClickListener {
+            showDatePickerDialogAnniversaryDate(binding.anniversaryDate)
+        }
+
+        binding.nextActionDate.setOnClickListener {
+            showDatePickerDialogNextActionDate(binding.nextActionDate)
+        }
 
         /// For Visit At
         val visitedAddAutoComplete = binding.autovisitedat
@@ -298,7 +312,7 @@ class FeedBackFragment : BaseFragment() {
 
         /// Shop Ownership
         val ownshipAddAutoComplete = binding.autoshopownship
-        val listofownership = arrayOf("Owner","Rental")
+        val listofownership = arrayOf("Owned","Rental")
         val ownershipAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofownership)
         ownshipAddAutoComplete.threshold = 3
         ownshipAddAutoComplete.setAdapter(ownershipAutoCompleteAdapter)
@@ -445,11 +459,7 @@ class FeedBackFragment : BaseFragment() {
              binding.submitBtn.setOnClickListener {
                  log.e("output data", feedback.toString())
                  val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                 commonClassForApi?.FillFeedBackForm(
-                     disposableObserverTaskFromCallResponse,
-                     feedback,
-                     "Bearer " + account.authToken
-                 )
+                 commonClassForApi?.FillFeedBackForm(disposableObserverTaskFromCallResponse, feedback, "Bearer " + account.authToken)
              }
 
 //        val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
@@ -490,6 +500,8 @@ class FeedBackFragment : BaseFragment() {
 //                        Query.ALL_MANUAL_TASK,
 //                        onOpportunityListListener
 //                    )
+                activity.navHostFragment.findNavController().popBackStack()
+
             }
 
             override fun onError(e: Throwable) {
@@ -498,4 +510,80 @@ class FeedBackFragment : BaseFragment() {
 
             override fun onComplete() {}
         }
+
+    private fun showDatePickerDialogAnniversaryDate(datePickerEditText: EditText) {
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
+                val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
+
+                // Get the current date in the "yyyy-MM-dd" format
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val currentDateFormatted = sdf.format(currentDate.time)
+
+                // Check if the selected date is not a past date
+                if (selectedDate >= currentDateFormatted) {
+                    feedback.anniversarydate = selectedDate
+                    datePickerEditText.setText(selectedDate)
+                    // Update your UI element with the selected date
+//                    dateTextView.text = selectedDate
+                } else {
+                    // Show an error message for selecting a past date
+//                    dateTextView.text = "Please select a future date"
+                }
+            },
+            year,
+            month,
+            day
+        )
+
+        // Set the minimum date to the current date to restrict past dates
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        // Show the date picker dialog
+        datePickerDialog.show()
+    }
+    private fun showDatePickerDialogNextActionDate(datePickerEditText: EditText) {
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
+                val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
+
+                // Get the current date in the "yyyy-MM-dd" format
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val currentDateFormatted = sdf.format(currentDate.time)
+
+                // Check if the selected date is not a past date
+                if (selectedDate >= currentDateFormatted) {
+                    feedback.nextactiondate = selectedDate
+                    datePickerEditText.setText(selectedDate)
+                    // Update your UI element with the selected date
+//                    dateTextView.text = selectedDate
+                } else {
+                    // Show an error message for selecting a past date
+//                    dateTextView.text = "Please select a future date"
+                }
+            },
+            year,
+            month,
+            day
+        )
+
+        // Set the minimum date to the current date to restrict past dates
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        // Show the date picker dialog
+        datePickerDialog.show()
+    }
+
 }

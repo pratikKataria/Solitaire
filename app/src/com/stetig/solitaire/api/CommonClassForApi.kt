@@ -127,30 +127,30 @@ class CommonClassForApi private constructor() {
     }
 
 
-//    fun salesCallTaskRequest(disposableObserver: DisposableObserver<SendCampaignApprovalRequestResponse>, sendCallStatus: SalesCallTask, auth: String){
-//        Utils.showProgressDialog(activity)
-//        RestClient.getInstance().getService()!!.salesCallTaskRequest(sendCallStatus, auth)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(object : Observer<SendCampaignApprovalRequestResponse?> {
-//                override fun onSubscribe(d: Disposable) {}
-//                override fun onNext(callStatusResponse: SendCampaignApprovalRequestResponse) {
-//                    disposableObserver.onNext(callStatusResponse)
-//                    Utils.hideProgressDialog(activity)
-//                }
-//
-//                override fun onError(e: Throwable) {
-//                    disposableObserver.onError(e)
-//                    Utils.setToast(activity, "Unable to send request please try again...")
-//                    Utils.hideProgressDialog(activity)
-//                }
-//
-//                override fun onComplete() {
-//                    disposableObserver.onComplete()
-//                    Utils.hideProgressDialog(activity)
-//                }
-//            })
-//    }
+    fun salesCallTaskRequest(disposableObserver: DisposableObserver<CreateTaskFromCallResponse>, sendCallStatus: CallTaskRequest, auth: String){
+        Utils.showProgressDialog(activity)
+        RestClient.getInstance().getService()!!.salesCallTaskRequest(sendCallStatus, auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<CreateTaskFromCallResponse?> {
+                override fun onSubscribe(d: Disposable) {}
+                override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
+                    disposableObserver.onNext(callStatusResponse)
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onError(e: Throwable) {
+                    disposableObserver.onError(e)
+                    Utils.setToast(activity, "Unable to send request please try again...")
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onComplete() {
+                    disposableObserver.onComplete()
+                    Utils.hideProgressDialog(activity)
+                }
+            })
+    }
 
     fun FillFeedBackForm(disposableObserver: DisposableObserver<FeedBackResponse>, sendCallStatus: FeedBack, auth: String){
         Utils.showProgressDialog(activity)

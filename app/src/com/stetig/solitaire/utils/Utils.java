@@ -1866,7 +1866,7 @@ public class Utils {
 
     public static String getFormattedDateSF(String parm) {
 
-        if (parm == null) return "";
+        if (parm == null) return "No Available";
 
         if (parm != null) {
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
@@ -1876,12 +1876,12 @@ public class Utils {
                 date = inputFormat.parse(parm);
             } catch (ParseException e) {
                 e.printStackTrace();
-                return "";
+                return "No Available";
             }
-            SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
             return formate.format(date);
         }
-        return "";
+        return "No Available";
     }
 
     public static String getFormattedDateSF_OpportunityCard(String parm) {

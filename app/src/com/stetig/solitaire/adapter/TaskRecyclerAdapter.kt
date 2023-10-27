@@ -34,8 +34,8 @@ abstract class TaskRecyclerAdapter(
 
         projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(whatNameOrProjectRName)
 //        projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
-        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = Utils.checkValueOrGiveEmpty(record?.createdDate)
-        projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.checkValueOrGiveEmpty(record?.createdDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = Utils.getFormattedDateSF(record?.createdDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateSF(record?.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(record?.typeofEnquiry)
 
 

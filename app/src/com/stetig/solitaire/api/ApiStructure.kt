@@ -16,7 +16,7 @@ interface ApiStructure {
 
     @Headers("Content-Type: application/json")
     @POST(Endpoints.SALES_CALL_TASK)
-    fun salesCallTaskRequest(@Body listBody: SalesCallTask, @Header("Authorization") authToken: String?): Observable<SalesCallTaskResponse?>
+    fun salesCallTaskRequest(@Body listBody: CallTaskRequest, @Header("Authorization") authToken: String?): Observable<CreateTaskFromCallResponse?>
 
     @Headers("Content-Type: application/json")
     @POST(Endpoints.CP_CREATION_APPROVAL)

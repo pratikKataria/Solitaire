@@ -351,7 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="130dp"
-                        android:text="Expiry date"
+                        android:text="Close Date"
                         android:textColor="@android:color/darker_gray" />
 
                     <TextView
