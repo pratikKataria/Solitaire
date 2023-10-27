@@ -42,7 +42,7 @@ class CpCreationRecyclerAdapter(private var context: Context, private var projec
             val bundle = Bundle()
             log.e("Cp Creation ID error", data.id?:"")
             bundle.putString(Keys.CAM_ID, data?.id?:"")
-            (context as MainActivity).navHostFragment.navController.navigate(R.id.action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment, bundle)
+            (context as MainActivity).navHostFragment.navController.navigate(R.id.action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment1, bundle)
         }
 
     }

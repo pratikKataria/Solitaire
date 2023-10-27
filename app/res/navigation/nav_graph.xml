@@ -131,7 +131,7 @@
         tools:layout="@layout/fragment_cp_creation_approval"
         >
         <action
-            android:id="@+id/action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment"
+            android:id="@+id/action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment1"
             app:destination="@id/cpcreationApprovalSubDetailFragment" />
     </fragment>
     <fragment

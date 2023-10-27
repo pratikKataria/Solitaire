@@ -17,6 +17,11 @@ interface ApiStructure {
     @Headers("Content-Type: application/json")
     @POST(Endpoints.SALES_CALL_TASK)
     fun salesCallTaskRequest(@Body listBody: SalesCallTask, @Header("Authorization") authToken: String?): Observable<SalesCallTaskResponse?>
+
+    @Headers("Content-Type: application/json")
+    @POST(Endpoints.CP_CREATION_APPROVAL)
+    fun sendcpcreationApprovalRequest(@Body listBody: SendCpCreaitonApprovalRequest, @Header("Authorization") authToken: String?): Observable<CpCreationApprovalResponse?>
+
     @Headers("Content-Type: application/json")
     @POST(Endpoints.SOURCECHANGE_APPROVAL)
     fun sendSourceChangeApprovalRequest(@Body listBody: SendSourceChangeApprovalRequest, @Header("Authorization") authToken: String?): Observable<SendSourceChangeApprovalResponse?>

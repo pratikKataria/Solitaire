@@ -15,29 +15,29 @@ class CpCreationApproval(
         @SerializedName("NTS_ID__c")
         val ntsId: String?,
         @SerializedName("Name")
-        val name: String? = null,
+        val name: String?,
         @SerializedName("CP_Sub_Type__c")
-        val cpSubType: String,
+        val cpSubType: String?,
         @SerializedName("CP_Type__c")
-        val cpType: String,
+        val cpType: String?,
         @SerializedName("Firm_Name__c")
-        val firmName: String,
+        val firmName: String?,
         @SerializedName("Sourcing_Manager__r")
-        val sourcingManager: SourcingManagerR,
+        val sourcingManager: SourcingManagerR?,
         @SerializedName("Maha_RERA_No__c")
-        val mahaRERAno: String,
+        val mahaRERAno: String?,
         @SerializedName("RERA_Expiry_Date__c")
-        val RERAexpData: String,
+        val RERAexpData: String?,
         @SerializedName("Zone__c")
-        val zone: String,
+        val zone: String?,
         @SerializedName("Expertise__c")
-        val expertise: String,
+        val expertise: String?,
         @SerializedName("Location_Of_the_CPs_Office__c")
-        val officelocation: String,
+        val officelocation: String?,
         @SerializedName("Level_1_Submitted_Date_Time__c")
-        val level1submissiondatetime: String,
+        val level1submissiondatetime: String?,
         @SerializedName("Level_2_Date_Time__c")
-        val level2datetime: String,
+        val level2datetime: String?,
     ){
         data class Attributes(
             @SerializedName("type")
