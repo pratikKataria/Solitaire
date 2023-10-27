@@ -1,11 +1,13 @@
 package com.stetig.solitaire.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.transition.MaterialSharedAxis
 import com.stetig.callsync.base.BaseFragment
 import com.stetig.solitaire.R
 import com.stetig.solitaire.activity.MainActivity
@@ -18,7 +20,7 @@ import com.stetig.solitaire.api.Query.Companion.OPPORTUNITY_DETAIL
 import com.stetig.solitaire.data.Opportunity
 import com.stetig.solitaire.databinding.FragmentOpportunityDetailBinding
 import com.stetig.solitaire.utils.Utils
-import com.google.android.material.transition.MaterialSharedAxis
+
 
 class OpportunityDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentOpportunityDetailBinding
@@ -69,6 +71,9 @@ class OpportunityDetailFragment : BaseFragment() {
 
                 binding.include.call.setOnClickListener { callNumber(opty.accountMobileNumberC, activity) }
                 binding.include.whatsapp.setOnClickListener { sendWhatsAppToSpecificNumber(opty.accountMobileNumberC, activity) }
+                binding.include.share.setOnClickListener {
+                    OpportunityRecyclerAdapter.smsNumber(opty.accountMobileNumberC, activity)
+                }
 
 //                binding.stage.setOnClickListener {
 //                    val bundle = Bundle()
@@ -86,6 +91,7 @@ class OpportunityDetailFragment : BaseFragment() {
 
         }
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

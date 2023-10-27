@@ -98,8 +98,7 @@ class SourceChangeSubDetailFragment : BaseFragment() {
                 binding.approveBtn.setOnClickListener {
                     val userAccount =
                         SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                    val commonClassForApi: CommonClassForApi =
-                        CommonClassForApi.getInstance(activity)!!
+                    val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
                     val data = SendSourceChangeApprovalRequest(
                         sitevisitId = data.records[0]?.id.toString(),

@@ -39,7 +39,7 @@ class OpportunityRecyclerAdapter(private var context: Context, private var proje
 
         projectDetailCardViewHolder.cardViewProjectsBinding.include.call.setOnClickListener { callNumber(data.accountMobileNumberC, context) }
         projectDetailCardViewHolder.cardViewProjectsBinding.include.whatsapp.setOnClickListener { sendWhatsAppToSpecificNumber(data.accountMobileNumberC, context) }
-        projectDetailCardViewHolder.cardViewProjectsBinding.include.sms.setOnClickListener {
+        projectDetailCardViewHolder.cardViewProjectsBinding.include.share.setOnClickListener {
             smsNumber(data.accountMobileNumberC, context)
         }
 //        projectDetailCardViewHolder.cardViewProjectsBinding.include.timer.setOnClickListener {
