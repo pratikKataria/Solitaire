@@ -99,7 +99,7 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                         status = "Approve",
                         comment=binding.commentBox.text.toString()
                     )
-                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
+//                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
                 }
 
                 binding.rejectBtn.setOnClickListener {
@@ -113,7 +113,7 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                         status = "Reject",
                         comment=binding.commentBox.text.toString()
                     )
-                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
+//                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
 
                 }
             }

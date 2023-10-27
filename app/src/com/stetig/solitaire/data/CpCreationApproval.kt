@@ -5,7 +5,7 @@ class CpCreationApproval(
     @SerializedName("done")
     val done: Boolean?,
     @SerializedName("records")
-    val records: List<Record?>,
+    val records: List<Record>,
     @SerializedName("totalSize")
     val totalSize: Int?
 ) {
