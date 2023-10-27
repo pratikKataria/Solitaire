@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+    <LinearLayout
+        android:id="@+id/cp_approval_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/source_change_approval_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#F5F5F5"
+            app:cardElevation="0dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:id="@+id/cp_approval_header_parent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NTS Name:  "
+                        android:fontFamily="@font/myriad_pro_semi_bold"
+                        android:textColor="#858585"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/cp_approval_nts_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/myriad_pro_semi_bold"
+                        android:text="project"
+                        android:textColor="#1A1A1A"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                ==
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NTS :  "
+                        android:fontFamily="@font/myriad_pro_semi_bold"
+                        android:textColor="#858585"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/cp_approval_nts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="Opportunity"
+                        android:textColor="#1A1A1A"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Firm Name :  "
+                        android:fontFamily="@font/myriad_pro_semi_bold"
+                        android:textColor="#858585"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/cp_approval_firemname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="MTM Phase 1"
+                        android:textColor="#1A1A1A"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout> <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sourcing Manager:  "
+                    android:fontFamily="@font/myriad_pro_semi_bold"
+                    android:textColor="#858585"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/cp_approval_sourcing_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:singleLine="false"
+                    android:text="29-10-2023"
+                    android:textColor="#1A1A1A"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Requested Date:  "
+                        android:fontFamily="@font/myriad_pro_semi_bold"
+                        android:textColor="#858585"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/cp_approval_req_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="29-10-2023"
+                        android:textColor="#1A1A1A"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
+

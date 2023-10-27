@@ -71,9 +71,9 @@
             android:id="@+id/action_menuFragment_to_approvalFragment"
             app:destination="@+id/approvalFragment"
             />
-        <action
-            android:id="@+id/action_menuFragment_to_campaignApprovalDetailFragment"
-            app:destination="@id/campaignApprovalDetailFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_menuFragment_to_campaignApprovalDetailFragment"-->
+<!--            app:destination="@id/campaignApprovalDetailFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/approvalFragment"
@@ -86,6 +86,12 @@
         <action
             android:id="@+id/action_approvalFragment_to_campaignApprovalDetailFragment"
             app:destination="@id/campaignApprovalDetailFragment" />
+        <action
+            android:id="@+id/action_approvalFragment_to_sourceChangeApprovalDetailFragment"
+            app:destination="@id/sourceChangeApprovalDetailFragment" />
+        <action
+            android:id="@+id/action_approvalFragment_to_cpcreationApprovalDetailFragment"
+            app:destination="@id/cpcreationApprovalDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -119,6 +125,25 @@
             app:destination="@id/opportunityFragment" />
     </fragment>
     <fragment
+        android:id="@+id/cpcreationApprovalDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CpCreationApprovalDetailFragment"
+        android:label="fragment_cp_creation_approval"
+        tools:layout="@layout/fragment_cp_creation_approval"
+        >
+        <action
+            android:id="@+id/action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment"
+            app:destination="@id/cpcreationApprovalSubDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sourceChangeApprovalDetailFragment"
+        android:name="com.stetig.solitaire.fragment.SourceChangeApprovalDetailFragment"
+        android:label="fragment_source_change_approval"
+        tools:layout="@layout/fragment_source_change_approval">
+        <action
+            android:id="@+id/action_sourceChangeApprovalDetailFragment_to_sourceChangeApprovalSubDetailFragment"
+            app:destination="@id/sourcechangeApprovalSubDetailFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/campaignApprovalDetailFragment"
         android:name="com.stetig.solitaire.fragment.CampaignApprovalDetailFragment"
         android:label="fragment_campaign_approval_detail"
@@ -127,11 +152,26 @@
             android:id="@+id/action_campaignApprovalDetailFragment_to_campaignApprovalSubDetailFragment"
             app:destination="@id/campaignApprovalSubDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/campaignApprovalSubDetailFragment"
         android:name="com.stetig.solitaire.fragment.CampaignApprovalSubDetailFragment"
         android:label="fragment_campaign_approval_subdetail"
         tools:layout="@layout/fragment_campaign_approval_subdetail"
+        ></fragment>
+
+    <fragment
+        android:id="@+id/sourcechangeApprovalSubDetailFragment"
+        android:name="com.stetig.solitaire.fragment.SourceChangeSubDetailFragment"
+        android:label="fragment_source_change_approval_subdetail"
+        tools:layout="@layout/fragment_source_change_approval_subdetail"
+        ></fragment>
+
+    <fragment
+        android:id="@+id/cpcreationApprovalSubDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CpCreationApprovalDetailFragment"
+        android:label="fragment_cp_creation_approval_subdetail"
+        tools:layout="@layout/fragment_source_change_approval_subdetail"
         ></fragment>
     <fragment
         android:id="@+id/approvalDetailFragment"

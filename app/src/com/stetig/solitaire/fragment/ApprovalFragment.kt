@@ -45,6 +45,12 @@ class ApprovalFragment : BaseFragment() {
         binding.icApprovalMenuTwo.setOnClickListener {
             moveToCampaignDetials("Submitted for Approval")
         }
+        binding.icApprovalMenuThree.setOnClickListener{
+            moveToSourceChangeDetials("Pending For Approval")
+        }
+        binding.icApprovalMenuFour.setOnClickListener{
+            moveToCpCreationDetials("CP CREATION APPROVAL")
+        }
     }
 
     private fun moveToFragmentDetials(type: String) {
@@ -58,6 +64,19 @@ class ApprovalFragment : BaseFragment() {
         bundle.putString(Keys.APP_TYPE, type)
         navigateTo(R.id.action_approvalFragment_to_campaignApprovalDetailFragment, bundle)
     }
+
+    private  fun moveToSourceChangeDetials(type: String){
+        val bundle = Bundle()
+        bundle.putString(Keys.APP_TYPE, type)
+        navigateTo(R.id.action_approvalFragment_to_sourceChangeApprovalDetailFragment, bundle)
+    }
+
+    private fun moveToCpCreationDetials(type: String){
+        val bundle = Bundle()
+        bundle.putString(Keys.APP_TYPE, type)
+        navigateTo(R.id.action_approvalFragment_to_cpcreationApprovalDetailFragment, bundle)
+    }
+
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onResume() {

@@ -92,6 +92,14 @@ interface Query {
         val CAMPAIGN_APPROVAL_LIST = "Select Id, Name, Primary_Project__r.Name,Parent.Name,Approval_Status__c from Campaign $WHERE RecordTypeId = '012C30000007DKOIA2' $AND ((Approval_Status__c='Submitted for Approval' $AND Level_1_Approver__c='005C3000001MbbRIAS') $OR (Approval_Status__c='Level 1 Approved' $AND Level_2_Approver__c!=null $AND Level_2_Approver__c='005C3000001MbbRIAS'))"
         val CAMPAIGN_TABLE_FIELDS = "Select Id, Name, Primary_Project__r.Name,Parent.Name,BudgetedCost, Approval_Status__c , StartDate,EndDate from Campaign $WHERE RecordTypeId = '012C30000007DKOIA2' $AND  id = "
 
+        val SOURCE_CHANGE_APPROVAL_LIST = "Select Id,Name,Customer_Name__c,Customer_Name__r.Name,Owner.Name,Visit_source_approval_Status__c from site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND OwnerId=${Utils.buildQueryParameter(USER_ID)}"
+        val SOURCE_CHANGE_TABLE_FIELDS = "SELECT Id, Site_Visit_Stage__c, Type_of_Enquiry__c, Customer_Name__c, Project__r.Name, Mobile_No2__c, Source1__c, Opportunity_Walk_in_Source__c, Opportunity_Walk_in_Sub_Source__c, Sub_Source2__c,Channel_Partner_Leasing__c FROM site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND id = "
+
+
+        val CP_CREATION_APPROVAL_LIST = "Select Id,NTS_ID__c,Name,CP_Sub_Type__c,Firm_Name__c,Sourcing_Manager__r.Name,CP_Type__c,Maha_RERA_No__c,RERA_Expiry_Date__c,Zone__c,Expertise__c,Location_Of_the_CPs_Office__c,Level_1_Submitted_Date_Time__c,Level_2_Date_Time__c from NTS_CP__c where ((Level_1_Approval_Status__c!='Approved') OR (Level_2_Approval_Status__c!='=Approved')) AND NTS_CP_Status__c!='Approved'"
+        val CP_CREATTION_TABLE_FIELDS = "Select Id,NTS_ID__c,Name,CP_Sub_Type__c,Firm_Name__c,Sourcing_Manager__r.Name,CP_Type__c,Maha_RERA_No__c,RERA_Expiry_Date__c,Zone__c,Expertise__c,Location_Of_the_CPs_Office__c,Level_1_Submitted_Date_Time__c,Level_2_Date_Time__c from NTS_CP__c $WHERE id = "
+
+
         val SEARCH = "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, Sales_Call_Attempt_Date__c, Project__c, Project__r.Name from Opportunity $WHERE $OPPORTUNITY_ACTIVE_FILTER $AND $OWNER_FILTER $AND"
         val TIME_LINE_QUERY = "Select Id, Mobile_Number_Webform__c, Task_Type__c, Subject, ActivityDate, createddate, WhatId, status, RecordTypeId FROM Task $WHERE "
 //        Select Id, ActivityDate, WhatId, What.Name , CreatedDate FROM Task WHERE whatid in (select id from opportunity) AND RecordTypeId = '012C3000000Aqq9IAC'

@@ -2,6 +2,7 @@ package com.stetig.solitaire.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,11 +16,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.annotations.SerializedName
 import com.stetig.callsync.base.BaseFragment
 import com.stetig.solitaire.R
 import com.stetig.solitaire.activity.MainActivity
+import com.stetig.solitaire.api.CommonClassForApi
 import com.stetig.solitaire.api.Keys
+import com.stetig.solitaire.api.Query
+import com.salesforce.androidsdk.app.SalesforceSDKManager
+import com.stetig.solitaire.data.*
 import com.stetig.solitaire.databinding.FeedbackFormBinding
+import com.stetig.solitaire.utils.Utils
+import io.reactivex.observers.DisposableObserver
 import org.acra.ACRA.log
 
 
@@ -27,15 +35,78 @@ class FeedBackFragment : BaseFragment() {
 
     lateinit var activity: MainActivity
     lateinit var binding: FeedbackFormBinding
+    private var commonClassForApi: CommonClassForApi? = null
     lateinit var typeofenq:String
+    lateinit var visitid: String
+    lateinit var rating: String
+    var feedback = FeedBack()
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = inflate(inflater, R.layout.feedback_form, container, false)
-
         val typeofenq = arguments?.getString(Keys.TYPE_ENQUIRY)
+        val visitid = arguments?.getString(Keys.SITE_VISIT_ID)
+        feedback.id = visitid.toString()
+        feedback.typeofenquiry = typeofenq.toString()
         log.e("TYPE OF ENQUIRY====", typeofenq.toString())
         initView(binding.root)
+
+        feedback.smFeedback = binding.smFeedback.text.toString()
+        feedback.placeofwork = binding.placeOfWork.text.toString()
+        feedback.designation = binding.designation.text.toString()
+        feedback.pincode = binding.workLocationPincode.text.toString()
+        feedback.anniversarydate = binding.anniversaryDate.text.toString()
+        feedback.nextactiondate =binding.nextActionDate.text.toString()
+
+        log.e("error dekho", typeofenq.toString())
+        if (typeofenq == "Leasing") {
+            binding.autosubcategory.visibility = View.VISIBLE
+            binding.autowholesalerretailer.visibility = View.VISIBLE
+            binding.autoshopownship.visibility = View.VISIBLE
+            binding.currentShopSize.visibility = View.VISIBLE
+            binding.rental.visibility = View.VISIBLE
+            binding.dailybusiness.visibility = View.VISIBLE
+            binding.employeesize.visibility = View.VISIBLE
+            binding.totaloutlets.visibility = View.VISIBLE
+            binding.outletslocation.visibility = View.VISIBLE
+            binding.autoleasing.visibility = View.VISIBLE
+
+            binding.autosubcategory1.visibility = View.VISIBLE
+            binding.autowholesalerretailer1.visibility = View.VISIBLE
+            binding.autoshopownship1.visibility = View.VISIBLE
+            binding.currentShopSize1.visibility = View.VISIBLE
+            binding.rental1.visibility = View.VISIBLE
+            binding.dailybusiness1.visibility = View.VISIBLE
+            binding.employeesize1.visibility = View.VISIBLE
+            binding.totaloutlets1.visibility = View.VISIBLE
+            binding.outletslocation1.visibility = View.VISIBLE
+            binding.autoleasing1.visibility = View.VISIBLE
+
+        } else {
+            binding.autosubcategory.visibility = View.GONE
+            binding.autowholesalerretailer.visibility = View.GONE
+            binding.autoshopownship.visibility = View.GONE
+            binding.currentShopSize.visibility = View.GONE
+            binding.rental.visibility = View.GONE
+            binding.dailybusiness.visibility = View.GONE
+            binding.employeesize.visibility = View.GONE
+            binding.totaloutlets.visibility = View.GONE
+            binding.outletslocation.visibility = View.GONE
+            binding.autoleasing.visibility = View.GONE
+
+            binding.autosubcategory1.visibility = View.GONE
+            binding.autowholesalerretailer1.visibility = View.GONE
+            binding.autoshopownship1.visibility = View.GONE
+            binding.currentShopSize1.visibility = View.GONE
+            binding.rental1.visibility = View.GONE
+            binding.dailybusiness1.visibility = View.GONE
+            binding.employeesize1.visibility = View.GONE
+            binding.totaloutlets1.visibility = View.GONE
+            binding.outletslocation1.visibility = View.GONE
+            binding.autoleasing1.visibility = View.GONE
+
+        }
         return binding.root
     }
 
@@ -131,60 +202,15 @@ class FeedBackFragment : BaseFragment() {
 
 
     override fun initView(rootView: View?) {
-        if (typeofenq == "Leasing") {
-            binding.autosubcategory.visibility = View.VISIBLE
-            binding.autowholesalerretailer.visibility = View.VISIBLE
-            binding.autoshopownship.visibility = View.VISIBLE
-            binding.currentShopSize.visibility = View.VISIBLE
-            binding.rental.visibility = View.VISIBLE
-            binding.dailybusiness.visibility = View.VISIBLE
-            binding.employeesize.visibility = View.VISIBLE
-            binding.totaloutlets.visibility = View.VISIBLE
-            binding.outletslocation.visibility = View.VISIBLE
-            binding.autoleasing.visibility = View.VISIBLE
-
-            binding.autosubcategory1.visibility = View.VISIBLE
-            binding.autowholesalerretailer1.visibility = View.VISIBLE
-            binding.autoshopownship1.visibility = View.VISIBLE
-            binding.currentShopSize1.visibility = View.VISIBLE
-            binding.rental1.visibility = View.VISIBLE
-            binding.dailybusiness1.visibility = View.VISIBLE
-            binding.employeesize1.visibility = View.VISIBLE
-            binding.totaloutlets1.visibility = View.VISIBLE
-            binding.outletslocation1.visibility = View.VISIBLE
-            binding.autoleasing1.visibility = View.VISIBLE
-
-        } else {
-            binding.autosubcategory.visibility = View.GONE
-            binding.autowholesalerretailer.visibility = View.GONE
-            binding.autoshopownship.visibility = View.GONE
-            binding.currentShopSize.visibility = View.GONE
-            binding.rental.visibility = View.GONE
-            binding.dailybusiness.visibility = View.GONE
-            binding.employeesize.visibility = View.GONE
-            binding.totaloutlets.visibility = View.GONE
-            binding.outletslocation.visibility = View.GONE
-            binding.autoleasing.visibility = View.GONE
-
-            binding.autosubcategory1.visibility = View.GONE
-            binding.autowholesalerretailer1.visibility = View.GONE
-            binding.autoshopownship1.visibility = View.GONE
-            binding.currentShopSize1.visibility = View.GONE
-            binding.rental1.visibility = View.GONE
-            binding.dailybusiness1.visibility = View.GONE
-            binding.employeesize1.visibility = View.GONE
-            binding.totaloutlets1.visibility = View.GONE
-            binding.outletslocation1.visibility = View.GONE
-            binding.autoleasing1.visibility = View.GONE
-
-        }
 
         /// For Visit At
         val visitedAddAutoComplete = binding.autovisitedat
-        val visitedAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, arrayOf("Site", "Outbound", "Outbound - Outstation", "E-Visit"))
+        val listofvisitedat = arrayOf("Site", "Outbound", "Outbound - Outstation", "E-Visit")
+        val visitedAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofvisitedat)
         visitedAddAutoComplete.threshold = 3
         visitedAddAutoComplete.setAdapter(visitedAutoCompleteAdapter)
         visitedAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.visitiedAt = listofvisitedat[position]
         }
 
         /// For Ethnicity
@@ -194,6 +220,7 @@ class FeedBackFragment : BaseFragment() {
         enthicityAutoCompleteTextView.threshold = 3
         enthicityAutoCompleteTextView.setAdapter(ethinicityAdapter)
         enthicityAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.ethnicity = listOfEthnicity[position]
         }
 
         /// For Budget
@@ -203,6 +230,7 @@ class FeedBackFragment : BaseFragment() {
         budgetAutoCompleteTextView.threshold = 3
         budgetAutoCompleteTextView.setAdapter(budgetAdapter)
         budgetAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.budget = listOfBudget[position]
         }
 
         /// For Zone
@@ -212,19 +240,22 @@ class FeedBackFragment : BaseFragment() {
         zoneAutoCompleteTextView.threshold = 3
         zoneAutoCompleteTextView.setAdapter(zoneAdapter)
         zoneAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.zone = listOfZone[position]
         }
 
         /// For Wholeseller
         val wholesellerAddAutoComplete = binding.autowholesalerretailer
-        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, arrayOf("Wholeseller","Retailer" ,"Both"))
+        val listofwholeseller = arrayOf("Wholeseller","Retailer" ,"Both")
+        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofwholeseller)
         wholesellerAddAutoComplete.threshold = 3
         wholesellerAddAutoComplete.setAdapter(wholesellerAutoCompleteAdapter)
         wholesellerAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.wholesellerretailer = listofwholeseller[position]
         }
 
         /// For Sub category
         val subcategoryAddAutoComplete = binding.autosubcategory
-        val subcategoryAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, arrayOf(
+        val listofsubcategory = arrayOf(
             "Grains and Pulses",
             "Spices and Dry Fruits",
             "Packaged foods and ready to eat",
@@ -257,29 +288,53 @@ class FeedBackFragment : BaseFragment() {
             "Consumer Electronics & Electrical",
             "Gifts, Crafts, and Stationery Products",
             "Toys and Baby Products",
-            "Computers, computer spare parts, and the Internet"))
+            "Computers, computer spare parts, and the Internet")
+        val subcategoryAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofsubcategory)
         subcategoryAddAutoComplete.threshold = 3
         subcategoryAddAutoComplete.setAdapter(subcategoryAutoCompleteAdapter)
         subcategoryAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.subCategory = listofsubcategory[position]
         }
 
         /// Shop Ownership
         val ownshipAddAutoComplete = binding.autoshopownship
-        val ownershipAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, arrayOf("Owner","Rental"))
+        val listofownership = arrayOf("Owner","Rental")
+        val ownershipAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofownership)
         ownshipAddAutoComplete.threshold = 3
         ownshipAddAutoComplete.setAdapter(ownershipAutoCompleteAdapter)
         ownshipAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.shopOwnership = listofownership[position]
         }
 
         /// Leasing(Interested)
         val leasingAddAutoComplete = binding.autoleasing
-        val leasingAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, arrayOf("Yes","No", "Tentative"))
+        val listofleasing =  arrayOf("Yes","No", "Tentative")
+        val leasingAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofleasing)
         leasingAddAutoComplete.threshold = 3
         leasingAddAutoComplete.setAdapter(leasingAutoCompleteAdapter)
         leasingAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.leasign = listofleasing[position]
         }
 
+        /// Talked about competition
+        val talkedaboutAddAutoComplete = binding.tac
+        val listofTAC = arrayOf("Yes","No")
+        val talkedaboutAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofTAC )
+        talkedaboutAddAutoComplete.threshold = 3
+        talkedaboutAddAutoComplete.setAdapter(talkedaboutAutoCompleteAdapter)
+        talkedaboutAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+            feedback.tac = listofTAC[position]
+        }
 
+        /// Desired Possession
+        val desiredpossessionAddAutoComplete = binding.autodesiredpossession
+        val listofdesiredposs = arrayOf("Ready-to-Move","Under Construction")
+        val desiredpossessionAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofdesiredposs)
+        desiredpossessionAddAutoComplete.threshold = 3
+        desiredpossessionAddAutoComplete.setAdapter(desiredpossessionAutoCompleteAdapter)
+        desiredpossessionAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
+        feedback.desiredPossession = listofdesiredposs[position]
+        }
 
         binding.feedbackchipGroup.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId != View.NO_ID) {
@@ -292,6 +347,7 @@ class FeedBackFragment : BaseFragment() {
 
                 // Handle the selected chip
                 val selectedText = selectedChip.text.toString()
+                feedback.rating = selectedText
                 when (selectedText) {
                     "Hot" -> {
                         val listOfDisposition = statusMap["Hot"]
@@ -300,7 +356,7 @@ class FeedBackFragment : BaseFragment() {
                             android.R.layout.simple_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
-                        val autoCompleteTextView = binding.autodesiredpossession
+                        val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
                         autoCompleteTextView.onItemClickListener =
@@ -318,7 +374,7 @@ class FeedBackFragment : BaseFragment() {
                             listOfDisposition ?: arrayOf()
                         )
 
-                        val autoCompleteTextView = binding.autodesiredpossession
+                        val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
                         autoCompleteTextView.onItemClickListener =
@@ -336,7 +392,7 @@ class FeedBackFragment : BaseFragment() {
                             listOfDisposition ?: arrayOf()
                         )
 
-                        val autoCompleteTextView = binding.autodesiredpossession
+                        val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
                         autoCompleteTextView.onItemClickListener =
@@ -354,7 +410,7 @@ class FeedBackFragment : BaseFragment() {
                             listOfDisposition ?: arrayOf()
                         )
 
-                        val autoCompleteTextView = binding.autodesiredpossession
+                        val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
                         autoCompleteTextView.onItemClickListener =
@@ -372,7 +428,7 @@ class FeedBackFragment : BaseFragment() {
                             listOfDisposition ?: arrayOf()
                             )
 
-                        val autoCompleteTextView = binding.autodesiredpossession
+                        val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
                         autoCompleteTextView.onItemClickListener =
@@ -386,9 +442,15 @@ class FeedBackFragment : BaseFragment() {
                 // No chip selected
             }
         }
-
-
-
+             binding.submitBtn.setOnClickListener {
+                 log.e("output data", feedback.toString())
+                 val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+                 commonClassForApi?.FillFeedBackForm(
+                     disposableObserverTaskFromCallResponse,
+                     feedback,
+                     "Bearer " + account.authToken
+                 )
+             }
 
 //        val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
 //        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autovisitedat)
@@ -418,4 +480,22 @@ class FeedBackFragment : BaseFragment() {
         super.onAttach(context)
         activity = if (context is MainActivity) context else getActivity() as MainActivity
     }
+
+
+    private var disposableObserverTaskFromCallResponse: DisposableObserver<FeedBackResponse> =
+        object : DisposableObserver<FeedBackResponse>() {
+            override fun onNext(callStatusResponse: FeedBackResponse) {
+                Utils.showToast(requireContext(), "FeedBack Sent!!")
+//                    commonClassForQuery.getAllManualTasks(
+//                        Query.ALL_MANUAL_TASK,
+//                        onOpportunityListListener
+//                    )
+            }
+
+            override fun onError(e: Throwable) {
+                Log.e(javaClass.name, "onError: 337 " + e.message)
+            }
+
+            override fun onComplete() {}
+        }
 }

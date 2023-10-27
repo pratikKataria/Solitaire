@@ -13,11 +13,13 @@ import retrofit2.http.POST
  * Created by Pratik Kataria on 03-12-2020.
  */
 interface ApiStructure {
-    
+
     @Headers("Content-Type: application/json")
     @POST(Endpoints.SALES_CALL_TASK)
     fun salesCallTaskRequest(@Body listBody: SalesCallTask, @Header("Authorization") authToken: String?): Observable<SalesCallTaskResponse?>
-
+    @Headers("Content-Type: application/json")
+    @POST(Endpoints.SOURCECHANGE_APPROVAL)
+    fun sendSourceChangeApprovalRequest(@Body listBody: SendSourceChangeApprovalRequest, @Header("Authorization") authToken: String?): Observable<SendSourceChangeApprovalResponse?>
     @Headers("Content-Type: application/json")
     @POST(Endpoints.CAMPAIGN_APPROVAL)
     fun sendCampaignApprovalRequest(@Body listBody: SendCampaignApprovalRequest, @Header("Authorization") authToken: String?): Observable<SendCampaignApprovalRequestResponse?>

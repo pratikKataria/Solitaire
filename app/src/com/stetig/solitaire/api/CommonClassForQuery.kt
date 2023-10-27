@@ -422,6 +422,58 @@ class CommonClassForQuery private constructor() {
         }
     }
 
+    fun getSourceChanegApproval(query: String?, onDataReceiveListener: OnDataReceiveListener) {
+        Log.e(javaClass.name, "getSourceChanegApproval: $query")
+        Utils.showProgressDialog(activity)
+        try {
+            val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    Utils.hideProgressDialog(activity)
+                    try {
+                        val approvals: SourceChangeApproval = Gson().fromJson(response.asString(), SourceChangeApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, approvals)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: Exception) {
+                    Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getCpCreationApproval(query: String?, onDataReceiveListener: OnDataReceiveListener) {
+        Log.e(javaClass.name, "getCpCreationApproval: $query")
+        Utils.showProgressDialog(activity)
+        try {
+            val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    Utils.hideProgressDialog(activity)
+                    try {
+                        val approvals: CpCreationApproval = Gson().fromJson(response.asString(), CpCreationApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, approvals)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: Exception) {
+                    Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun getTimeLine(query: String?, onDataReceiveListener: OnDataReceiveListener) {
         try {
             Log.e("common class for query", "getAccountDetails: $query")

@@ -1,27 +1,55 @@
 package com.stetig.solitaire.data
 import com.google.gson.annotations.SerializedName
-
 data class FeedBack(
     @SerializedName("Id")
-    val id: String?,
+    var id: String? = null,
     @SerializedName("TypeOfEnquiry")
-    val typeofenquiry: String?,
+    var typeofenquiry: String? = null,
     @SerializedName("VisitedAt")
-    val visitiedAt: String?,
+    var visitiedAt: String? = null,
     @SerializedName("Ethnicity")
-    val ethnicity: String?,
+    var ethnicity: String? = null,
     @SerializedName("Zone")
-    val zone: String?,
+    var zone: String? = null,
     @SerializedName("TAC")
-    val tac: String?,
+    var tac: String? = null,
     @SerializedName("Rating")
-    val rating: String?,
+    var rating: String? = null,
     @SerializedName("Sm_Feedback")
-    val smFeedback: String?,
+    var smFeedback: String? = null,
     @SerializedName("Placeofwork")
-    val placeofwork: String?,
+    var placeofwork: String? = null,
     @SerializedName("designation")
-    val designation: String?,
+    var designation: String? = null,
     @SerializedName("Pincode")
-    val pincode: String?,
+    var pincode: String? = null,
+    @SerializedName("NextActionDate")
+    var nextactiondate: String? = null,
+    @SerializedName("Budget")
+    var budget: String? = null,
+    @SerializedName("DesiredPossession")
+    var desiredPossession: String? = null,
+    @SerializedName("Anniversary")
+    var anniversarydate: String? = null,
+    @SerializedName("WholesellerRetailer")
+    var wholesellerretailer: String? = null,
+    @SerializedName("Subcategory")
+    var subCategory: String? = null,
+    @SerializedName("ShopOwnership")
+    var shopOwnership: String? = null,
+    @SerializedName("ShopSize")
+    var shopSize: String? = null,
+    @SerializedName("Rental")
+    var rental: String? = null,
+    @SerializedName("DailyBusiness")
+    var dailyBusiness: String? = null,
+    @SerializedName("EmployeeSize")
+    var employeeSize: String? = null,
+    @SerializedName("TotalOutlet")
+    var totalOutlet: String? = null,
+    @SerializedName("OutletLocation")
+    var outletLocation: String? = null,
+    @SerializedName("Leasign")
+    var leasign: String? = null,
+
 )
