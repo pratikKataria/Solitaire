@@ -2,6 +2,7 @@ package com.stetig.solitaire.api
 
 public interface Endpoints {
     companion object {
+        const val CP_CREATION_APPROVAL = "CPApproval"
         const val  SOURCECHANGE_APPROVAL = "SourceChange"
         const val APPROVAL_REQUEST = "ApprovalRequest"
         const val FEEDBACK_FORM = "Feedback"

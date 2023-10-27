@@ -26,6 +26,7 @@ import com.stetig.solitaire.data.CpCreationApproval
 import com.stetig.solitaire.data.SourceChangeApproval
 import com.stetig.solitaire.databinding.FragmentCpCreationApprovalBinding
 import com.stetig.solitaire.utils.Utils
+import org.acra.ACRA.log
 
 class CpCreationApprovalDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentCpCreationApprovalBinding
@@ -62,7 +63,7 @@ class CpCreationApprovalDetailFragment : BaseFragment() {
         if (arguments != null) {
             val type = arguments?.getString(Keys.APP_TYPE, "not found")
             binding.title.text = type
-
+            log.e("idcheck", type.toString())
             val query = when {
                 type.equals("CP CREATION APPROVAL") -> {
                     Query.CP_CREATION_APPROVAL_LIST

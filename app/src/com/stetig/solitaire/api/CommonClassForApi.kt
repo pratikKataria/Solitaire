@@ -101,6 +101,31 @@ class CommonClassForApi private constructor() {
             })
     }
 
+    fun CpCreationApprovalRequest(disposableObserver: DisposableObserver<CpCreationApprovalResponse>, sendCallStatus: SendCpCreaitonApprovalRequest, auth: String){
+        Utils.showProgressDialog(activity)
+        RestClient.getInstance().getService()!!.sendcpcreationApprovalRequest(sendCallStatus, auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<CpCreationApprovalResponse?> {
+                override fun onSubscribe(d: Disposable) {}
+                override fun onNext(callStatusResponse: CpCreationApprovalResponse) {
+                    disposableObserver.onNext(callStatusResponse)
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onError(e: Throwable) {
+                    disposableObserver.onError(e)
+                    Utils.setToast(activity, "Unable to send request please try again...")
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onComplete() {
+                    disposableObserver.onComplete()
+                    Utils.hideProgressDialog(activity)
+                }
+            })
+    }
+
 
 //    fun salesCallTaskRequest(disposableObserver: DisposableObserver<SendCampaignApprovalRequestResponse>, sendCallStatus: SalesCallTask, auth: String){
 //        Utils.showProgressDialog(activity)

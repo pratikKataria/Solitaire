@@ -99,7 +99,7 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                         status = "Approve",
                         comment=binding.commentBox.text.toString()
                     )
-                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
+                    commonClassForApi.CpCreationApprovalRequest(disposableObserver, data, auth)
                 }
 
                 binding.rejectBtn.setOnClickListener {
@@ -113,7 +113,7 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                         status = "Reject",
                         comment=binding.commentBox.text.toString()
                     )
-                    commonClassForApi.SourceChangeApprovalRequest(disposableObserver, data, auth)
+                    commonClassForApi.CpCreationApprovalRequest(disposableObserver, data, auth)
 
                 }
             }
@@ -124,9 +124,9 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
         }
 
     }
-    private var disposableObserver: DisposableObserver<SendSourceChangeApprovalResponse> =
-        object : DisposableObserver<SendSourceChangeApprovalResponse>() {
-            override fun onNext(callStatusResponse: SendSourceChangeApprovalResponse) {
+    private var disposableObserver: DisposableObserver<CpCreationApprovalResponse> =
+        object : DisposableObserver<CpCreationApprovalResponse>() {
+            override fun onNext(callStatusResponse: CpCreationApprovalResponse) {
                 Utils.setToast(activity, callStatusResponse.message)
                 activity.navHostFragment.findNavController().popBackStack()
             }
