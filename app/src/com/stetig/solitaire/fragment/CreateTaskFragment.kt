@@ -99,7 +99,7 @@ class CreateTaskFragment : BaseFragment() {
             val inflater = layoutInflater
             val dialogView: View = inflater.inflate(com.stetig.solitaire.R.layout.create_task_form, null)
 
-            val listOfTaskTypes = arrayOf("CRM Interaction", "Sales Call", "Feedback Call")
+            val listOfTaskTypes = arrayOf("Follow Up", "Visit Proposed")
             val taskTypeAutoCompleteView = dialogView.findViewById(R.id.task_dropdown) as AutoCompleteTextView
             val taskTypeAutoCompleteAdapter = ArrayAdapter(
                 activity, android.R.layout.simple_spinner_item, listOfTaskTypes
@@ -112,8 +112,7 @@ class CreateTaskFragment : BaseFragment() {
                 }
 
 
-            val editTextSubject =
-                dialogView.findViewById(com.stetig.solitaire.R.id.subject_c) as EditText
+            val editTextSubject = dialogView.findViewById(com.stetig.solitaire.R.id.subject_c) as EditText
 //            createTaskRequest.subject = editTextSubject.text.toString()
             editTextSubject.addTextChangedListener { text: Editable? ->
                 createTaskRequest.subject = text.toString()

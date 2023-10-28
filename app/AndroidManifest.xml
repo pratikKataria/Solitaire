@@ -28,7 +28,7 @@
 
 
 	<application
-		android:icon="@drawable/sf__icon"
+		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:name="com.stetig.solitaire.app.MainApplication"
 		android:manageSpaceActivity="com.salesforce.androidsdk.ui.ManageSpaceActivity"

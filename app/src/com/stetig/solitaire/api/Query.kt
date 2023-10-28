@@ -36,7 +36,7 @@ interface Query {
         const val SITE_VISIT_FILTER = "Site_Visit_Stage__c = "
         const val CLOSE_DATE_FILTER = "CloseDate = NEXT_N_DAYS:7"
         const val CLOSE_DATE_TODAY_FILTER = "Closedate = TODAY"
-        const val ACTIVITY_DATE_TODAY_FILTER = "ActivityDate = TODAY"
+        const val ACTIVITY_DATE_TODAY_FILTER = "Next_Action_Date__c = TODAY"
         const val PROJECT_COLLATERAL_FILTER = "Project_Collaterals_on_App__c = TRUE"
         const val PROJECT_COLLATERAL_ACTIVE = "Is_Active__c = TRUE"
         const val OPPORTUNITY_ACTIVE_FILTER = "Is_Active_basis_close_date__c = true"
@@ -58,14 +58,14 @@ interface Query {
 
         val USER_ACCOUNT = "SELECT Id, firstName, LastName, Username, Phone, MobilePhone, Email from User $WHERE $USER_NAME_FILTER"
 //            "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = 00DC30000006cdh AND WhatId != null and Call_Proposed_Date_Of_Visit__c != null AND ActivityDate = TODAY"
-        val TODAY_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Proposed_Date_Of_Visit__c != null $AND $ACTIVITY_DATE_TODAY_FILTER "
-        val TODAY_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null $AND $ACTIVITY_DATE_TODAY_FILTER "
-        val TODAY_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation' $AND CreatedDate=Today"
+        val TODAY_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND $OWNER_FILTER AND Call_Proposed_Date_Of_Visit__c != null AND Next_Action_Date__c = TODAY"
+        val TODAY_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow Up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"
+        val TODAY_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c WHERE Site_Visit_Stage__c ='Sales Manager Allocated' AND $OWNER_FILTER AND CreatedDate=Today AND Customer_Name__c != null"
 
 //        SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND WhatId != null AND Call_Proposed_Date_Of_Visit__c != null
-        val ALL_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Proposed_Date_Of_Visit__c != null "
-        val ALL_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null"
-        val ALL_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation'"
+        val ALL_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Proposed_Date_Of_Visit__c != null AND $OWNER_FILTER"
+        val ALL_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow up' AND $OWNER_FILTER"
+        val ALL_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c WHERE  Type_of_Enquiry__c != null AND Site_Visit_Stage__c = 'Sales Manager Allocated' AND Customer_Name__c != null AND $OWNER_FILTER"
 
 //      SELECT * from Opportunity WHERE Is_Active_basis_close_date__c = true AND Owner.username = 'chandan.kokul@stetig.in.devs' AND StageName =
         val OPPORTUNITY_LIST = "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, CreatedDate, Account_Email__c, Sales_Call_Attempt_Date__c, Project__r.Name from Opportunity $WHERE $OWNER_FILTER $AND $STAGE_NAME_FILTER"
@@ -104,14 +104,14 @@ interface Query {
         val TIME_LINE_QUERY = "Select Id, Mobile_Number_Webform__c, Task_Type__c, Subject, ActivityDate, createddate, WhatId, status, RecordTypeId FROM Task $WHERE "
 //        Select Id, ActivityDate, WhatId, What.Name , CreatedDate FROM Task WHERE whatid in (select id from opportunity) AND RecordTypeId = '012C3000000Aqq9IAC'
 
-        val PROPOSED_SITE_VISIT_LIST_TODAY = "SELECT ID, what.Name, what.Id, CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Proposed_Date_Of_Visit__c != null $AND $ACTIVITY_DATE_TODAY_FILTER"
-        val PROPOSED_SITE_VISIT_LIST = "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Proposed_Date_Of_Visit__c != null"
+        val PROPOSED_SITE_VISIT_LIST_TODAY = "SELECT ID, what.Name, what.Id, CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null $AND $ACTIVITY_DATE_TODAY_FILTER AND $OWNER_FILTER"
+        val PROPOSED_SITE_VISIT_LIST = "SELECT ID, what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null AND $OWNER_FILTER"
 
-        val FOLLOW_UP_TODAY = "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null $AND $ACTIVITY_DATE_TODAY_FILTER"
+        val FOLLOW_UP_TODAY =  "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"
         val FOLLOW_UP_LIST = "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null"
 
         val ALOTED_SITE_VISIT_LIST_TODAY = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation' $AND CreatedDate=Today"
-        val ALOTED_SITE_VISIT_LIST = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Type_of_Enquiry__c != Null AND Site_Visit_Stage__c!='Pending Sales Manager Allocation'"
+        val ALOTED_SITE_VISIT_LIST = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c WHERE Type_of_Enquiry__c != null AND Site_Visit_Stage__c = 'Sales Manager Allocated' AND Customer_Name__c != null AND $OWNER_FILTER"
 
         val PROJECT_LINK_FETCH = "SELECT Id, ContentDocumentId FROM ContentDocumentLink $WHERE linkedEntityId ="
         val PROJECT_LINK = "SELECT Id, LatestPublishedVersion.Title,LatestPublishedVersion.Public_URL__c from ContentDocument $WHERE Id ="

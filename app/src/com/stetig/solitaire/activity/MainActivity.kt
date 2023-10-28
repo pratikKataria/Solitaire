@@ -568,9 +568,7 @@ class MainActivity : BaseActivity() {
         layoutProfessionalCallDetailBinding.submitCalldisposition.setOnClickListener {
             val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
             val auth = "Bearer " + account.authToken
-            callTaskRequest.callDate = "2023-10-19"
-            callTaskRequest.calltime = "00:00:00"
-            callTaskRequest.mobileNumber = mMobilNumber
+            callTaskRequest.mobileNumber = CountryCodeRemover.numberFormatter(mMobilNumber)
             callTaskRequest.recordType = "Opportunity"
             callTaskRequest.communicationtype = "Inbound call"
             callTaskRequest.rating = "Hot"
@@ -740,6 +738,7 @@ class MainActivity : BaseActivity() {
                 // Check if the selected date is not a past date
                 if (selectedDate >= currentDateFormatted) {
                     datePickerEditText.setText(selectedDate)
+                    callTaskRequest.callDate = selectedDate
                     // Update your UI element with the selected date
 //                    dateTextView.text = selectedDate
                 } else {
@@ -1059,6 +1058,8 @@ class MainActivity : BaseActivity() {
                 var time: String = hourOfDay.toString() + ":" + minute;
                 print("Time selected$time");
                 date.setText(convertTo12HourFormat(time))
+                callTaskRequest.calltime = "$hourOfDay:$minute:00"
+
             },
             hour,
             minute,
