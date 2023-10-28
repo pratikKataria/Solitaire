@@ -45,12 +45,12 @@ abstract class TaskRecyclerAdapter(
 
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.setOnClickListener {
+            projectList[position].id?.let { completeTask(it) }
             val bundle = Bundle()
             bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
             bundle.putString(Keys.SITE_VISIT_ID,record?.id)
             if (record?.attributes?.type == "Site_Visit__c")
                 if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform, bundle)
-                else projectList[position].id?.let { completeTask(it) }
         }
 
         projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {

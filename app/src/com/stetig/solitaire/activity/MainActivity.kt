@@ -296,10 +296,11 @@ class MainActivity : BaseActivity() {
 
 //        showPopUp(false, "")
     }
-
+    var tempcom : String?= null;
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.e("TAG", "onNewIntent: $intent")
+        tempcom = intent?.getStringExtra("commType").toString()
+        Log.e("TAG", "onNewIntent: ${intent?.getStringExtra("commType")}")
         setIntent(intent);
     }
 
@@ -570,7 +571,8 @@ class MainActivity : BaseActivity() {
             val auth = "Bearer " + account.authToken
             callTaskRequest.mobileNumber = CountryCodeRemover.numberFormatter(mMobilNumber)
             callTaskRequest.recordType = "Opportunity"
-            callTaskRequest.communicationtype = "Inbound call"
+            callTaskRequest.communicationtype = if(tempcom == "OutCall") "Outbound Call" else "Inbound call"
+//            callTaskRequest.communicationtype =
             callTaskRequest.rating = "Hot"
             callTaskRequest.dispositionPicklist = "Partial Swipe Done"
             callTaskRequest.comment = popUpBinding.yesNoCallDetail.desc.text.toString()

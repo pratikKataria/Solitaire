@@ -3,11 +3,7 @@ package com.stetig.solitaire.api
 import com.stetig.solitaire.data.*
 import io.reactivex.Observable
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Created by Pratik Kataria on 03-12-2020.
@@ -75,6 +71,6 @@ interface ApiStructure {
 
     @Headers("Content-Type: application/json")
     @GET(Endpoints.GET_ALL_OPTY)
-    fun getAllOpty(@Header("Authorization") authToken: String?): Observable<AllOpportunityDto?>
+    fun getAllOpty(@Path("id") id: String, @Header("Authorization") authToken: String?): Observable<AllOpportunityDto?>
 
 }

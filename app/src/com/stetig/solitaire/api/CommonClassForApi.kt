@@ -2,6 +2,8 @@ package com.stetig.solitaire.api
 
 import android.app.Activity
 import com.google.firebase.crashlytics.BuildConfig
+import com.salesforce.androidsdk.accounts.UserAccount.USER_ID
+import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.stetig.solitaire.data.*
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.Observer
@@ -307,10 +309,10 @@ class CommonClassForApi private constructor() {
                     }
                 })
     }
-
+    private val USER_ID_TEMP: String = "${SalesforceSDKManager.getInstance().userAccountManager.currentUser.userId}"
     fun getAllOpportunities(disposableObserver: DisposableObserver<AllOpportunityDto>, auth: String) {
         Utils.showProgressDialog(activity)
-        RestClient.getInstance().service!!.getAllOpty(auth)
+        RestClient.getInstance().service!!.getAllOpty(USER_ID_TEMP,auth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<AllOpportunityDto?> {

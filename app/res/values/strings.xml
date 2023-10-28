@@ -36,6 +36,7 @@
     <string name="logout">Logout</string>
     <string name="profile">profile</string>
     <string name="qualification">Qualification</string>
+    <string name="bookingconfirmed">Booking Confirmed</string>
     <string name="project_details">project details</string>
     <string name="city">City</string>
     <string name="name">Name</string>

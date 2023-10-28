@@ -16,7 +16,9 @@ import com.stetig.solitaire.activity.MainActivity
 import com.stetig.solitaire.adapter.OpportunityRecyclerAdapter
 import com.stetig.solitaire.api.CommonClassForQuery
 import com.stetig.solitaire.api.Keys
+import com.stetig.solitaire.api.Query.Companion.BOOKED_OPPORTUNITY_LIST
 import com.stetig.solitaire.api.Query.Companion.EXPIRING_OPPORTUNITY_IN_7_DAYS
+import com.stetig.solitaire.api.Query.Companion.OPEN_OPPORTUNITY_LIST
 import com.stetig.solitaire.api.Query.Companion.OPPORTUNITY_LIST
 import com.stetig.solitaire.api.Query.Companion.TODAY_OPPORTUNITY
 import com.stetig.solitaire.data.Opportunity
@@ -63,12 +65,17 @@ class OpportunityFragment : BaseFragment() {
                 type.equals(getString(R.string.action_opportunity_for_today)) -> {
                     TODAY_OPPORTUNITY
                 }
+                type.equals(getString(R.string.qualification)) -> {
+                    OPEN_OPPORTUNITY_LIST
+                }
+                type.equals(getString(R.string.bookingconfirmed)) -> {
+                    BOOKED_OPPORTUNITY_LIST
+                }
                 else -> {
                     OPPORTUNITY_LIST + Utils.buildQueryParameter(type)
-
                 }
             }
-            Log.e("", "onResume: $OPPORTUNITY_LIST")
+            Log.e("", "onResume: $type")
             commonClassForQuery.getOpportunity(query, onOpportunityListListener)
 
         }

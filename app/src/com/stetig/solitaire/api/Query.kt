@@ -1,5 +1,4 @@
 package com.stetig.solitaire.api
-
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.stetig.solitaire.utils.Utils
 
@@ -57,7 +56,7 @@ interface Query {
         private const val OR = "OR"
 
         val USER_ACCOUNT = "SELECT Id, firstName, LastName, Username, Phone, MobilePhone, Email from User $WHERE $USER_NAME_FILTER"
-//            "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = 00DC30000006cdh AND WhatId != null and Call_Proposed_Date_Of_Visit__c != null AND ActivityDate = TODAY"
+//      "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = 00DC30000006cdh AND WhatId != null and Call_Proposed_Date_Of_Visit__c != null AND ActivityDate = TODAY"
         val TODAY_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND $OWNER_FILTER AND Call_Proposed_Date_Of_Visit__c != null AND Next_Action_Date__c = TODAY"
         val TODAY_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow Up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"
         val TODAY_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c WHERE Site_Visit_Stage__c ='Sales Manager Allocated' AND $OWNER_FILTER AND CreatedDate=Today AND Customer_Name__c != null"
@@ -68,6 +67,9 @@ interface Query {
         val ALL_TASK_FACE_TO_FACE_COUNT = "SELECT COUNT(ID) FROM site_visit__c WHERE  Type_of_Enquiry__c != null AND Site_Visit_Stage__c = 'Sales Manager Allocated' AND Customer_Name__c != null AND $OWNER_FILTER"
 
 //      SELECT * from Opportunity WHERE Is_Active_basis_close_date__c = true AND Owner.username = 'chandan.kokul@stetig.in.devs' AND StageName =
+        val OPEN_OPPORTUNITY_LIST =  "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, CreatedDate, Account_Email__c, Sales_Call_Attempt_Date__c, Project__r.Name from Opportunity $WHERE $OWNER_FILTER AND (StageName =  'Qualification' OR StageName =  'Qualified'OR StageName =  'Proposal Shared')"
+        val BOOKED_OPPORTUNITY_LIST =  "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, CreatedDate, Account_Email__c, Sales_Call_Attempt_Date__c, Project__r.Name from Opportunity $WHERE $OWNER_FILTER AND (StageName =  'Booking Confirmed' OR StageName='Token Amount Received')"
+
         val OPPORTUNITY_LIST = "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, CreatedDate, Account_Email__c, Sales_Call_Attempt_Date__c, Project__r.Name from Opportunity $WHERE $OWNER_FILTER $AND $STAGE_NAME_FILTER"
         val OPPORTUNITY_DETAIL = "SELECT Name, Id, StageName,Sales_Call_Attempt_Status__c, Status__c, Account_Email__c, CreatedDate, Sales_Call_Description__c, CloseDate,Project_Type__c,Booking__r.Name, Project__c,Account_Mobile_Number__c, Configuration__c from Opportunity $WHERE id="
         val ALL_ACTIVE_OPPORTUNITY = "SELECT Name, Id, StageName,Sales_Call_Attempt_Status__c, Status__c, Account_Email__c, CreatedDate, Sales_Call_Description__c, CloseDate,Project_Type__c,Booking__r.Name, Project__c,Account_Mobile_Number__c, Configuration__c from Opportunity $WHERE $OPPORTUNITY_ACTIVE_FILTER $AND Active_New__c = true $ASC"
@@ -78,7 +80,6 @@ interface Query {
 
         val SITE_VISIT_DETAIL = "SELECT Property_Type__c,Property_SubType__c,Purpose_of_Purchase__c,Zone__c,Desired_Possession__c,Budget__c from site_visit__c $WHERE id="
         var PROJECT_NAME_FROM_OPPORTUNITY_NUMBER = "SELECT Account_Email_Id__c, Project__c, Account_Mobile_Number__c, Project__r.Name from Opportunity $WHERE $OPPORTUNITY_ACTIVE_FILTER $AND Account_Mobile_Number__c = "
-
 
         val PROJECTS_COLLATERAL = "Select Id, RDS_City__c,RDS_State__c,Address__c ,Name FROM Project__c"
         val PROJECTS_COLLATERAL_CITY_FILTER = "SELECT Id ,Name,RDS_City__c,RDS_State__c,Address__c FROM Project__c $WHERE $CITY_FILTER"
@@ -95,10 +96,8 @@ interface Query {
         val SOURCE_CHANGE_APPROVAL_LIST = "Select Id,Name,Customer_Name__c,Customer_Name__r.Name,Owner.Name,Visit_source_approval_Status__c from site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND OwnerId=${Utils.buildQueryParameter(USER_ID)}"
         val SOURCE_CHANGE_TABLE_FIELDS = "SELECT Id, Site_Visit_Stage__c, Type_of_Enquiry__c, Customer_Name__c, Project__r.Name, Mobile_No2__c, Source1__c, Opportunity_Walk_in_Source__c, Opportunity_Walk_in_Sub_Source__c, Sub_Source2__c,Channel_Partner_Leasing__c FROM site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND id = "
 
-
         val CP_CREATION_APPROVAL_LIST = "Select Id,NTS_ID__c,Name,CP_Sub_Type__c,Firm_Name__c,Sourcing_Manager__r.Name,CP_Type__c,Maha_RERA_No__c,RERA_Expiry_Date__c,Zone__c,Expertise__c,Location_Of_the_CPs_Office__c,Level_1_Submitted_Date_Time__c,Level_2_Date_Time__c from NTS_CP__c where ((Level_1_Approval_Status__c!='Approved') OR (Level_2_Approval_Status__c!='=Approved')) AND NTS_CP_Status__c!='Approved'"
         val CP_CREATTION_TABLE_FIELDS = "Select Id,NTS_ID__c,Name,CP_Sub_Type__c,Firm_Name__c,Sourcing_Manager__r.Name,CP_Type__c,Maha_RERA_No__c,RERA_Expiry_Date__c,Zone__c,Expertise__c,Location_Of_the_CPs_Office__c,Level_1_Submitted_Date_Time__c,Level_2_Date_Time__c from NTS_CP__c $WHERE id = "
-
 
         val SEARCH = "SELECT Name, Id, StageName, Status__c, Account_Mobile_Number__c, Sales_Call_Attempt_Date__c, Project__c, Project__r.Name from Opportunity $WHERE $OPPORTUNITY_ACTIVE_FILTER $AND $OWNER_FILTER $AND"
         val TIME_LINE_QUERY = "Select Id, Mobile_Number_Webform__c, Task_Type__c, Subject, ActivityDate, createddate, WhatId, status, RecordTypeId FROM Task $WHERE "
@@ -123,6 +122,6 @@ interface Query {
 //        var TASK_AND_OPPORTUNITY_DETAIL = "Select Id, ActivityDate, WhatId, What.Name , CreatedDate FROM Task $WHERE $WHAT_ID_IN_TASK_FILTER $AND $RECORD_TYPE_ID_FILTER"
 
         var TODAY_OPPORTUNITY = "SELECT id, Name, closedate, Project__r.Name, StageName, Status__c,  Account_Mobile_Number__c, Sales_Call_Attempt_Date__c,Active_New__c from Opportunity WHERE Active_New__c=true AND  Sales_Next_Action_Date__c = TODAY"
-        var ALL_MANUAL_TASK = "Select Id,whatId,Subject,Activitydate,What.Name,ProjectInterestedWeb__r.Name,createdDate,Task_Type__c from task where createdDate=Today"
+        var ALL_MANUAL_TASK = "Select Id,whatId,Subject,Activitydate,What.Name,ProjectInterestedWeb__r.Name,createdDate,Task_Type__c from task $WHERE createdDate=Today AND OwnerId=${Utils.buildQueryParameter(USER_ID)}"
     }
 }

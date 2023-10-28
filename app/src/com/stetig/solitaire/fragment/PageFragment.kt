@@ -89,7 +89,7 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
                 val auth = "Bearer " + userAccount.authToken
                 commonClassForApi.markAsComplete(
                     disposableObserver,
-                    MarkAsCompleteReq(userAccount.username, id),
+                    MarkAsCompleteReq(id),
                     auth
                 )
             }
@@ -106,8 +106,8 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
             }
 
             override fun onError(e: Throwable) {
-                Toast.makeText(context, "An unexpected error has occurred", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(context, "An unexpected error has occurred", Toast.LENGTH_SHORT)
+//                    .show()
                 Log.e(javaClass.name, "onError: 337 " + e.message)
             }
 

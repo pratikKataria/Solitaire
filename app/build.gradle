@@ -6,8 +6,9 @@ apply plugin: 'com.google.firebase.crashlytics'
 dependencies {
   implementation project(':libs:MobileSync')
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.21"
-//as
-    //android
+//asasdfasdfasd
+    //andasd
+//    sad
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

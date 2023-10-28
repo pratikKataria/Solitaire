@@ -36,6 +36,7 @@ public class PostCallReceiver extends BroadcastReceiver {
                 final String number = intent.getStringExtra("number");
                 final String filePath = intent.getStringExtra("call_record_path");
                 final String commType = intent.getStringExtra("commType");
+                Log.e("PostCallReceiver", "onReceive: " + commType);
                 final long callReceivedTime = intent.getLongExtra(Keys.CALL_RECEIVED_TIME, 0);
                 final long callEndedTime = intent.getLongExtra(Keys.CALL_ENDED_TIME, 0);
 

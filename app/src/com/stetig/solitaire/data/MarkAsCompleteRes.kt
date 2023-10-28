@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class MarkAsCompleteRes(
     @SerializedName("message")
     val message: String,
-    @SerializedName("returnCode")
-    val returnCode: Int,
+    @SerializedName("TaskId")
+    val taskid: Int,
     @SerializedName("status")
     val status: String
 )
