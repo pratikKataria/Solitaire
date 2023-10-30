@@ -31,7 +31,7 @@ class OpportunityRecyclerAdapter(private var context: Context, private var proje
         val data = projectList[position]
         projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(data.name)
         projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.checkValueOrGiveEmpty(data.projectC)
-        projectDetailCardViewHolder.cardViewProjectsBinding.date.text = Utils.checkValueOrGiveEmpty(data.createdDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.date.text = Utils.getFormattedDateWithTimeSF(data.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.configurationOpp.text = Utils.checkValueOrGiveEmpty(data.configurationC)
         projectDetailCardViewHolder.cardViewProjectsBinding.statusOpp.text = Utils.checkValueOrGiveEmpty(data.statusC)
         projectDetailCardViewHolder.cardViewProjectsBinding.mobileNoOpp.text = Utils.checkValueOrGiveEmpty(data.accountMobileNumberC)
