@@ -77,7 +77,7 @@ class CpCreationApprovalDetailFragment : BaseFragment() {
                 }
             }
             Log.e("", "getCpCreationApproval: ${Query.CP_CREATION_APPROVAL_LIST}")
-            commonClassForQuery.getCpCreationApproval(query, cpcreationapprovalListListener)
+            commonClassForQuery.getCpCreationApprovalWithoutLoader(query, cpcreationapprovalListListener)
 
         }
     }

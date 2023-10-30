@@ -16,6 +16,8 @@ import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.api.Query
 import com.stetig.solitaire.data.Approval
 import com.stetig.solitaire.data.CampaignApproval
+import com.stetig.solitaire.data.CpCreationApproval
+import com.stetig.solitaire.data.SourceChangeApproval
 import com.stetig.solitaire.databinding.FragmentApprovalBinding
 import com.stetig.solitaire.utils.Utils
 
@@ -45,10 +47,10 @@ class ApprovalFragment : BaseFragment() {
         binding.icApprovalMenuTwo.setOnClickListener {
             moveToCampaignDetials("Submitted for Approval")
         }
-        binding.icApprovalMenuThree.setOnClickListener{
+        binding.icApprovalMenuThree.setOnClickListener {
             moveToSourceChangeDetials("Pending For Approval")
         }
-        binding.icApprovalMenuFour.setOnClickListener{
+        binding.icApprovalMenuFour.setOnClickListener {
             moveToCpCreationDetials("CP CREATION APPROVAL")
         }
     }
@@ -65,13 +67,13 @@ class ApprovalFragment : BaseFragment() {
         navigateTo(R.id.action_approvalFragment_to_campaignApprovalDetailFragment, bundle)
     }
 
-    private  fun moveToSourceChangeDetials(type: String){
+    private fun moveToSourceChangeDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
         navigateTo(R.id.action_approvalFragment_to_sourceChangeApprovalDetailFragment, bundle)
     }
 
-    private fun moveToCpCreationDetials(type: String){
+    private fun moveToCpCreationDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
         navigateTo(R.id.action_approvalFragment_to_cpcreationApprovalDetailFragment, bundle)
@@ -84,7 +86,9 @@ class ApprovalFragment : BaseFragment() {
         commonClassForQuery = CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
 
         commonClassForQuery.getCampaign(Query.CAMPAIGN_APPROVAL_LIST, campaignapprovalListListener)
-        commonClassForQuery.getApprovalWithoutLoader(Query.APPROVAL_LIST +Utils.buildQueryParameter("Approval Pending"), approvalListListener)
+        commonClassForQuery.getApprovalWithoutLoader(Query.APPROVAL_LIST + Utils.buildQueryParameter("Approval Pending"), approvalListListener)
+        commonClassForQuery.getSourceChanegApprovalWithoutLoader(Query.SOURCE_CHANGE_APPROVAL_LIST, sourcechangeapprovalListListener)
+        commonClassForQuery.getCpCreationApprovalWithoutLoader(Query.CP_CREATION_APPROVAL_LIST, cpcreationapprovalListListener)
 
     }
 
@@ -111,6 +115,32 @@ class ApprovalFragment : BaseFragment() {
 
         override fun onError(obj: String) {}
     }
+
+    private val sourcechangeapprovalListListener = object : CommonClassForQuery.OnDataReceiveListener {
+        override fun onDataReceive(data: Any) {
+            if (data is SourceChangeApproval) {
+                binding.sourceChangeApprovalCount.text = data.records.size.toString()
+
+            }
+        }
+
+        override fun onError(obj: String) {}
+
+
+    }
+
+    private val cpcreationapprovalListListener = object : CommonClassForQuery.OnDataReceiveListener {
+        override fun onDataReceive(data: Any) {
+            if (data is CpCreationApproval) {
+                binding.channelPartnerCreationApprovalCount.text = data.records.size.toString()
+            }
+        }
+
+        override fun onError(obj: String) {}
+
+
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

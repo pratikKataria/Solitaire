@@ -24,10 +24,10 @@ class CampaignApprovalRecyclerAdapter(private var context: Context, private var 
         val data = projectList[position]
 //        log.e("name", data.opportunityName.name)
         approvalDetailCardViewHolder.cardViewApprovalBinding.parentCampaignName.text = Utils.checkValueOrGiveEmpty(
-            data?.name?:""
+            data?.parent?.name?:""
         )
         approvalDetailCardViewHolder.cardViewApprovalBinding.childCampaignName.text = Utils.checkValueOrGiveEmpty(
-            data?.primaryProjectR?.name?:""
+            data?.name?:""
         )
         approvalDetailCardViewHolder.cardViewApprovalBinding.campaignProjectName.text = Utils.checkValueOrGiveEmpty(
             data?.primaryProjectR?.name?:""

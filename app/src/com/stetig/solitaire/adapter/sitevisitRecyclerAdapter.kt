@@ -34,7 +34,7 @@ class sitevisitRecyclerAdapter(
         projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitProjectName.text =
             Utils.checkValueOrGiveEmpty(data.oppproject)
         projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitDate.text =
-            Utils.checkValueOrGiveEmpty(data.createdDate)
+            Utils.getFormattedDateWithTimeSF(data.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitType.text =
             Utils.checkValueOrGiveEmpty(data.typeofvisit)
         projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitEnquiryType.text =

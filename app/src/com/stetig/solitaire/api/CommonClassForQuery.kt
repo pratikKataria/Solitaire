@@ -104,6 +104,7 @@ class CommonClassForQuery private constructor() {
                         e.printStackTrace()
                     }
                 }
+
                 override fun onError(exception: java.lang.Exception) {
                     Utils.hideProgressDialog(activity)
                     onDataReceiveListener.onError(exception.message!!)
@@ -128,30 +129,37 @@ class CommonClassForQuery private constructor() {
                                 taskCount.type = Query.SITE_VISIT
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.FOLLOW_UP -> {
                                 taskCount.type = Query.FOLLOW_UP
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.FACE_TO_FACE -> {
                                 taskCount.type = Query.FACE_TO_FACE
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.NEGOTIATION -> {
                                 taskCount.type = Query.NEGOTIATION
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.NEED_ANALYSIS -> {
                                 taskCount.type = Query.NEED_ANALYSIS
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.PROPOSAL -> {
                                 taskCount.type = Query.PROPOSAL
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.BIP -> {
                                 taskCount.type = Query.BIP
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
                             }
+
                             Query.QUALIFICATION -> {
                                 taskCount.type = Query.QUALIFICATION
                                 sendDataToUIThread(onDataReceiveListener, taskCount)
@@ -375,11 +383,11 @@ class CommonClassForQuery private constructor() {
 
     fun getApprovalWithoutLoader(query: String?, onDataReceiveListener: OnDataReceiveListener) {
         Log.e(javaClass.name, "getApproval: $query")
-         try {
+        try {
             val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
             restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
                 override fun onSuccess(request: RestRequest, response: RestResponse) {
-                     try {
+                    try {
                         val approvals: Approval = Gson().fromJson(response.asString(), Approval::class.java)
                         sendDataToUIThread(onDataReceiveListener, approvals)
                     } catch (e: Exception) {
@@ -388,7 +396,7 @@ class CommonClassForQuery private constructor() {
                 }
 
                 override fun onError(exception: Exception) {
-                     onDataReceiveListener.onError(exception.message!!)
+                    onDataReceiveListener.onError(exception.message!!)
                 }
             })
         } catch (e: java.lang.Exception) {
@@ -448,6 +456,29 @@ class CommonClassForQuery private constructor() {
         }
     }
 
+    fun getSourceChanegApprovalWithoutLoader(query: String?, onDataReceiveListener: OnDataReceiveListener) {
+        Log.e(javaClass.name, "getSourceChanegApproval: $query")
+        try {
+            val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    try {
+                        val approvals: SourceChangeApproval = Gson().fromJson(response.asString(), SourceChangeApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, approvals)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: Exception) {
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun getCpCreationApproval(query: String?, onDataReceiveListener: OnDataReceiveListener) {
         Log.e(javaClass.name, "getCpCreationApproval: $query")
         Utils.showProgressDialog(activity)
@@ -466,6 +497,29 @@ class CommonClassForQuery private constructor() {
 
                 override fun onError(exception: Exception) {
                     Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getCpCreationApprovalWithoutLoader(query: String?, onDataReceiveListener: OnDataReceiveListener) {
+        Log.e(javaClass.name, "getCpCreationApproval: $query")
+        try {
+            val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    try {
+                        val approvals: CpCreationApproval = Gson().fromJson(response.asString(), CpCreationApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, approvals)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: Exception) {
                     onDataReceiveListener.onError(exception.message!!)
                 }
             })
