@@ -16,7 +16,11 @@ import io.reactivex.schedulers.Schedulers
  * Created by Pratik Kataria on 03-12-2020.
  */
 class CommonClassForApi private constructor() {
-
+    fun getUserIdOrEmpty(): String {
+        val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+        val userId = userAccount?.userId
+        return userId ?: ""
+    }
     companion object {
         private var activity: Activity? = null
         private var commonClassForApi: CommonClassForApi? = null
@@ -309,10 +313,9 @@ class CommonClassForApi private constructor() {
                     }
                 })
     }
-    private val USER_ID_TEMP: String = "${SalesforceSDKManager.getInstance().userAccountManager.currentUser.userId}"
     fun getAllOpportunities(disposableObserver: DisposableObserver<AllOpportunityDto>, auth: String) {
         Utils.showProgressDialog(activity)
-        RestClient.getInstance().service!!.getAllOpty(USER_ID_TEMP,auth)
+        RestClient.getInstance().service!!.getAllOpty(getUserIdOrEmpty(),auth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<AllOpportunityDto?> {
