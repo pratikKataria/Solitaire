@@ -76,5 +76,8 @@ interface ApiStructure {
     @Headers("Content-Type: application/json")
     @POST(Endpoints.UPDATE_SM_ACTIVITY)
     fun updateSMActivity(@Body smStatusRequest: SMStatusRequest, @Header("Authorization") authToken: String?): Observable<SMStatusResponse?>
+    @Headers("Content-Type: application/json")
+    @POST(Endpoints.FEEDBACK_FROM)
+    fun updateFeedbackFromStatus(@Body smStatusRequest: FeedbackFromStatusUpdateRequest, @Header("Authorization") authToken: String?): Observable<SalesCallTaskResponse?>
 
 }

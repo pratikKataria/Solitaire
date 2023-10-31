@@ -20,8 +20,10 @@ import com.stetig.solitaire.data.MarkAsCompleteReq
 import com.stetig.solitaire.data.MarkAsCompleteRes
 import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.FragmentPageBinding
-import com.stetig.solitaire.utils.Utils
 import com.salesforce.androidsdk.app.SalesforceSDKManager
+import com.stetig.solitaire.R
+import com.stetig.solitaire.data.FeedbackFromStatusUpdateRequest
+import com.stetig.solitaire.data.SalesCallTaskResponse
 import io.reactivex.observers.DisposableObserver
 import org.acra.ACRA.log
 
@@ -93,6 +95,18 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
                     auth
                 )
             }
+
+            override fun updateFeedbackForm(id: String, bundle: Bundle) {
+                val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser ?: return
+                val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
+                val auth = "Bearer " + userAccount.authToken
+                commonClassForApi.updateFeedbackFormStatus(
+                    disposableObserverFeedbackFrom,
+                    FeedbackFromStatusUpdateRequest(id),
+                    auth,
+                    bundle
+                )
+            }
         }
         binding.recyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -108,6 +122,23 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
             override fun onError(e: Throwable) {
 //                Toast.makeText(context, "An unexpected error has occurred", Toast.LENGTH_SHORT)
 //                    .show()
+                Log.e(javaClass.name, "onError: 337 " + e.message)
+            }
+
+            override fun onComplete() {}
+        }
+
+    private var disposableObserverFeedbackFrom: DisposableObserver<SalesCallTaskResponse> =
+        object : DisposableObserver<SalesCallTaskResponse>() {
+            override fun onNext(callStatusResponse: SalesCallTaskResponse) {
+                Toast.makeText(context, "Feedback form enabled", Toast.LENGTH_SHORT).show()
+                getDataFromSF(currentOrder)
+                if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform, callStatusResponse.bundle)
+            }
+
+            override fun onError(e: Throwable) {
+//                Toast.makeText(context, "An unexpected error has occurred", Toast.LENGTH_SHORT)
+//        .show()
                 Log.e(javaClass.name, "onError: 337 " + e.message)
             }
 

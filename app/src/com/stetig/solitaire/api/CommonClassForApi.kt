@@ -1,8 +1,8 @@
 package com.stetig.solitaire.api
 
 import android.app.Activity
+import android.os.Bundle
 import com.google.firebase.crashlytics.BuildConfig
-import com.salesforce.androidsdk.accounts.UserAccount.USER_ID
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.stetig.solitaire.data.*
 import com.stetig.solitaire.utils.Utils
@@ -299,6 +299,31 @@ class CommonClassForApi private constructor() {
                 .subscribe(object : Observer<MarkAsCompleteRes?> {
                     override fun onSubscribe(d: Disposable) {}
                     override fun onNext(callStatusResponse: MarkAsCompleteRes) {
+                        disposableObserver.onNext(callStatusResponse)
+                        Utils.hideProgressDialog(activity)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        disposableObserver.onError(e)
+                        Utils.hideProgressDialog(activity)
+                    }
+
+                    override fun onComplete() {
+                        disposableObserver.onComplete()
+                        Utils.hideProgressDialog(activity)
+                    }
+                })
+    }
+
+    fun updateFeedbackFormStatus(disposableObserver: DisposableObserver<SalesCallTaskResponse>, sendCallStatus: FeedbackFromStatusUpdateRequest, auth: String, bundle: Bundle) {
+        Utils.showProgressDialog(activity)
+        RestClient.getInstance().getService()!!.updateFeedbackFromStatus(sendCallStatus,  auth)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<SalesCallTaskResponse?> {
+                    override fun onSubscribe(d: Disposable) {}
+                    override fun onNext(callStatusResponse: SalesCallTaskResponse) {
+                        callStatusResponse.bundle = bundle
                         disposableObserver.onNext(callStatusResponse)
                         Utils.hideProgressDialog(activity)
                     }

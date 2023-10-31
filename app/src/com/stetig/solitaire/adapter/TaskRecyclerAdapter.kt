@@ -1,7 +1,6 @@
 package com.stetig.solitaire.adapter
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.CardViewTaskBinding
 import com.stetig.solitaire.utils.Utils
-import org.acra.ACRA.log
 
 /**
  * Created by Pratik Kataria on 27-11-2020.
@@ -47,12 +45,15 @@ abstract class TaskRecyclerAdapter(
         projectDetailCardViewHolder.cardViewProjectsBinding.activityDateLayoutLl.visibility = if (record?.attributes?.type == "Site_Visit__c") View.GONE else View.VISIBLE
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.setOnClickListener {
-            projectList[position].id?.let { completeTask(it) }
-            val bundle = Bundle()
-            bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
-            bundle.putString(Keys.SITE_VISIT_ID, record?.id)
-            if (record?.attributes?.type == "Site_Visit__c")
-                if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform, bundle)
+            if (record?.attributes?.type == "Site_Visit__c") {
+                val bundle = Bundle()
+                bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
+                bundle.putString(Keys.SITE_VISIT_ID, record?.id)
+                projectList[position].id?.let { it1 -> updateFeedbackForm(it1, bundle) }
+            } else {
+                projectList[position].id?.let { completeTask(it) }
+
+            }
         }
 
         projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {
@@ -68,6 +69,7 @@ abstract class TaskRecyclerAdapter(
     override fun getItemCount() = projectList.size
 
     abstract fun completeTask(id: String)
+    abstract fun updateFeedbackForm(id: String, bundle: Bundle)
 
     class ProjectDetailCardViewHolder(var cardViewProjectsBinding: CardViewTaskBinding) :
         RecyclerView.ViewHolder(cardViewProjectsBinding.root)

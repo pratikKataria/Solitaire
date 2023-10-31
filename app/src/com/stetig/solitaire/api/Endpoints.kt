@@ -25,5 +25,6 @@ public interface Endpoints {
         const val APP_VERSION           =  "AppVersion/"
         const val GET_ALL_OPTY          =  "opportunities/{id}"
         const val UPDATE_SM_ACTIVITY          =  "updateUserActivity"
+        const val FEEDBACK_FROM          =  "FeedbackStatus"
     }
 }
