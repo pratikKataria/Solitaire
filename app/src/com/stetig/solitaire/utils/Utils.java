@@ -66,9 +66,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -1989,6 +1991,24 @@ public class Utils {
 
     public static String checkValueOrGiveEmpty(String parm) {
         return parm == null ? "Not Available" : "" + parm;
+    }
+
+    public static String convertToIndianCurrency(String input) {
+        try {
+
+            if (input == null) {
+                return "-";
+            }
+
+            double number = Double.parseDouble(input);
+            int roundedNumber = (int) Math.round(number); // Round off double to int
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+            currencyFormat.setCurrency(Currency.getInstance("INR"));
+            String formattedNumber = String.format("%d", roundedNumber);
+            return "₹ " + formattedNumber;
+        } catch (NumberFormatException e) {
+            return "-";
+        }
     }
 
     public static String checkValueOrGiveEmptySpace(String parm) {

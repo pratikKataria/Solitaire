@@ -70,14 +70,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/baserate_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/baserate_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity= "center_horizontal"
@@ -97,14 +97,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/totalamount_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/totalamount_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -124,14 +124,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/infrastructure_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/infrastructure_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -151,14 +151,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/msebDevelopment_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/msebDevelopment_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -178,14 +178,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/premium_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/premium_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -205,14 +205,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/floor_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/floor_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -231,14 +231,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/amenities_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/amenities_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -257,14 +257,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/legalcharges_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/legalcharges_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -283,14 +283,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/considerationvalue_current"
-            android:text="Current Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/considerationvalue_previous"
-            android:text="Previous Value"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -357,14 +357,14 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/stampduty_current"
-            android:text="0 /-"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/stampduty_previous"
-            android:text="0 /-"
+            android:text="-"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -383,7 +383,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/registration_current"
-            android:text="0 /-"
+            android:text="-"
             android:padding="5dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -395,7 +395,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
-            android:text="0 /-" />
+            android:text="-" />
     </TableRow>
     <TableRow
     android:layout_width="wrap_content"
@@ -410,14 +410,14 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/gst_current"
-        android:text="0 /-"
+        android:text="-"
         android:padding="5dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/gst_previous"
-        android:text="0 /-"
+        android:text="-"
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:gravity="center"

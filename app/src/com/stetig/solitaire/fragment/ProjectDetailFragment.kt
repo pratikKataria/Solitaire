@@ -134,6 +134,7 @@ class ProjectDetailFragment : BaseFragment() {
         }
     }
 
+//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000003O2rn&d=%2Fa%2FC3000000So8L%2FdpxCdLr4vl952tLqLNWxr6bbB5y7bxbhDJyhYDIOI2g&asPdf=false
     private fun shareViaEmail() {
         val intent = Intent()
         val emailAdd = if (email == null) "mailto:" else "mailto:$email"

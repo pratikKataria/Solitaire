@@ -1,8 +1,10 @@
 package com.stetig.solitaire.adapter
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.stetig.solitaire.R
@@ -34,21 +36,21 @@ abstract class TaskRecyclerAdapter(
 
         projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(whatNameOrProjectRName)
 //        projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
-        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = Utils.getFormattedDateSF(record?.createdDate)
-        projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateSF(record?.createdDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = if (record?.nextActionDate == null)  Utils.getFormattedDateWithTimeSF(record?.activityDate) else Utils.getFormattedDateWithTimeSF(record?.nextActionDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateWithTimeSF(record?.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(record?.typeofEnquiry)
 
 
 
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.text = if (record?.attributes?.type == "Site_Visit__c") "FEEDBACK" else "MARK AS COMPLETE"
-
+        projectDetailCardViewHolder.cardViewProjectsBinding.activityDateLayoutLl.visibility = if (record?.attributes?.type == "Site_Visit__c") View.GONE else View.VISIBLE
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.setOnClickListener {
             projectList[position].id?.let { completeTask(it) }
             val bundle = Bundle()
             bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
-            bundle.putString(Keys.SITE_VISIT_ID,record?.id)
+            bundle.putString(Keys.SITE_VISIT_ID, record?.id)
             if (record?.attributes?.type == "Site_Visit__c")
                 if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_taskFragment_to_Feedbackform, bundle)
         }

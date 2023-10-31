@@ -92,7 +92,7 @@ interface Query {
         val CAMPAIGN_APPROVAL_LIST = "Select Id, Name, Primary_Project__r.Name,Parent.Name,Approval_Status__c from Campaign $WHERE $RECORD_TYPE_ID_FILTER $AND ((Approval_Status__c='Submitted for Approval' $AND Level_1_Approver__c=${Utils.buildQueryParameter(USER_ID)}) $OR (Approval_Status__c='Level 1 Approved' $AND Level_2_Approver__c!=null $AND Level_2_Approver__c=${Utils.buildQueryParameter(USER_ID)}))"
         val CAMPAIGN_TABLE_FIELDS = "Select Id, Name, Primary_Project__r.Name,Parent.Name,BudgetedCost, Approval_Status__c , StartDate,EndDate from Campaign $WHERE $RECORD_TYPE_ID_FILTER $AND  id = "
 
-        val SOURCE_CHANGE_APPROVAL_LIST = "Select Id,Name,Customer_Name__c,Customer_Name__r.Name,Owner.Name,Visit_source_approval_Status__c from site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND OwnerId=${Utils.buildQueryParameter(USER_ID)}"
+        val SOURCE_CHANGE_APPROVAL_LIST = "Select Id,Name,Customer_Name__c,Customer_Name__r.Name,Owner.Name,Visit_source_approval_Status__c from site_visit__c WHERE Visit_source_approval_Status__c='Pending For Approval' AND VisitSourceApprover__r.username = ${Utils.buildQueryParameter(USER_NAME)}"
         val SOURCE_CHANGE_TABLE_FIELDS = "SELECT Id, Site_Visit_Stage__c, Type_of_Enquiry__c, Customer_Name__c, Project__r.Name, Mobile_No2__c, Source1__c, Opportunity_Walk_in_Source__c, Opportunity_Walk_in_Sub_Source__c, Sub_Source2__c,Channel_Partner_Leasing__c FROM site_visit__c $WHERE Visit_source_approval_Status__c='Pending For Approval' $AND id = "
 
         val CP_CREATION_APPROVAL_LIST = "Select Id,NTS_ID__c,Name,CP_Sub_Type__c,Firm_Name__c,Sourcing_Manager__r.Name,CP_Type__c,Maha_RERA_No__c,RERA_Expiry_Date__c,Zone__c,Expertise__c,Location_Of_the_CPs_Office__c,Level_1_Submitted_Date_Time__c,Level_2_Date_Time__c from NTS_CP__c where ((Level_1_Approval_Status__c!='Approved') OR (Level_2_Approval_Status__c!='=Approved')) AND NTS_CP_Status__c!='Approved'"
@@ -102,11 +102,11 @@ interface Query {
         val TIME_LINE_QUERY = "Select Id, Mobile_Number_Webform__c, Task_Type__c, Subject, ActivityDate, createddate, WhatId, status, RecordTypeId FROM Task $WHERE "
 //        Select Id, ActivityDate, WhatId, What.Name , CreatedDate FROM Task WHERE whatid in (select id from opportunity) AND RecordTypeId = '012C3000000Aqq9IAC'
 
-        val PROPOSED_SITE_VISIT_LIST_TODAY = "SELECT ID, what.Name, what.Id, CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null $AND $ACTIVITY_DATE_TODAY_FILTER AND $OWNER_FILTER"
-        val PROPOSED_SITE_VISIT_LIST = "SELECT ID, what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null AND $OWNER_FILTER"
+        val PROPOSED_SITE_VISIT_LIST_TODAY = "SELECT ID, what.Name, what.Id, CreatedDate, Call_Proposed_Date_Of_Visit__c FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null $AND $ACTIVITY_DATE_TODAY_FILTER AND $OWNER_FILTER"
+        val PROPOSED_SITE_VISIT_LIST = "SELECT ID, what.Name, what.Id,CreatedDate, Call_Proposed_Date_Of_Visit__c FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND Call_Proposed_Date_Of_Visit__c != null AND $OWNER_FILTER"
 
-        val FOLLOW_UP_TODAY =  "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"
-        val FOLLOW_UP_LIST = "SELECT ID,what.Name, what.Id,CreatedDate FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null"
+        val FOLLOW_UP_TODAY =  "SELECT ID,what.Name, what.Id,CreatedDate,  Next_Action_Date__c FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"
+        val FOLLOW_UP_LIST = "SELECT ID,what.Name, what.Id,CreatedDate, Next_Action_Date__c FROM TASK $WHERE $RECORD_TYPE_ID_FILTER $AND $OPPORTUNITY_ID_NOT_NULL_FILTER $AND Call_Attempt_Status__c != null"
 
         val ALOTED_SITE_VISIT_LIST_TODAY = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c $WHERE Site_Visit_Stage__c!='Pending Sales Manager Allocation' $AND CreatedDate=Today AND $OWNER_FILTER"
         val ALOTED_SITE_VISIT_LIST = "SELECT ID,Site_Visit_Stage__c,Type_of_Enquiry__c,Customer_Name__c,Project__r.Name,Mobile_No2__c  FROM site_visit__c WHERE Type_of_Enquiry__c != null AND Site_Visit_Stage__c = 'Sales Manager Allocated' AND Customer_Name__c != null AND $OWNER_FILTER"

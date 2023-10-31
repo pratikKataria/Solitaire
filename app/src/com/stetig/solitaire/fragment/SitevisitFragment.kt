@@ -1,4 +1,5 @@
 package com.stetig.solitaire.fragment
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -16,6 +17,9 @@ import com.stetig.solitaire.adapter.sitevisitRecyclerAdapter
 import com.stetig.solitaire.api.CommonClassForQuery
 import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.api.Query.Companion.EXPIRING_OPPORTUNITY_IN_7_DAYS
+import com.stetig.solitaire.api.Query.Companion.ORDER_BY
+import com.stetig.solitaire.api.Query.Companion.ORDER_BY_CREATED_DATE
+import com.stetig.solitaire.api.Query.Companion.PROPOSED_SITE_VISIT_LIST
 import com.stetig.solitaire.api.Query.Companion.SITE_VISIT_LIST
 import com.stetig.solitaire.api.Query.Companion.TODAY_OPPORTUNITY
 import com.stetig.solitaire.data.Sitevisit
@@ -30,8 +34,10 @@ class SitevisitFragment : BaseFragment() {
     private lateinit var adapter: sitevisitRecyclerAdapter
     private var projectList = mutableListOf<Sitevisit.Record>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_sitevisit, container, false)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         initView(rootView = binding.root)
@@ -60,11 +66,17 @@ class SitevisitFragment : BaseFragment() {
                 type.equals(getString(R.string.expiring_opportunities_for_next_7_days)) -> {
                     EXPIRING_OPPORTUNITY_IN_7_DAYS
                 }
+
                 type.equals(getString(R.string.action_opportunity_for_today)) -> {
                     TODAY_OPPORTUNITY
                 }
+
                 else -> {
-                    SITE_VISIT_LIST + Utils.buildQueryParameter(type)
+                    if (type == "sales Manager Allocated") {
+                        "$PROPOSED_SITE_VISIT_LIST $ORDER_BY_CREATED_DATE"
+                    } else {
+                        SITE_VISIT_LIST + Utils.buildQueryParameter(type)
+                    }
                 }
             }
             Log.e("", "onResume: $SITE_VISIT_LIST")
@@ -76,7 +88,7 @@ class SitevisitFragment : BaseFragment() {
     private val onSitevisitListListener = object : CommonClassForQuery.OnDataReceiveListener {
         override fun onDataReceive(data: Any) {
             if (data is Sitevisit) {
-                log.e("Recorder data " , data.records.toString())
+                log.e("Recorder data ", data.records.toString())
                 projectList.clear()
                 projectList.addAll(data.records)
                 adapter.notifyDataSetChanged()

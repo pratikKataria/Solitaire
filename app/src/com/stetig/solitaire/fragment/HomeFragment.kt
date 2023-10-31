@@ -171,6 +171,7 @@ class HomeFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         }
 
         override fun onError(obj: String) {
+            Log.e("Home Fragment", "onError Token Expire Check : $obj")
         }
 
     }
