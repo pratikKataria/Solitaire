@@ -38,11 +38,12 @@ class CpCreationRecyclerAdapter(private var context: Context, private var projec
         approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalReqDate.text = Utils.checkValueOrGiveEmpty(
             data?.level2datetime?:""
         )
+
         approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalLinearLayout.setOnClickListener {
             val bundle = Bundle()
             log.e("Cp Creation ID error", data.id?:"")
             bundle.putString(Keys.CAM_ID, data?.id?:"")
-            (context as MainActivity).navHostFragment.navController.navigate(R.id.action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment1, bundle)
+            (context as MainActivity).navHostFragment.navController.navigate(R.id.action_cpcreationApprovalFragment_to_CPCApprovalFragment, bundle)
         }
 
     }

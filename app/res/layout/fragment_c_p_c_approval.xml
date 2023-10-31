@@ -182,23 +182,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="Files Present"
-                    android:padding="5dp"
-                    android:layout_width="@dimen/_80sdp"
-                    android:textColor="#000000"
-                    android:background="#EAEAEA"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/fiels"
-                    android:text="file name"
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+<!--            <TableRow-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <TextView-->
+<!--                    android:text="Files Present"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_width="@dimen/_80sdp"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:background="#EAEAEA"-->
+<!--                    android:layout_height="wrap_content" />-->
+<!--                <TextView-->
+<!--                    android:id="@+id/fiels"-->
+<!--                    android:text="file name"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content" />-->
+<!--            </TableRow>-->
             <EditText
                 android:id="@+id/comment_box"
                 android:layout_width="match_parent"

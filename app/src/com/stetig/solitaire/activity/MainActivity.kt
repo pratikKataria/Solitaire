@@ -72,6 +72,7 @@ import com.stetig.solitaire.utils.SharedPrefs
 import com.stetig.solitaire.utils.UpcommingNotificationPrefs
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
+import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -296,7 +297,8 @@ class MainActivity : BaseActivity() {
 
 //        showPopUp(false, "")
     }
-    var tempcom : String?= null;
+
+    var tempcom: String? = null;
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         tempcom = intent?.getStringExtra("commType").toString()
@@ -354,7 +356,14 @@ class MainActivity : BaseActivity() {
                 Log.e(javaClass.name, "onNext: 494 $updateTokenRes")
             }
 
-            override fun onError(e: Throwable) {}
+            override fun onError(e: Throwable) {
+                if (e is HttpException) {
+                    if (e.code() == 401) {
+                        SalesforceSDKManager.getInstance().logout(this@MainActivity)
+                    }
+                }
+            }
+
             override fun onComplete() {}
         }
 
@@ -571,7 +580,7 @@ class MainActivity : BaseActivity() {
             val auth = "Bearer " + account.authToken
             callTaskRequest.mobileNumber = CountryCodeRemover.numberFormatter(mMobilNumber)
             callTaskRequest.recordType = "Opportunity"
-            callTaskRequest.communicationtype = if(tempcom == "OutCall") "Outbound Call" else "Inbound call"
+            callTaskRequest.communicationtype = if (tempcom == "OutCall") "Outbound Call" else "Inbound call"
 //            callTaskRequest.communicationtype =
             callTaskRequest.rating = "Hot"
             callTaskRequest.dispositionPicklist = "Partial Swipe Done"

@@ -91,7 +91,7 @@
             app:destination="@id/sourceChangeApprovalDetailFragment" />
         <action
             android:id="@+id/action_approvalFragment_to_cpcreationApprovalDetailFragment"
-            app:destination="@id/cpcreationApprovalDetailFragment" />
+            app:destination="@id/cpcreationApprovalFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -125,14 +125,13 @@
             app:destination="@id/opportunityFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cpcreationApprovalDetailFragment"
+        android:id="@+id/cpcreationApprovalFragment"
         android:name="com.stetig.solitaire.fragment.CpCreationApprovalDetailFragment"
         android:label="fragment_cp_creation_approval"
-        tools:layout="@layout/fragment_cp_creation_approval"
-        >
+        tools:layout="@layout/fragment_cp_creation_approval">
         <action
-            android:id="@+id/action_cpcreationApprovalDetailFragment_to_cpcreationApprovalSubDetailFragment1"
-            app:destination="@id/cpcreationApprovalSubDetailFragment" />
+            android:id="@+id/action_cpcreationApprovalFragment_to_CPCApprovalFragment"
+            app:destination="@id/CPCApprovalFragment" />
     </fragment>
     <fragment
         android:id="@+id/sourceChangeApprovalDetailFragment"
@@ -171,7 +170,7 @@
         android:id="@+id/cpcreationApprovalSubDetailFragment"
         android:name="com.stetig.solitaire.fragment.CpCreationApprovalDetailFragment"
         android:label="fragment_cp_creation_approval_subdetail"
-        tools:layout="@layout/fragment_source_change_approval_subdetail"
+        tools:layout="@layout/fragment_cp_creation_approval_subdetail"
         ></fragment>
     <fragment
         android:id="@+id/approvalDetailFragment"
@@ -284,4 +283,9 @@
         android:label="UpdateOpportunityFragment" >
 
     </fragment>
+    <fragment
+        android:id="@+id/CPCApprovalFragment"
+        android:name="com.stetig.solitaire.fragment.CPCApprovalFragment"
+        android:label="CPCApprovalFragment"
+        tools:layout="@layout/fragment_c_p_c_approval"/>
 </navigation>

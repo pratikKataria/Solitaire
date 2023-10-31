@@ -98,7 +98,7 @@ class CommonClassForQuery private constructor() {
                 override fun onSuccess(request: RestRequest, response: RestResponse) {
                     Utils.hideProgressDialog(activity)
                     try {
-                        val projects: SourceChangeApproval? = Gson().fromJson<SourceChangeApproval>(response.asString(), SourceChangeApproval::class.java)
+                        val projects: CpCreationApproval? = Gson().fromJson<CpCreationApproval>(response.asString(), CpCreationApproval::class.java)
                         sendDataToUIThread(onDataReceiveListener, projects)
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()

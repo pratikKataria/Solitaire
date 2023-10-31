@@ -125,7 +125,7 @@ class ProjectDetailFragment : BaseFragment() {
 
     private fun shareViaWhatsApp() {
         if (Utils.isWhatsAppInstalled(getActivity(), "com.whatsapp")) {
-            val whatsAppQuery = if (number == null) "http://api.whatsapp.com/send?text=${getLinks()}" else "http://api.whatsapp.com/send?phone=+91$number &text= ${getLinks()}"
+            val whatsAppQuery = if (number == null) "http://api.whatsapp.com/send?text=${getWhatsAppLinks()}" else "http://api.whatsapp.com/send?phone=+91$number &text= ${getLinks()}"
             val intent = Intent()
             intent.action = Intent.ACTION_VIEW
             if (checkIfEmpty()) return
@@ -133,7 +133,8 @@ class ProjectDetailFragment : BaseFragment() {
             startActivity(intent)
         }
     }
-
+//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000001Gp1E&d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM&asPdf=false
+//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh%26ids=068C3000001Gp1E%26d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM%26asPdf=false
 //    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000003O2rn&d=%2Fa%2FC3000000So8L%2FdpxCdLr4vl952tLqLNWxr6bbB5y7bxbhDJyhYDIOI2g&asPdf=false
     private fun shareViaEmail() {
         val intent = Intent()
@@ -150,6 +151,17 @@ class ProjectDetailFragment : BaseFragment() {
         for (checkBox in checkBoxList) {
             if (checkBox.isChecked && checkBox.tag.toString().isNotEmpty()) {
                 s.append(" ").append(checkBox.tag.toString()).append("\n")
+            }
+        }
+        return s.toString()
+    }
+
+    private fun getWhatsAppLinks(): String {
+        val s = StringBuilder()
+        for (checkBox in checkBoxList) {
+            if (checkBox.isChecked && checkBox.tag.toString().isNotEmpty()) {
+                val link = checkBox.tag.toString().replace("&", "%26")
+                s.append(" ").append(link).append("\n")
             }
         }
         return s.toString()
