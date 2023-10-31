@@ -316,6 +316,7 @@ class MainActivity : BaseActivity() {
         startCallHandlerService()
         checkForCallPopUp()
         checkNotification()
+        checkPermissions()
 
 //        FirebaseCrashlytics.getInstance().recordException(RuntimeException("Send Logs"))
         if (SalesforceSDKManager.getInstance().userAccountManager.currentUser == null) return

@@ -41,6 +41,14 @@ class sitevisitRecyclerAdapter(
             Utils.checkValueOrGiveEmpty(data.typeofenquiry)
         projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitSourcingManager.text =
             Utils.checkValueOrGiveEmpty(data.oppsourcingmanager)
+
+        projectDetailCardViewHolder.cardViewProjectsBinding.feedbackBtn.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(Keys.TYPE_ENQUIRY, data?.typeofenquiry)
+            bundle.putString(Keys.SITE_VISIT_ID, data?.id)
+            if (context is MainActivity) (context as MainActivity).navHostFragment.navController.navigate(R.id.action_sitevisitFragment_to_Feedbackform, bundle)
+        }
+
         projectDetailCardViewHolder.cardViewProjectsBinding.viewDetailsBtn.setOnClickListener {
 
             val bundle = Bundle()

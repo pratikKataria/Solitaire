@@ -190,7 +190,6 @@
                         android:fontFamily="@font/myriad_pro_regular"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:visibility="gone"
                         android:text="@string/feedback"
                         android:textAllCaps="false"
                         android:textColor="@color/white"

@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_sitevisitFragment_to_opportunityDetailFragment"
             app:destination="@id/opportunityDetailFragment" />
+        <action
+            android:id="@+id/action_sitevisitFragment_to_Feedbackform"
+            app:destination="@id/Feedbackform" />
     </fragment>
     <fragment
         android:id="@+id/Feedbackform"
