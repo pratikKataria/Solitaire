@@ -492,7 +492,11 @@ class MainActivity : BaseActivity() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
                             }
+
+                        autoCompleteTextView.text.clear()
+                        callTaskRequest.rating = selectedText
                     }
 
                     "Warm" -> {
@@ -511,7 +515,10 @@ class MainActivity : BaseActivity() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
                             }
+                        autoCompleteTextView.text.clear()
+                        callTaskRequest.rating = selectedText
                     }
 
                     "Cold" -> {
@@ -530,7 +537,10 @@ class MainActivity : BaseActivity() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
                             }
+                        autoCompleteTextView.text.clear()
+                        callTaskRequest.rating = selectedText
                     }
 
                     "Booked" -> {
@@ -549,7 +559,10 @@ class MainActivity : BaseActivity() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
                             }
+                        autoCompleteTextView.text.clear()
+                        callTaskRequest.rating = selectedText
                     }
 
                     "Lost" -> {
@@ -568,7 +581,10 @@ class MainActivity : BaseActivity() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
                             }
+                        autoCompleteTextView.text.clear()
+                        callTaskRequest.rating = selectedText
                     }
                 }
             } else {
@@ -583,8 +599,8 @@ class MainActivity : BaseActivity() {
             callTaskRequest.recordType = "Opportunity"
             callTaskRequest.communicationtype = if (tempcom == "OutCall") "Outbound Call" else "Inbound call"
 //            callTaskRequest.communicationtype =
-            callTaskRequest.rating = "Hot"
-            callTaskRequest.dispositionPicklist = "Partial Swipe Done"
+//            callTaskRequest.rating = "Hot"
+//            callTaskRequest.dispositionPicklist = "Partial Swipe Done"
             callTaskRequest.comment = popUpBinding.yesNoCallDetail.desc.text.toString()
 
 
