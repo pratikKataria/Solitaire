@@ -55,7 +55,7 @@ interface Query {
         private const val WHERE = "WHERE"
         private const val OR = "OR"
 
-        val USER_ACCOUNT = "SELECT Id, firstName, LastName, Username, Phone, MobilePhone, Email from User $WHERE $USER_NAME_FILTER"
+        val USER_ACCOUNT = "SELECT Id, firstName, LastName, Username, Phone, MobilePhone, Email, SM_Status__c from User $WHERE $USER_NAME_FILTER"
 //      "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = 00DC30000006cdh AND WhatId != null and Call_Proposed_Date_Of_Visit__c != null AND ActivityDate = TODAY"
         val TODAY_TASK_SITE_VISIT_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND $OWNER_FILTER AND Call_Proposed_Date_Of_Visit__c != null AND Next_Action_Date__c = TODAY"
         val TODAY_TASK_FOLLOW_UP_COUNT = "SELECT COUNT(ID) FROM TASK WHERE RecordTypeId = '012C3000000Aqq9IAC' AND Call_Attempt_Status__c = 'Follow Up' AND $OWNER_FILTER AND Next_Action_Date__c = TODAY"

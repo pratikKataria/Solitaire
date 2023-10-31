@@ -24,5 +24,6 @@ public interface Endpoints {
         const val MARK_AS_READ          =  "MarkRead/"
         const val APP_VERSION           =  "AppVersion/"
         const val GET_ALL_OPTY          =  "opportunities/{id}"
+        const val UPDATE_SM_ACTIVITY          =  "updateUserActivity"
     }
 }

@@ -27,7 +27,9 @@ data class AccountDetail(
             @SerializedName("Phone")
             val phone: String,
             @SerializedName("Username")
-            val username: String
+            val username: String,
+            @SerializedName("SM_Status__c")
+            val smActiveStatus: String
     ) {
         data class Attributes(
                 @SerializedName("type")

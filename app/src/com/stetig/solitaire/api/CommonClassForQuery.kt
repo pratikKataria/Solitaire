@@ -40,11 +40,11 @@ class CommonClassForQuery private constructor() {
     fun getAccountDetails(query: String, onDataReceiveListener: OnDataReceiveListener) {
         try {
             Log.e("common class for query", "getAccountDetails: $query")
-            Utils.showProgressDialog(activity)
+//            Utils.showProgressDialog(activity)
             val request = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
             restClient!!.sendAsync(request, object : AsyncRequestCallback {
                 override fun onSuccess(request: RestRequest, response: RestResponse) {
-                    Utils.hideProgressDialog(activity)
+//                    Utils.hideProgressDialog(activity)
                     try {
                         val projects: AccountDetail = Gson().fromJson<AccountDetail>(response.asString(), AccountDetail::class.java)
                         sendDataToUIThread(onDataReceiveListener, projects)
@@ -54,7 +54,7 @@ class CommonClassForQuery private constructor() {
                 }
 
                 override fun onError(exception: java.lang.Exception) {
-                    Utils.hideProgressDialog(activity)
+//                    Utils.hideProgressDialog(activity)
                     onDataReceiveListener.onError(exception.message!!)
                 }
             })

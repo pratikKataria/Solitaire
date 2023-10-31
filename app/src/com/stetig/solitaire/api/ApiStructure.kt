@@ -73,4 +73,8 @@ interface ApiStructure {
     @GET(Endpoints.GET_ALL_OPTY)
     fun getAllOpty(@Path("id") id: String, @Header("Authorization") authToken: String?): Observable<AllOpportunityDto?>
 
+    @Headers("Content-Type: application/json")
+    @POST(Endpoints.UPDATE_SM_ACTIVITY)
+    fun updateSMActivity(@Body smStatusRequest: SMStatusRequest, @Header("Authorization") authToken: String?): Observable<SMStatusResponse?>
+
 }

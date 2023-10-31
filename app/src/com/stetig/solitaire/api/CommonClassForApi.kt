@@ -57,6 +57,31 @@ class CommonClassForApi private constructor() {
             })
     }
 
+    fun updateSalesManagerStatus(disposableObserver: DisposableObserver<SMStatusResponse>, smStatusRequest: SMStatusRequest, auth: String){
+        Utils.showProgressDialog(activity)
+        RestClient.getInstance().getService()!!.updateSMActivity(smStatusRequest, auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<SMStatusResponse?> {
+                override fun onSubscribe(d: Disposable) {}
+                override fun onNext(callStatusResponse: SMStatusResponse) {
+                    disposableObserver.onNext(callStatusResponse)
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onError(e: Throwable) {
+                    disposableObserver.onError(e)
+                    Utils.setToast(activity, "Unable to send request please try again...")
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onComplete() {
+                    disposableObserver.onComplete()
+                    Utils.hideProgressDialog(activity)
+                }
+            })
+    }
+
     fun CampaignApprovalRequest(disposableObserver: DisposableObserver<SendCampaignApprovalRequestResponse>, sendCallStatus: SendCampaignApprovalRequest, auth: String){
         Utils.showProgressDialog(activity)
         RestClient.getInstance().getService()!!.sendCampaignApprovalRequest(sendCallStatus, auth)
