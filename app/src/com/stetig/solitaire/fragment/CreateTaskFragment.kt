@@ -2,6 +2,7 @@ package com.stetig.solitaire.fragment
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -192,15 +193,40 @@ class CreateTaskFragment : BaseFragment() {
             requireContext(),
             { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
+                val displayTime = "${dayOfMonth.toString().padStart(2, '0')}-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "$selectedYear"
 
                 // Get the current date in the "yyyy-MM-dd" format
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
                 val currentDateFormatted = sdf.format(currentDate.time)
 
                 // Check if the selected date is not a past date
                 if (selectedDate >= currentDateFormatted) {
-                    createTaskRequest.duedate = selectedDate
-                    datePickerEditText.setText(selectedDate)
+
+
+                    val calendar = Calendar.getInstance()
+                    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                    val minute = calendar.get(Calendar.MINUTE)
+
+                    // Create a TimePickerDialog and show it
+                    val timePickerDialog = TimePickerDialog(
+                        activity,
+                        { view, hourOfDay, minute ->
+
+                            var time: String = hourOfDay.toString() + ":" + minute
+                            print("Time selected$time")
+                            // date.setText(convertTo12HourFormat(time))
+                            // callTaskRequest.calltime = "$hourOfDay:$minute:00"
+                            createTaskRequest.duedate = selectedDate
+                            createTaskRequest.time = "$time:00"
+                            datePickerEditText.setText("$displayTime ${convertTo12HourFormat(time)}")
+                        },
+                        hour,
+                        minute,
+                        false
+                    )
+
+                    timePickerDialog.show()
+
                     // Update your UI element with the selected date
 //                    dateTextView.text = selectedDate
                 } else {
@@ -254,5 +280,34 @@ class CreateTaskFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = if (context is MainActivity) context else getActivity() as MainActivity
+    }
+
+
+    var customTimePicker =
+        DatePickerDialog.OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+            datePicker?.minDate = System.currentTimeMillis() - 1000;
+            val calendar = Calendar.getInstance()
+            val timePicker = TimePickerDialog(
+                activity, R.style.MyDatePickerDialogTheme, { timePicker, i, i1 ->
+                    val calendar = Calendar.getInstance()
+                    calendar[year, month, dayOfMonth, i] = i1
+//                    buildSendStatus(calendar.time, "Follow Up", _manual_task, opportunityId)
+                }, calendar[Calendar.HOUR], calendar[Calendar.MINUTE], false
+            )
+            timePicker.show()
+        }
+
+    fun convertTo12HourFormat(time24Hour: String): String {
+        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+
+        var formattedTime = ""
+        try {
+            val date = inputFormat.parse(time24Hour)
+            formattedTime = outputFormat.format(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedTime
     }
 }

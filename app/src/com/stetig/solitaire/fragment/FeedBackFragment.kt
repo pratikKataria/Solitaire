@@ -43,11 +43,10 @@ class FeedBackFragment : BaseFragment() {
     lateinit var activity: MainActivity
     lateinit var binding: FeedbackFormBinding
     private var commonClassForApi: CommonClassForApi? = null
-    lateinit var typeofenq:String
+    lateinit var typeofenq: String
     lateinit var visitid: String
     lateinit var rating: String
     var feedback = FeedBack()
-
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -61,8 +60,6 @@ class FeedBackFragment : BaseFragment() {
 
         feedback.smFeedback = binding.smFeedback.text.toString()
         feedback.placeofwork = binding.placeOfWork.text.toString()
-        feedback.designation = binding.designation.text.toString()
-        feedback.pincode = "a2IC30000002VkTMAU"
 
         log.e("error dekho", typeofenq.toString())
         if (typeofenq == "Leasing") {
@@ -259,8 +256,8 @@ class FeedBackFragment : BaseFragment() {
 
         /// For Wholeseller
         val wholesellerAddAutoComplete = binding.autowholesalerretailer
-        val listofwholeseller = arrayOf("Wholeseller","Retailer" ,"Both")
-        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofwholeseller)
+        val listofwholeseller = arrayOf("Wholeseller", "Retailer", "Both")
+        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofwholeseller)
         wholesellerAddAutoComplete.threshold = 3
         wholesellerAddAutoComplete.setAdapter(wholesellerAutoCompleteAdapter)
         wholesellerAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -302,7 +299,8 @@ class FeedBackFragment : BaseFragment() {
             "Consumer Electronics & Electrical",
             "Gifts, Crafts, and Stationery Products",
             "Toys and Baby Products",
-            "Computers, computer spare parts, and the Internet")
+            "Computers, computer spare parts, and the Internet"
+        )
         val subcategoryAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofsubcategory)
         subcategoryAddAutoComplete.threshold = 3
         subcategoryAddAutoComplete.setAdapter(subcategoryAutoCompleteAdapter)
@@ -312,7 +310,7 @@ class FeedBackFragment : BaseFragment() {
 
         /// Shop Ownership
         val ownshipAddAutoComplete = binding.autoshopownship
-        val listofownership = arrayOf("Owned","Rental")
+        val listofownership = arrayOf("Owned", "Rental")
         val ownershipAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofownership)
         ownshipAddAutoComplete.threshold = 3
         ownshipAddAutoComplete.setAdapter(ownershipAutoCompleteAdapter)
@@ -322,8 +320,8 @@ class FeedBackFragment : BaseFragment() {
 
         /// Leasing(Interested)
         val leasingAddAutoComplete = binding.autoleasing
-        val listofleasing =  arrayOf("Yes","No", "Tentative")
-        val leasingAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofleasing)
+        val listofleasing = arrayOf("Yes", "No", "Tentative")
+        val leasingAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofleasing)
         leasingAddAutoComplete.threshold = 3
         leasingAddAutoComplete.setAdapter(leasingAutoCompleteAdapter)
         leasingAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -332,8 +330,8 @@ class FeedBackFragment : BaseFragment() {
 
         /// Talked about competition
         val talkedaboutAddAutoComplete = binding.tac
-        val listofTAC = arrayOf("Yes","No")
-        val talkedaboutAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item,listofTAC )
+        val listofTAC = arrayOf("Yes", "No")
+        val talkedaboutAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofTAC)
         talkedaboutAddAutoComplete.threshold = 3
         talkedaboutAddAutoComplete.setAdapter(talkedaboutAutoCompleteAdapter)
         talkedaboutAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -342,12 +340,12 @@ class FeedBackFragment : BaseFragment() {
 
         /// Desired Possession
         val desiredpossessionAddAutoComplete = binding.autodesiredpossession
-        val listofdesiredposs = arrayOf("Ready-to-Move","Under Construction")
+        val listofdesiredposs = arrayOf("Ready-to-Move", "Under Construction")
         val desiredpossessionAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofdesiredposs)
         desiredpossessionAddAutoComplete.threshold = 3
         desiredpossessionAddAutoComplete.setAdapter(desiredpossessionAutoCompleteAdapter)
         desiredpossessionAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
-        feedback.desiredPossession = listofdesiredposs[position]
+            feedback.desiredPossession = listofdesiredposs[position]
         }
 
         binding.feedbackchipGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -373,12 +371,15 @@ class FeedBackFragment : BaseFragment() {
                         val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+
+                            feedback.disposition = listOfDisposition?.get(position)
                             }
+
                     }
+
                     "Warm" -> {
                         val listOfDisposition = statusMap["Warm"]
 
@@ -391,12 +392,13 @@ class FeedBackFragment : BaseFragment() {
                         val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                            }
+                            feedback.disposition = listOfDisposition?.get(position)
+                        }
                     }
+
                     "Cold" -> {
                         val listOfDisposition = statusMap["Cold"]
 
@@ -413,8 +415,10 @@ class FeedBackFragment : BaseFragment() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                feedback.disposition = listOfDisposition?.get(position)
                             }
                     }
+
                     "Booked" -> {
                         val listOfDisposition = statusMap["Booked"]
 
@@ -431,16 +435,18 @@ class FeedBackFragment : BaseFragment() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                feedback.disposition = listOfDisposition?.get(position)
                             }
                     }
+
                     "Lost" -> {
                         val listOfDisposition = statusMap["Lost"]
 
-                        val adapter =  ArrayAdapter(
+                        val adapter = ArrayAdapter(
                             activity,
-                                android.R.layout.simple_spinner_item,
+                            android.R.layout.simple_spinner_item,
                             listOfDisposition ?: arrayOf()
-                            )
+                        )
 
                         val autoCompleteTextView = binding.autodisposition
                         autoCompleteTextView.threshold = 3
@@ -449,6 +455,7 @@ class FeedBackFragment : BaseFragment() {
                             AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
+                                feedback.disposition = listOfDisposition?.get(position)
                             }
                     }
                 }
@@ -456,11 +463,16 @@ class FeedBackFragment : BaseFragment() {
                 // No chip selected
             }
         }
-             binding.submitBtn.setOnClickListener {
-                 log.e("output data", feedback.toString())
-                 val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                 commonClassForApi?.FillFeedBackForm(disposableObserverTaskFromCallResponse, feedback, "Bearer " + account.authToken)
-             }
+        binding.submitBtn.setOnClickListener {
+            log.e("output data", feedback.toString())
+            feedback.designation = binding.designation.text.toString()
+            feedback.pincode = binding.workLocationPincode.text.toString()
+            feedback.smFeedback = binding.smFeedback.text.toString()
+            feedback.placeofwork = binding.placeOfWork.text.toString()
+
+            val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+            commonClassForApi?.FillFeedBackForm(disposableObserverTaskFromCallResponse, feedback, "Bearer " + account.authToken)
+        }
 
 //        val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
 //        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autovisitedat)
@@ -543,11 +555,12 @@ class FeedBackFragment : BaseFragment() {
         )
 
         // Set the minimum date to the current date to restrict past dates
-        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+//        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
 
         // Show the date picker dialog
         datePickerDialog.show()
     }
+
     private fun showDatePickerDialogNextActionDate(datePickerEditText: EditText) {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)

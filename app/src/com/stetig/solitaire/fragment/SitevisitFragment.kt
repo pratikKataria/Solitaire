@@ -60,7 +60,8 @@ class SitevisitFragment : BaseFragment() {
         commonClassForQuery = CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
         if (arguments != null) {
             val type = arguments?.getString(Keys.SITE_TYPE, "not found")
-            binding.sitevisittitle.text = type
+
+            binding.sitevisittitle.text =  if ( type == "sales Manager Allocated") "Schedule Site Visit" else type
 
             val query = when {
                 type.equals(getString(R.string.expiring_opportunities_for_next_7_days)) -> {

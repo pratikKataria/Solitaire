@@ -51,5 +51,6 @@ data class FeedBack(
     var outletLocation: String? = null,
     @SerializedName("Leasign")
     var leasign: String? = null,
-
+    @SerializedName("Disposition")
+    var disposition: String? = null,
 )

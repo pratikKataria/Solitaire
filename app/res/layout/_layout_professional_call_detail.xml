@@ -83,7 +83,7 @@
                         android:background="@drawable/bg_rect_round_s_border"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="@string/follow_up"
+                        android:text="Follow Up"
                         android:textAlignment="center"
                         android:textColor="@color/chip_selection_text_color" />
 

@@ -115,6 +115,58 @@ class CommonClassForQuery private constructor() {
         }
     }
 
+    fun getCampaignTableDetailsSourceChangeApproval(query: String, onDataReceiveListener: OnDataReceiveListener) {
+        try {
+            Log.e("common class for query", "getCampaignTableDetails: $query")
+            Utils.showProgressDialog(activity)
+            val request = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(request, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    Utils.hideProgressDialog(activity)
+                    try {
+                        val projects: SourceChangeApproval? = Gson().fromJson(response.asString(), SourceChangeApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, projects)
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: java.lang.Exception) {
+                    Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (xe: Exception) {
+
+        }
+    }
+
+    fun getCampaignTableDetailsCampaignApproval(query: String, onDataReceiveListener: OnDataReceiveListener) {
+        try {
+            Log.e("common class for query", "getCampaignTableDetails: $query")
+            Utils.showProgressDialog(activity)
+            val request = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(request, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    Utils.hideProgressDialog(activity)
+                    try {
+                        val projects: CampaignApproval? = Gson().fromJson<CampaignApproval>(response.asString(), CampaignApproval::class.java)
+                        sendDataToUIThread(onDataReceiveListener, projects)
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: java.lang.Exception) {
+                    Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (xe: Exception) {
+
+        }
+    }
+
     fun getCount(query: String, type: String?, onDataReceiveListener: OnDataReceiveListener) {
         Log.d(javaClass.name, "exampleQuery: 44 example query$query")
         try {

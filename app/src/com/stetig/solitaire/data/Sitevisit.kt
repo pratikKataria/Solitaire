@@ -10,6 +10,19 @@ data class Sitevisit(
     val totalSize: Int
 ) {
     data class Record(
+        @SerializedName("attributes")
+        val attributes: Task.Record.Attributes?,
+        @SerializedName("Call_Proposed_Date_Of_Visit__c")
+        val activityDate: String?,
+        @SerializedName("Next_Action_Date__c")
+        val nextActionDate: String?,
+        @SerializedName("Mobile_No2__c")
+        val mobileNo2C: String?,
+        @SerializedName("Project__r")
+        val projectR: Task.Record.ProjectR?,
+        @SerializedName("What")
+        val what: Task.Record.What?,
+
         @SerializedName("Id")
         val id: String,
         @SerializedName("Name")

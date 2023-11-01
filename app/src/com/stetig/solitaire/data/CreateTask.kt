@@ -7,6 +7,8 @@ data class CreateTask(
     var subject: String? = null,
     @SerializedName("DueDate")
     var duedate: String? = null,
+    @SerializedName("calltime")
+    var time: String? = null,
     @SerializedName("opp_Id")
     var opp_Id: String? = null,
 )

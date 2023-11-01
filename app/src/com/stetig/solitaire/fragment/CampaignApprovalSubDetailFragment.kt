@@ -58,11 +58,7 @@ class CampaignApprovalSubDetailFragment : BaseFragment() {
                 CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
             if (arguments != null) {
                 val id = arguments?.getString(Keys.CAM_ID, "")
-                commonClassForQuery.getCampaignTableDetails(
-                    Query.CAMPAIGN_TABLE_FIELDS + Utils.buildQueryParameter(
-                        id
-                    ), onDataReceiveListener
-                )
+                commonClassForQuery.getCampaignTableDetailsCampaignApproval(Query.CAMPAIGN_TABLE_FIELDS + Utils.buildQueryParameter(id), onDataReceiveListener)
             }
         } catch (e: Exception) {
         }
@@ -70,22 +66,20 @@ class CampaignApprovalSubDetailFragment : BaseFragment() {
 
     private var onDataReceiveListener = object : CommonClassForQuery.OnDataReceiveListener {
         override fun onDataReceive(data: Any) {
-            if (data is CampaignApproval && data.records.isNotEmpty()) {
+            if (data is  CampaignApproval && data.records.isNotEmpty()) {
 
                 val record = data.records[0]
 
                 binding.parentCampaignNameC.text = Utils.checkValueOrGiveEmpty(record.name)
-                binding.childCampaignNameC.text =
-                    Utils.checkValueOrGiveEmpty(record.primaryProjectR?.name)
-                binding.projectNameC.text =
-                    Utils.checkValueOrGiveEmpty(record.primaryProjectR?.name)
+                binding.childCampaignNameC.text = Utils.checkValueOrGiveEmpty(record.primaryProjectR?.name)
+                binding.projectNameC.text = Utils.checkValueOrGiveEmpty(record.primaryProjectR?.name)
                 binding.startDate.text = record.startDate
                 binding.endDate.text = record.endDate
                 binding.budgetCostInHeirachy.text = record.budgetedCost.toString()
                 binding.budgetCostInChildCampaign.text = record.budgetedCost.toString()
 
 
-                if (record.approvalStatus == "Level 1 Approved" || record.approvalStatus == "Level 2 Approved") {
+                if (record.approvalStatus == "Level 1 Approved" && record.approvalStatus == "Level 2 Approved") {
                     binding.approveBtn.visibility = View.GONE
                     binding.rejectBtn.visibility = View.GONE
                 }
@@ -95,8 +89,7 @@ class CampaignApprovalSubDetailFragment : BaseFragment() {
                 binding.approveBtn.setOnClickListener {
                     val userAccount =
                         SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                    val commonClassForApi: CommonClassForApi =
-                        CommonClassForApi.getInstance(activity)!!
+                    val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
                     val data = SendCampaignApprovalRequest(
                         campaignId = data.records[0]?.id.toString(),

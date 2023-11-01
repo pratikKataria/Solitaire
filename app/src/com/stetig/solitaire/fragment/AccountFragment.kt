@@ -3,12 +3,14 @@ package com.stetig.solitaire.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.salesforce.androidsdk.app.SalesforceSDKManager
@@ -85,6 +87,14 @@ class AccountFragment : BaseFragment() {
 
                 if (data.records[0].smActiveStatus != null && data.records[0].smActiveStatus == "Active") {
                     binding.toggleSwitch.isChecked = true
+                }
+
+                if (data.records[0].smActiveStatus != null && data.records[0].smActiveStatus == "Active") {
+                    binding.iconActive.setImageDrawable(getResources().getDrawable(R.drawable.ic_active))
+                    binding.iconActive.colorFilter = null;
+                } else {
+                    binding.iconActive.setImageDrawable(getResources().getDrawable(R.drawable.ic_inactive))
+                    binding.iconActive.setColorFilter(ContextCompat.getColor(activity, R.color.light_grey));
                 }
             }
         }

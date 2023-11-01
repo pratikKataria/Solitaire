@@ -56,7 +56,7 @@ class AllActiveOpportunityFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         commonClassForQuery = CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
-//        commonClassForQuery.getOpportunity(ALL_ACTIVE_OPPORTUNITY_ORDER_BY, onOpportunityListListener)
+        commonClassForQuery.getOpportunity(ALL_ACTIVE_OPPORTUNITY_ORDER_BY, onOpportunityListListener)
     }
 
     private val onOpportunityListListener = object : CommonClassForQuery.OnDataReceiveListener {

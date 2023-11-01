@@ -58,11 +58,7 @@ class SourceChangeSubDetailFragment : BaseFragment() {
                 CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
             if (arguments != null) {
                 val id = arguments?.getString(Keys.CAM_ID, "")
-                commonClassForQuery.getCampaignTableDetails(
-                    Query.SOURCE_CHANGE_TABLE_FIELDS + Utils.buildQueryParameter(
-                        id
-                    ), onDataReceiveListener
-                )
+                commonClassForQuery.getCampaignTableDetailsSourceChangeApproval(Query.SOURCE_CHANGE_TABLE_FIELDS + Utils.buildQueryParameter(id), onDataReceiveListener)
             }
         } catch (e: Exception) {
         }

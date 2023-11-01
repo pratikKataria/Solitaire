@@ -37,6 +37,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.gms.common.util.PlatformVersion
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -263,7 +264,11 @@ class MainActivity : BaseActivity() {
 
         setupNavigation()
         checkForOverlay()
-        checkPermissions()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkPermissions2()
+        } else {
+            checkPermissions()
+        }
         binding.toolBarLayout.imageViewNotification.setOnClickListener {
 //            navHostFragment.navController.popBackStack(R.id.homeFragment, false)
             navHostFragment.navController.popBackStack()
@@ -316,7 +321,7 @@ class MainActivity : BaseActivity() {
         startCallHandlerService()
         checkForCallPopUp()
         checkNotification()
-        checkPermissions()
+//        checkPermissions()
 
 //        FirebaseCrashlytics.getInstance().recordException(RuntimeException("Send Logs"))
         if (SalesforceSDKManager.getInstance().userAccountManager.currentUser == null) return
@@ -1173,31 +1178,31 @@ class MainActivity : BaseActivity() {
 
     private val PERMISSION_REQUEST_CODE = 100
 
-    private val permissions = arrayOf(
+    private var permissions = arrayOf(
         Manifest.permission.CALL_PHONE,
         Manifest.permission.READ_PHONE_STATE,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.READ_CALL_LOG
+        Manifest.permission.READ_CALL_LOG,
     )
 
     private fun checkPermissions() {
-//        val readPhoneNumberSateH =
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) Manifest.permission.READ_PHONE_NUMBERS
-//            else Manifest.permission.READ_PHONE_STATE
-//        TedPermission.with(this).setPermissionListener(permissionListener).setPermissions(
-//            readPhoneNumberSateH,
-//            Manifest.permission.CALL_PHONE,
-//            Manifest.permission.READ_PHONE_STATE,
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.RECORD_AUDIO,
-//            Manifest.permission.READ_CALL_LOG
-//        ).check()
-
         ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+    }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkPermissions2() {
+        var permissions1 = arrayOf(
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.POST_NOTIFICATIONS
+        )
+        ActivityCompat.requestPermissions(this, permissions1, PERMISSION_REQUEST_CODE);
     }
 
     override fun onRequestPermissionsResult(
@@ -1216,26 +1221,10 @@ class MainActivity : BaseActivity() {
                     break
                 }
             }
-            if (allPermissionsGranted) {
-                // All permissions are granted, proceed with your app logic
-            } else {
-                // Permissions are not granted, inform the user or handle accordingly
-            }
         }
 
 
     }
-
-
-    var permissionListener: PermissionListener = object : PermissionListener {
-        override fun onPermissionGranted() {
-//            Utils.setToast(this@MainActivity, "All Permission granted")
-        }
-
-
-        override fun onPermissionDenied(deniedPermissions: List<String>) {}
-    }
-
 
     private fun checkForOverlay() {
         if (checkSelfPermission(Manifest.permission.READ_CALL_LOG) === PackageManager.PERMISSION_DENIED) {
