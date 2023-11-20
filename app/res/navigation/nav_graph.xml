@@ -74,9 +74,7 @@
             android:id="@+id/action_menuFragment_to_approvalFragment"
             app:destination="@+id/approvalFragment"
             />
-<!--        <action-->
-<!--            android:id="@+id/action_menuFragment_to_campaignApprovalDetailFragment"-->
-<!--            app:destination="@id/campaignApprovalDetailFragment" />-->
+
     </fragment>
     <fragment
         android:id="@+id/approvalFragment"
@@ -95,6 +93,10 @@
         <action
             android:id="@+id/action_approvalFragment_to_cpcreationApprovalDetailFragment"
             app:destination="@id/cpcreationApprovalFragment" />
+        <action
+            android:id="@+id/action_approvalFragment_to_CCRApprovalRequestFragment"
+            app:destination="@id/CCRApprovalRequestFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -291,4 +293,18 @@
         android:name="com.stetig.solitaire.fragment.CPCApprovalFragment"
         android:label="CPCApprovalFragment"
         tools:layout="@layout/fragment_c_p_c_approval"/>
+
+    <fragment
+        android:id="@+id/CCRApprovalRequestFragment"
+        android:name="com.stetig.solitaire.fragment.CCRApprovalRequestFragment"
+        android:label="CCRApprovalRequestFragment" >
+        <action
+            android:id="@+id/action_CCRApprovalRequestFragment_to_CCRDetailFragment"
+            app:destination="@id/CCRDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CCRDetailFragment"
+        android:name="com.stetig.solitaire.fragment.CCRDetailFragment"
+        android:label="CCRDetailFragment" />
+
 </navigation>

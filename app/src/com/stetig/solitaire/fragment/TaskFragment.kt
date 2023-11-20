@@ -29,7 +29,7 @@ class TaskFragment : BaseFragment() {
 
     private lateinit var activity: MainActivity
     private lateinit var binding: FragmentTaskBinding
-    var tabs = arrayOf("Proposed Site Visits", "Follow up", "Aloted Site Visits")
+    var tabs = arrayOf("Proposed Site Visits", "Follow up", "Allotted Site Visits")
     val categories = arrayOf("Sort by \u2193\u2191", "Name", "Activity", "Created")
     var colorRes = intArrayOf(R.color.sv, R.color.fu, R.color.f2f)
     var pos = 0
@@ -49,7 +49,7 @@ class TaskFragment : BaseFragment() {
         binding.headerText.text = if (isToday) "Task for Today" else "All Task"
         pos = arguments?.getInt(Keys.TASK_TYPE, 0) ?: 0
         initTabBar()
-        val arrayAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, categories)
+        val arrayAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, categories)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.totalActiveOpportunitiesSpinnerSortType.adapter = arrayAdapter
         binding.totalActiveOpportunitiesSpinnerSortType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

@@ -41,7 +41,7 @@ class AllActiveOpportunityFragment : BaseFragment() {
     override fun initView(rootView: View?) {
         initRecycler()
 
-        val arrayAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, categories)
+        val arrayAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, categories)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.totalActiveOpportunitiesSpinnerSortType.adapter = arrayAdapter
 

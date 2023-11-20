@@ -30,8 +30,7 @@ class ApprovalDetailFragment : BaseFragment() {
 
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_approval_detail, container, false)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         initView(rootView = binding.root)
@@ -59,7 +58,7 @@ class ApprovalDetailFragment : BaseFragment() {
 
             val query = when {
                 type.equals(getString(R.string.approvalpending)) -> {
-                    Query.APPROVAL_LIST +Utils.buildQueryParameter(type)
+                    Query.APPROVAL_LIST
                 }
                 type.equals(getString(R.string.action_opportunity_for_today)) -> {
                     Query.TODAY_OPPORTUNITY
@@ -79,9 +78,15 @@ class ApprovalDetailFragment : BaseFragment() {
         override fun onDataReceive(data: Any) {
             if (data is Approval) {
                 projectList.clear()
-                projectList.addAll(data.records)
-                adapter.notifyDataSetChanged()
-                activity.checkListIsEmpty(data.records)
+
+                data.records?.forEach {
+                    if (it?.costSheets1R != null || it?.paymentPlansR != null) {
+                        projectList.add(it)
+                        adapter.notifyDataSetChanged()
+                        activity.checkListIsEmpty(projectList)
+                    }
+                }
+
             }
         }
 

@@ -217,7 +217,7 @@ class FeedBackFragment : BaseFragment() {
         /// For Visit At
         val visitedAddAutoComplete = binding.autovisitedat
         val listofvisitedat = arrayOf("Site", "Outbound", "Outbound - Outstation", "E-Visit")
-        val visitedAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofvisitedat)
+        val visitedAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofvisitedat)
         visitedAddAutoComplete.threshold = 3
         visitedAddAutoComplete.setAdapter(visitedAutoCompleteAdapter)
         visitedAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -227,7 +227,7 @@ class FeedBackFragment : BaseFragment() {
         /// For Ethnicity
         val enthicityAutoCompleteTextView = binding.autoethnicity
         val listOfEthnicity = arrayOf("Bengali", "Christian", "Gujarati", "Marathi", "Marwari", "Muslim", "North Indian Hindu", "Parsi", "Punjabi", "Sindhi", "South Indian Hindu")
-        val ethinicityAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listOfEthnicity)
+        val ethinicityAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listOfEthnicity)
         enthicityAutoCompleteTextView.threshold = 3
         enthicityAutoCompleteTextView.setAdapter(ethinicityAdapter)
         enthicityAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -237,7 +237,7 @@ class FeedBackFragment : BaseFragment() {
         /// For Budget
         val budgetAutoCompleteTextView = binding.autobudget
         val listOfBudget = arrayOf("80 Lacs & Below", "80 L - 90 L", "90 L – 01 Cr", "01 Cr – 01.10 Cr", "01.10 Cr – 01.40 Cr", "01.40 Cr +")
-        val budgetAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listOfBudget)
+        val budgetAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listOfBudget)
         budgetAutoCompleteTextView.threshold = 3
         budgetAutoCompleteTextView.setAdapter(budgetAdapter)
         budgetAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -247,7 +247,7 @@ class FeedBackFragment : BaseFragment() {
         /// For Zone
         val zoneAutoCompleteTextView = binding.autozone
         val listOfZone = arrayOf("A", "B", "C", "D", "E", "Any")
-        val zoneAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listOfZone)
+        val zoneAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listOfZone)
         zoneAutoCompleteTextView.threshold = 3
         zoneAutoCompleteTextView.setAdapter(zoneAdapter)
         zoneAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -257,7 +257,7 @@ class FeedBackFragment : BaseFragment() {
         /// For Wholeseller
         val wholesellerAddAutoComplete = binding.autowholesalerretailer
         val listofwholeseller = arrayOf("Wholeseller", "Retailer", "Both")
-        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofwholeseller)
+        val wholesellerAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofwholeseller)
         wholesellerAddAutoComplete.threshold = 3
         wholesellerAddAutoComplete.setAdapter(wholesellerAutoCompleteAdapter)
         wholesellerAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -301,7 +301,7 @@ class FeedBackFragment : BaseFragment() {
             "Toys and Baby Products",
             "Computers, computer spare parts, and the Internet"
         )
-        val subcategoryAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofsubcategory)
+        val subcategoryAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofsubcategory)
         subcategoryAddAutoComplete.threshold = 3
         subcategoryAddAutoComplete.setAdapter(subcategoryAutoCompleteAdapter)
         subcategoryAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -311,7 +311,7 @@ class FeedBackFragment : BaseFragment() {
         /// Shop Ownership
         val ownshipAddAutoComplete = binding.autoshopownship
         val listofownership = arrayOf("Owned", "Rental")
-        val ownershipAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofownership)
+        val ownershipAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofownership)
         ownshipAddAutoComplete.threshold = 3
         ownshipAddAutoComplete.setAdapter(ownershipAutoCompleteAdapter)
         ownshipAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -321,7 +321,7 @@ class FeedBackFragment : BaseFragment() {
         /// Leasing(Interested)
         val leasingAddAutoComplete = binding.autoleasing
         val listofleasing = arrayOf("Yes", "No", "Tentative")
-        val leasingAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofleasing)
+        val leasingAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofleasing)
         leasingAddAutoComplete.threshold = 3
         leasingAddAutoComplete.setAdapter(leasingAutoCompleteAdapter)
         leasingAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -331,7 +331,7 @@ class FeedBackFragment : BaseFragment() {
         /// Talked about competition
         val talkedaboutAddAutoComplete = binding.tac
         val listofTAC = arrayOf("Yes", "No")
-        val talkedaboutAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofTAC)
+        val talkedaboutAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofTAC)
         talkedaboutAddAutoComplete.threshold = 3
         talkedaboutAddAutoComplete.setAdapter(talkedaboutAutoCompleteAdapter)
         talkedaboutAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -341,7 +341,7 @@ class FeedBackFragment : BaseFragment() {
         /// Desired Possession
         val desiredpossessionAddAutoComplete = binding.autodesiredpossession
         val listofdesiredposs = arrayOf("Ready-to-Move", "Under Construction")
-        val desiredpossessionAutoCompleteAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, listofdesiredposs)
+        val desiredpossessionAutoCompleteAdapter = ArrayAdapter(activity, R.layout._layout_spinner_item, listofdesiredposs)
         desiredpossessionAddAutoComplete.threshold = 3
         desiredpossessionAddAutoComplete.setAdapter(desiredpossessionAutoCompleteAdapter)
         desiredpossessionAddAutoComplete.onItemClickListener = OnItemClickListener { parent, view_, position, _ ->
@@ -365,7 +365,7 @@ class FeedBackFragment : BaseFragment() {
                         val listOfDisposition = statusMap["Hot"]
                         val adapter = ArrayAdapter(
                             activity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
                         val autoCompleteTextView = binding.autodisposition
@@ -385,7 +385,7 @@ class FeedBackFragment : BaseFragment() {
 
                         val adapter = ArrayAdapter(
                             activity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -404,7 +404,7 @@ class FeedBackFragment : BaseFragment() {
 
                         val adapter = ArrayAdapter(
                             activity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -424,7 +424,7 @@ class FeedBackFragment : BaseFragment() {
 
                         val adapter = ArrayAdapter(
                             activity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -444,7 +444,7 @@ class FeedBackFragment : BaseFragment() {
 
                         val adapter = ArrayAdapter(
                             activity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -539,15 +539,15 @@ class FeedBackFragment : BaseFragment() {
                 val currentDateFormatted = sdf.format(currentDate.time)
 
                 // Check if the selected date is not a past date
-                if (selectedDate >= currentDateFormatted) {
+//                if (selectedDate >= currentDateFormatted) {
                     feedback.anniversarydate = selectedDate
                     datePickerEditText.setText(selectedDate)
                     // Update your UI element with the selected date
 //                    dateTextView.text = selectedDate
-                } else {
+//                } else {
                     // Show an error message for selecting a past date
 //                    dateTextView.text = "Please select a future date"
-                }
+//                }
             },
             year,
             month,
@@ -556,6 +556,7 @@ class FeedBackFragment : BaseFragment() {
 
         // Set the minimum date to the current date to restrict past dates
 //        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePickerDialog.datePicker.setMaxDate(System.currentTimeMillis());
 
         // Show the date picker dialog
         datePickerDialog.show()

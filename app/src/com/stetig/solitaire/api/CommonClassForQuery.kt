@@ -115,6 +115,32 @@ class CommonClassForQuery private constructor() {
         }
     }
 
+    fun mobileNumberOnOpportunity(query: String, onDataReceiveListener: OnDataReceiveListener) {
+        try {
+            Log.e("common class for query", "getCampaignTableDetails: $query")
+            Utils.showProgressDialog(activity, "Checking for Opportunity")
+            val request = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(request, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    Utils.hideProgressDialog(activity)
+                    try {
+                        val projects: OpportunityByMobileNumberResponse? = Gson().fromJson<OpportunityByMobileNumberResponse>(response.asString(), OpportunityByMobileNumberResponse::class.java)
+                        sendDataToUIThread(onDataReceiveListener, projects)
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: java.lang.Exception) {
+                    Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (xe: Exception) {
+
+        }
+    }
+
     fun getCampaignTableDetailsSourceChangeApproval(query: String, onDataReceiveListener: OnDataReceiveListener) {
         try {
             Log.e("common class for query", "getCampaignTableDetails: $query")

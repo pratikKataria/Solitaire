@@ -363,6 +363,32 @@ public class Utils {
 
     }
 
+    public static void showProgressDialog(Activity activity, String message) {
+
+        if (progressDialog != null) {
+            progressDialog = null;
+        }
+
+        progressDialog = new ProgressDialog(activity, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(message);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        if (!progressDialog.isShowing()) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    progressDialog.dismiss();
+                }
+            }, 6000);
+            progressDialog.show();
+        } else {
+            progressDialog.dismiss();
+        }
+
+
+    }
+
     public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -1866,6 +1892,26 @@ public class Utils {
         return parm == null ? ": Not Available" : ": " + parm;
     }
 
+    public static String getFormattedDateYYYYMMDD(String parm) {
+
+        if (parm == null) return "";
+
+        if (parm != null) {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = null;
+            try {
+                date = inputFormat.parse(parm);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return "";
+            }
+            SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
+            return formate.format(date);
+        }
+        return "";
+    }
+
     public static String getFormattedDateSF(String parm) {
 
         if (parm == null) return "No Available";
@@ -2005,7 +2051,7 @@ public class Utils {
             NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
             currencyFormat.setCurrency(Currency.getInstance("INR"));
             String formattedNumber = String.format("%d", roundedNumber);
-            return "₹ " + formattedNumber;
+            return  formattedNumber + " Rs";
         } catch (NumberFormatException e) {
             return "-";
         }

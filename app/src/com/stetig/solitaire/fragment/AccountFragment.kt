@@ -85,6 +85,10 @@ class AccountFragment : BaseFragment() {
                 binding.accountEmailId.text = Utils.checkValueOrGiveDef(data.records[0].email)
                 binding.activeText.text = Utils.checkValueOrGiveDef(data.records[0].smActiveStatus)
 
+
+                binding.toggleSwitch.visibility = if (data.records[0].smActiveStatus != null && data.records[0].smActiveStatus == "In Progress") View.GONE else View.VISIBLE
+
+
                 if (data.records[0].smActiveStatus != null && data.records[0].smActiveStatus == "Active") {
                     binding.toggleSwitch.isChecked = true
                 }

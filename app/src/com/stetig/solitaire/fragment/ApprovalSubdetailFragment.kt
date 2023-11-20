@@ -1,28 +1,29 @@
 package com.stetig.solitaire.fragment
-import android.annotation.SuppressLint
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.stetig.callsync.base.BaseFragment
 import com.stetig.solitaire.R
 import com.stetig.solitaire.activity.MainActivity
-import com.stetig.solitaire.adapter.TaskRecyclerAdapter
 import com.stetig.solitaire.api.CommonClassForApi
 import com.stetig.solitaire.api.CommonClassForQuery
 import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.api.Query
 import com.stetig.solitaire.data.*
-import com.stetig.solitaire.databinding.FragmentApprovalBinding
-import com.stetig.solitaire.utils.Utils
 import com.stetig.solitaire.databinding.FragmentApprovalSubdetailBinding
+import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
 
@@ -30,17 +31,35 @@ class ApprovalSubdetailFragment : BaseFragment() {
     private lateinit var oppid: String
     lateinit var activity: MainActivity
     lateinit var binding: FragmentApprovalSubdetailBinding
+    private var commonClassForApi: CommonClassForApi? = null
+
 //    lateinit var binding2 : FragmentApprovalBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_approval_subdetail, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.stetig.solitaire.R.layout.fragment_approval_subdetail, container, false)
         initView(binding.root)
         return binding.root
     }
 
     override fun initView(rootView: View?) {
 
+        val csId = arguments?.getString(Keys.CS_ID)
+        val ppId = arguments?.getString(Keys.PP_ID)
 
+        if (csId == null)
+            binding.tblCostSheet.visibility = View.GONE
+        if (ppId == null)
+            binding.llPaymentPlan.visibility = View.GONE
+
+        try {
+            if (arguments != null) {
+                val id = arguments?.getString(Keys.OPP_ID, "")
+                commonClassForApi = CommonClassForApi.getInstance(activity)
+                commonClassForApi?.getPaymentPlan(updateTokenResDisposableObserver, CallTaskRequest(opportunityId = id))
+            }
+        } catch (e: Exception) {
+
+        }
     }
 
     override fun onResume() {
@@ -50,7 +69,7 @@ class ApprovalSubdetailFragment : BaseFragment() {
             val commonClassForQuery = CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
             if (arguments != null) {
                 val id = arguments?.getString(Keys.OPP_ID, "")
-                commonClassForQuery.getApprovalTableDetails(Query.APPROVAL_TABLE_FIELDS+Utils.buildQueryParameter(id), onDataReceiveListener)
+                commonClassForQuery.getApprovalTableDetails(Query.APPROVAL_TABLE_FIELDS + Utils.buildQueryParameter(id), onDataReceiveListener)
             }
         } catch (e: Exception) {
         }
@@ -60,10 +79,8 @@ class ApprovalSubdetailFragment : BaseFragment() {
         override fun onDataReceive(data: Any) {
             if (data is ApprovalTable && data.records.isNotEmpty()) {
 
-                binding.baserateCurrent.text =
-                    Utils.convertToIndianCurrency(data.records[0].baseRate)
-                binding.baseratePrevious.text =
-                    Utils.convertToIndianCurrency(data.records[0].baseRateOriginal)
+                binding.baserateCurrent.text = Utils.convertToIndianCurrency(data.records[0].baseRate)
+                binding.baseratePrevious.text = Utils.convertToIndianCurrency(data.records[0].baseRateOriginal)
                 binding.totalamountCurrent.text = Utils.convertToIndianCurrency((data.records[0].totalAmountforUnit))
                 binding.infrastructureCurrent.text = Utils.convertToIndianCurrency((data.records[0].infrastructureCharges))
                 binding.infrastructurePrevious.text = Utils.convertToIndianCurrency((data.records[0].infrastructureChargesOriginal))
@@ -74,50 +91,70 @@ class ApprovalSubdetailFragment : BaseFragment() {
                 binding.floorCurrent.text = Utils.convertToIndianCurrency((data.records[0].floorRise))
                 binding.floorPrevious.text = Utils.convertToIndianCurrency((data.records[0].floorRise_original))
                 binding.amenitiesCurrent.text = Utils.convertToIndianCurrency((data.records[0].amenities))
-                binding.amenitiesPrevious.text =  Utils.convertToIndianCurrency((data.records[0].amenities_original))
-                binding.legalchargesCurrent.text =  Utils.convertToIndianCurrency((data.records[0].legalCharges))
-                binding.legalchargesPrevious.text =  Utils.convertToIndianCurrency((data.records[0].legalCharges_original))
-                binding.considerationvalueCurrent.text =  Utils.convertToIndianCurrency((data.records[0].x1_totalConsideration_value))
-                binding.considerationvaluePrevious.text =  Utils.convertToIndianCurrency((data.records[0].totalConsideration_value_original))
-                binding.considerationvaluediffCurrent.text =  Utils.convertToIndianCurrency((data.records[0].totalConsideration_value_diff))
+                binding.amenitiesPrevious.text = Utils.convertToIndianCurrency((data.records[0].amenities_original))
+                binding.legalchargesCurrent.text = Utils.convertToIndianCurrency((data.records[0].legalCharges))
+                binding.legalchargesPrevious.text = Utils.convertToIndianCurrency((data.records[0].legalCharges_original))
+                binding.considerationvalueCurrent.text = Utils.convertToIndianCurrency((data.records[0].x1_totalConsideration_value))
+                binding.considerationvaluePrevious.text = Utils.convertToIndianCurrency((data.records[0].totalConsideration_value_original))
+                binding.considerationvaluediffCurrent.text = Utils.convertToIndianCurrency((data.records[0].totalConsideration_value_diff))
 
-                binding.stampdutyPrevious.text =  Utils.convertToIndianCurrency((data.records[0].stampDuty_waivedOff))
-                binding.registrationPrevious.text =  Utils.convertToIndianCurrency((data.records[0].registration_Charges_WaivedOff))
-                binding.gstPrevious.text =  Utils.convertToIndianCurrency((data.records[0].GST_waivedOff))
+                binding.stampdutyPrevious.text = Utils.convertToIndianCurrency((data.records[0].stampDuty_waivedOff))
+                binding.registrationPrevious.text = Utils.convertToIndianCurrency((data.records[0].registration_Charges_WaivedOff))
+                binding.gstPrevious.text = Utils.convertToIndianCurrency((data.records[0].GST_waivedOff))
 
-                binding.approveBtn.setOnClickListener{
+                binding.approveBtn.setOnClickListener {
 
-                    if (binding.commentBox.text.toString().isEmpty()){
+                    if (binding.commentBox.text.toString().isEmpty()) {
                         Utils.showToast(context, "Please Enter Comments")
                         return@setOnClickListener;
                     }
 
 
+                    val csId = arguments?.getString(Keys.CS_ID)
+                    val ppId = arguments?.getString(Keys.PP_ID)
+                    var approvalType = ""
+
+                    if (csId != null && ppId != null) approvalType = "Both"
+                    else if (ppId != null) approvalType = "Payment Plan"
+                    else approvalType = "Cost sheet"
+
+
                     val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
                     val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
                     val data = SendApprovalRequest(
-                        costsheetId = data.records[0]?.id,
-                        paymentplanId = " ",
+                        costsheetId = csId,
+                        paymentplanId = ppId,
                         status = "Approve",
-                        type = "Cost sheet",
+                        type = approvalType,
                         comment = binding.commentBox.text.toString(),
                     )
-                    commonClassForApi.ApprovalRequest(disposableObserver,data,auth)
-
+                    commonClassForApi.ApprovalRequest(disposableObserver, data, auth)
                 }
-                binding.rejectBtn.setOnClickListener{
+
+
+                binding.rejectBtn.setOnClickListener {
                     val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
                     val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
+
+                    val csId = arguments?.getString(Keys.CS_ID)
+                    val ppId = arguments?.getString(Keys.PP_ID)
+                    var approvalType = ""
+
+                    if (csId != null) approvalType = "Cost sheet"
+                    else if (ppId != null) approvalType = "Payment Plan"
+                    else approvalType = "Both"
+
+
                     val data = SendApprovalRequest(
                         costsheetId = data.records[0].id,
-                        paymentplanId = " ",
+                        paymentplanId = ppId,
                         status = "Reject",
-                        type = "Cost sheet",
+                        type = approvalType,
                         comment = binding.commentBox.text.toString(),
                     )
-                    commonClassForApi.ApprovalRequest(disposableObserver,data,auth)
+                    commonClassForApi.ApprovalRequest(disposableObserver, data, auth)
 
                 }
             }
@@ -133,9 +170,11 @@ class ApprovalSubdetailFragment : BaseFragment() {
             Utils.setToast(activity, callStatusResponse.message)
             activity.navHostFragment.findNavController().popBackStack()
         }
+
         override fun onError(e: Throwable) {
             Log.e(javaClass.name, "onError: 33`7 " + e.message)
         }
+
         override fun onComplete() {}
     }
 
@@ -143,4 +182,65 @@ class ApprovalSubdetailFragment : BaseFragment() {
         if (context is MainActivity) activity = context
         super.onAttach(context)
     }
+
+    var updateTokenResDisposableObserver: DisposableObserver<PaymentPlanResponse> =
+        object : DisposableObserver<PaymentPlanResponse>() {
+            override fun onNext(updateTokenRes: PaymentPlanResponse) {
+                if (updateTokenRes != null) {
+                    val projects: PaymentPlanList = Gson().fromJson<PaymentPlanList>(updateTokenRes.payPlanList, PaymentPlanList::class.java)
+                    Log.e("On ApprovalSubDetailFragmen t projects", "onNext: $projects")
+
+
+                    // Get the TableLayout defined in the XML layout
+
+                    // Define the number of rows and columns for your table
+
+                    // Define the number of rows and columns for your table
+                    val numRows = 3
+                    val numCols = 5
+
+                    // Loop through rows to create rows
+
+                    // Loop through rows to create rows
+                    for (i in projects) {
+                        val tableRow = TableRow(activity)
+                        tableRow.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
+                        tableRow.setBackgroundResource(R.drawable.border_horizontal); // Apply horizontal border
+
+                        // Loop through columns to create columns
+                        for (j in 0 until numCols) {
+
+
+                            val textView = TextView(activity)
+                            textView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
+                            textView.gravity = Gravity.LEFT
+                            textView.setPadding(25, 16, 25, 16)
+                            textView.setBackgroundResource(R.drawable.border_vertical); // Apply vertical border
+
+                            // Set text for the TextView (you can set dynamic content here)
+                            if (j == 0) textView.text = "${i.projectConstructionStagesR?.name ?: "Not Available"}"
+                            if (j == 1) textView.text = "${i.amountValueC}"
+                            if (j == 2) textView.text = "${i.daysMonthsValueC}"
+                            if (j == 3) textView.text = "${i.daysMonthsValueC}"
+                            if (j == 4) textView.text = "${i.daysMonthsValueC}"
+
+
+                            tableRow.addView(textView)
+                        }
+
+                        // Add the row to the TableLayout
+                        binding.paymentPlanTableLayout.addView(tableRow)
+                    }
+                }
+
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+
+            override fun onComplete() {}
+        }
+
 }
+

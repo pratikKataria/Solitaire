@@ -34,5 +34,11 @@
             layout="@layout/_layout_close_lost"
             android:visibility="gone"
             tools:visibility="visible" />
+
+        <include
+            android:id="@+id/select_opportunity_layout"
+            layout="@layout/_layout_call_opty"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 </layout>

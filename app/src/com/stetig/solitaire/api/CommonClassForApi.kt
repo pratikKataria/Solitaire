@@ -157,6 +157,31 @@ class CommonClassForApi private constructor() {
             })
     }
 
+    fun CCRApprovalRequest(disposableObserver: DisposableObserver<CpCreationApprovalResponse>, sendCallStatus: SendCpCreaitonApprovalRequest, auth: String){
+        Utils.showProgressDialog(activity)
+        RestClient.getInstance().getService()!!.sendCCRApproval(sendCallStatus, auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<CpCreationApprovalResponse?> {
+                override fun onSubscribe(d: Disposable) {}
+                override fun onNext(callStatusResponse: CpCreationApprovalResponse) {
+                    disposableObserver.onNext(callStatusResponse)
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onError(e: Throwable) {
+                    disposableObserver.onError(e)
+                    Utils.setToast(activity, "Unable to send request please try again...")
+                    Utils.hideProgressDialog(activity)
+                }
+
+                override fun onComplete() {
+                    disposableObserver.onComplete()
+                    Utils.hideProgressDialog(activity)
+                }
+            })
+    }
+
 
     fun salesCallTaskRequest(disposableObserver: DisposableObserver<CreateTaskFromCallResponse>, sendCallStatus: CallTaskRequest, auth: String){
         Utils.showProgressDialog(activity)
@@ -364,7 +389,7 @@ class CommonClassForApi private constructor() {
                 })
     }
     fun getAllOpportunities(disposableObserver: DisposableObserver<AllOpportunityDto>, auth: String) {
-        Utils.showProgressDialog(activity)
+//        Utils.showProgressDialog(activity)
         RestClient.getInstance().service!!.getAllOpty(getUserIdOrEmpty(),auth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -372,17 +397,17 @@ class CommonClassForApi private constructor() {
                     override fun onSubscribe(d: Disposable) {}
                     override fun onNext(callStatusResponse: AllOpportunityDto) {
                         disposableObserver.onNext(callStatusResponse)
-                        Utils.hideProgressDialog(activity)
+//                        Utils.hideProgressDialog(activity)
                     }
 
                     override fun onError(e: Throwable) {
                         disposableObserver.onError(e)
-                        Utils.hideProgressDialog(activity)
+//                        Utils.hideProgressDialog(activity)
                     }
 
                     override fun onComplete() {
                         disposableObserver.onComplete()
-                        Utils.hideProgressDialog(activity)
+//                        Utils.hideProgressDialog(activity)
                     }
                 })
     }
@@ -430,6 +455,30 @@ class CommonClassForApi private constructor() {
                     }
                 })
     }
+
+    fun getPaymentPlan(disposableObserver: DisposableObserver<PaymentPlanResponse>, sendCallStatus: CallTaskRequest) {
+        val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+        val token = "Bearer " + account.authToken
+
+        RestClient.getInstance().service.getPaymentPlan(sendCallStatus, token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<PaymentPlanResponse?> {
+                    override fun onSubscribe(d: Disposable) {}
+                    override fun onNext(callStatusResponse: PaymentPlanResponse) {
+                        disposableObserver.onNext(callStatusResponse)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        disposableObserver.onError(e)
+                    }
+
+                    override fun onComplete() {
+                        disposableObserver.onComplete()
+                    }
+                })
+    }
+
     fun checkDeviceVersion(disposableObserver: DisposableObserver<AppVersionResponse>, auth: String?) {
         RestClient.getInstance().service.checkAppVersion(auth)
                 .subscribeOn(Schedulers.io())

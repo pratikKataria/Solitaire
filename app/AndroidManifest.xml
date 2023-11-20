@@ -103,6 +103,10 @@
 		<package android:name="com.whatsapp.w4b" />
 	</queries>
 
+	<queries>
+		<package android:name="com.microsoft.office.outlook" />
+	</queries>
+
 	<uses-permission android:name="com.edunomics.solitaire.C2D_MESSAGE" />
 </manifest>
 

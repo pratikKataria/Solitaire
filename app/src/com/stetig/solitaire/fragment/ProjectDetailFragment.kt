@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.stetig.callsync.base.BaseFragment
@@ -113,7 +114,7 @@ class ProjectDetailFragment : BaseFragment() {
             if (data is ProjectLink) data.records?.forEach {
                 it.latestPublishedVersion.attributes.url
                 log.e("PublicURL========", it.latestPublishedVersion.attributes.url)
-                val checkBox = buildCheckBox(it?.latestPublishedVersion?.type, it?.latestPublishedVersion?.url__c?:"")
+                val checkBox = buildCheckBox(it?.latestPublishedVersion?.type, it?.latestPublishedVersion?.url__c ?: "")
                 checkBoxList.add(checkBox)
                 binding.checkboxGroup.addView(checkBox)
             }
@@ -125,7 +126,8 @@ class ProjectDetailFragment : BaseFragment() {
 
     private fun shareViaWhatsApp() {
         if (Utils.isWhatsAppInstalled(getActivity(), "com.whatsapp")) {
-            val whatsAppQuery = if (number == null) "http://api.whatsapp.com/send?text=${getWhatsAppLinks()}" else "http://api.whatsapp.com/send?phone=+91$number &text= ${getLinks()}"
+            val whatsAppQuery =
+                if (number == null) "http://api.whatsapp.com/send?text=${getWhatsAppLinks()}" else "http://api.whatsapp.com/send?phone=+91$number &text= ${getLinks()}"
             val intent = Intent()
             intent.action = Intent.ACTION_VIEW
             if (checkIfEmpty()) return
@@ -133,17 +135,51 @@ class ProjectDetailFragment : BaseFragment() {
             startActivity(intent)
         }
     }
-//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000001Gp1E&d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM&asPdf=false
+
+    //    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000001Gp1E&d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM&asPdf=false
 //    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh%26ids=068C3000001Gp1E%26d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM%26asPdf=false
 //    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000003O2rn&d=%2Fa%2FC3000000So8L%2FdpxCdLr4vl952tLqLNWxr6bbB5y7bxbhDJyhYDIOI2g&asPdf=false
     private fun shareViaEmail() {
-        val intent = Intent()
-        val emailAdd = if (email == null) "mailto:" else "mailto:$email"
-        intent.action = Intent.ACTION_SENDTO
-        intent.data = Uri.parse(emailAdd)
-        if (checkIfEmpty()) return
-        intent.putExtra(Intent.EXTRA_TEXT, getLinks())
-        startActivity(Intent.createChooser(intent, "Send email to: "))
+
+        val outlookPackageName = "com.microsoft.office.outlook"
+        val playStoreUri = Uri.parse("market://details?id=$outlookPackageName")
+        val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
+
+//        // Verify if there is an app to handle the intent
+//        if (playStoreIntent.resolveActivity(activity.packageManager) != null) {
+//            // Outlook app is installed or can be installed from Play Store, open Play Store
+//            startActivity(playStoreIntent)
+//            return
+//        }
+
+        try {
+            val emailAdd = if (email == null) "" else "$email"
+            val outlookUri = Uri.parse("ms-outlook://emails/new?to=$emailAdd&body=${getLinks()}")
+            val outlookIntent = Intent(Intent.ACTION_VIEW, outlookUri)
+            startActivity(outlookIntent)
+        } catch (xe : Exception) {
+            Toast.makeText(activity, "Please Install Microsoft Outlook", Toast.LENGTH_LONG).show()
+        }
+
+// Verify if there is an app to handle the intent
+//        if (outlookIntent.resolveActivity(packageManager) != null) {
+//            // Outlook app is installed, open it
+//            startActivity(outlookIntent)
+//        } else {
+        // Outlook app is not installed, open Outlook website in a browser
+//        val outlookWebUri = Uri.parse("https://outlook.live.com/")
+//        val outlookWebIntent = Intent(Intent.ACTION_VIEW, outlookWebUri)
+//        startActivity(outlookWebIntent)
+////        }
+//
+//
+
+
+//        intent.action = Intent.ACTION_SENDTO
+//        intent.data = Uri.parse(emailAdd)
+//        if (checkIfEmpty()) return
+//        intent.putExtra(Intent.EXTRA_TEXT, getLinks())
+//        startActivity(Intent.createChooser(intent, "Send email to: "))
     }
 
     private fun getLinks(): String {

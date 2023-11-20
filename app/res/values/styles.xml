@@ -15,6 +15,17 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+    </style>
+
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/myriad_pro_regular</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/myriad_pro_regular</item>
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -163,5 +174,6 @@
     <style name="ChipStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="fontFamily">@font/myriad_pro_regular</item>
      </style>
 </resources>

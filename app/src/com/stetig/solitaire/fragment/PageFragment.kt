@@ -62,8 +62,7 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
     }
 
     fun getDataFromSF(orderBy: String) {
-        val commonClassForQuery =
-            CommonClassForQuery.getInstance(activity, activity?.getRestClient())!!
+        val commonClassForQuery = CommonClassForQuery.getInstance(activity, activity?.getRestClient())!!
         val query = if (param1 && param2.toString() == "Proposed site visit") {
             "${Query.PROPOSED_SITE_VISIT_LIST_TODAY} $orderBy"
         } else if (!param1 && param2.toString() == "Proposed site visit") {
@@ -72,9 +71,9 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
             "${Query.FOLLOW_UP_TODAY} $orderBy"
         } else if (!param1 && param2.toString() == "Follow up") {
             "${Query.FOLLOW_UP_LIST} $orderBy"
-        } else if (param1 && param2.toString() == "Aloted site visit") {
+        } else if (param1 && param2.toString() == "Allotted site visit") {
             "${Query.ALOTED_SITE_VISIT_LIST_TODAY} $orderBy"
-        } else if (!param1 && param2.toString() == "Aloted site visit") {
+        } else if (!param1 && param2.toString() == "Allotted site visit") {
             "${Query.ALOTED_SITE_VISIT_LIST} $orderBy"
         } else {
             "Something went wrong!"
@@ -108,8 +107,7 @@ class PageFragment : BaseFragment(), OnSortingItemSelectedListener {
                 )
             }
         }
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
     }
 

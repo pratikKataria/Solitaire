@@ -1,477 +1,657 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-127dp">
-<TableLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/_8sdp"
-    android:layout_marginVertical="@dimen/_5sdp"
-    android:stretchColumns="1">
-    <TextView
-        android:id="@+id/specific_Approval_sheet_type"
-        style="@style/HeadingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_20sdp"
-        android:layout_gravity="center"
-        android:text="Cost Sheet"
-        android:textAllCaps="true"
-        android:textSize="18sp" />
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Details"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="Current Value"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="Previous Value"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-    </TableRow>
 
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Base Rate"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/baserate_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/baserate_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity= "center_horizontal"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Total Amount for Unit"
-            android:padding="5dp"
-            android:layout_width="@dimen/_80sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/totalamount_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/totalamount_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Infrastructure Chareges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/infrastructure_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/infrastructure_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="MSEB and Development Charges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/msebDevelopment_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/msebDevelopment_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Premium Charges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/premium_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/premium_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Floor Charges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/floor_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/floor_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Amenities, PST*"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/amenities_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/amenities_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Legal Charges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/legalcharges_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/legalcharges_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Consideration Value"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/considerationvalue_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/considerationvalue_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Consideration Value (Differnce)"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/considerationvaluediff_current"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:text="6,10,416 /-" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Details"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="Current Value"
-            android:padding="5dp"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="Waived Off Amount"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Stamp Duty"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/stampduty_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/stampduty_previous"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Registration Charges"
-            android:padding="5dp"
-            android:layout_width="@dimen/_60sdp"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:background="#EAEAEA"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/registration_current"
-            android:text="-"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:orientation="vertical">
+            <TableLayout
+                android:id="@+id/tblCostSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:stretchColumns="1">
 
-        <TextView
-            android:id="@+id/registration_previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="-" />
-    </TableRow>
-    <TableRow
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
-        android:text="GST"
-        android:padding="5dp"
-        android:layout_width="@dimen/_60sdp"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:background="#EAEAEA"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/gst_current"
-        android:text="-"
-        android:padding="5dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/gst_previous"
-        android:text="-"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:layout_height="wrap_content" />
-</TableRow>
-    <EditText
-        android:id="@+id/comment_box"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_75sdp"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:layout_marginHorizontal="@dimen/_8sdp"
-        android:background="@drawable/box_inputfield"
-        android:textColorHint="#AFAFAF"
-        android:hint="  Comments*" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/specific_Approval_sheet_type"
+                    style="@style/HeadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    android:text="Cost Sheet"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/approveBtn"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:elevation="0dp"
-            android:fontFamily="@font/myriad_pro_regular"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Approve"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:cornerRadius="8dp"/>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EAEAEA">
 
-        <View
-            android:layout_width="16dp"
-            android:layout_height="5dp" />
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        android:text="Details"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/rejectBtn"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:elevation="0dp"
-            android:fontFamily="@font/myriad_pro_regular"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Reject"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:cornerRadius="8dp"/>
-    </LinearLayout>
-</TableLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Current Value"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Previous Value"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Base Rate"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/baserate_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/baserate_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Total Amount for Unit"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/totalamount_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/totalamount_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Infrastructure Chareges"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/infrastructure_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/infrastructure_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="MSEB and Development Charges"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/msebDevelopment_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/msebDevelopment_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Premium Charges"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/premium_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/premium_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Floor Charges"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/floor_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/floor_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Amenities, PST*"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/amenities_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/amenities_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Legal Charges"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/legalcharges_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/legalcharges_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Consideration Value"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/considerationvalue_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/considerationvalue_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Consideration Value (Differnce)"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/considerationvaluediff_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EAEAEA">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        android:text="Details"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+
+                        android:text="Current Value"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Waived Off Amount"
+                        android:textColor="#000000"
+                        android:textFontWeight="800" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Stamp Duty"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/stampduty_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/stampduty_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:padding="5dp"
+                        android:text="Registration Charges"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/registration_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/registration_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="wrap_content"
+                        android:background="#EAEAEA"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        android:text="GST"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/gst_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+
+                        android:padding="5dp"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/gst_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:padding="5dp"
+                        android:text="-" />
+                </TableRow>
+            </TableLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llPaymentPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/paymentPlanHeading"
+                    style="@style/HeadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    android:text="Payment Plan"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadeScrollbars="false">
+
+                    <TableLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/paymentPlanTableLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        android:stretchColumns="1">
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#EAEAEA"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Particulars"
+                                android:textColor="#000000"
+                                android:paddingHorizontal="20dp"
+                                android:background="@drawable/border_vertical"
+                                android:textFontWeight="800" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="Payment %"
+                                android:background="@drawable/border_vertical"
+                                android:paddingHorizontal="20dp"
+                                android:textColor="#000000"
+                                android:textFontWeight="800" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:background="@drawable/border_vertical"
+                                android:paddingHorizontal="20dp"
+                                android:text="Amount\n(INR)"
+                                android:textColor="#000000"
+                                android:textFontWeight="800" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="right"
+                                android:background="@drawable/border_vertical"
+                                android:paddingHorizontal="20dp"
+                                android:gravity="center"
+                                android:text="GST\n(INR)"
+                                android:textColor="#000000"
+                                android:textFontWeight="800" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="right"
+                                android:background="@drawable/border_vertical"
+                                android:gravity="center"
+                                android:paddingHorizontal="20dp"
+                                android:text="Total\n(INR)"
+                                android:textColor="#000000"
+                                android:textFontWeight="800" />
+                        </TableRow>
+
+                    </TableLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/comment_box"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_75sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@drawable/box_inputfield"
+                android:hint="  Comments*"
+                android:textColorHint="#AFAFAF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/approveBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_green_light"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Approve"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:cornerRadius="8dp" />
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/rejectBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Reject"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
     </ScrollView>
 </layout>

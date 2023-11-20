@@ -196,9 +196,10 @@
                             android:textSize="12sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginVertical="8dp"
                         android:orientation="horizontal">
 
@@ -208,14 +209,15 @@
                             android:layout_width="0dp"
                             android:layout_height="32dp"
                             android:layout_weight="1"
-                            android:backgroundTint="@color/white"
                             android:fontFamily="@font/myriad_pro_regular"
                             android:includeFontPadding="false"
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
+                            android:backgroundTint="#F6C941"
+                            android:textStyle="bold"
                             android:text="Opportunity Details"
                             android:textColor="#040404"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             app:cornerRadius="6dp"
                             app:elevation="0dp" />
                     </LinearLayout>
@@ -385,8 +387,36 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/myriad_pro_regular"
+                            android:text="Comments"
+                            android:textColor="#858585"
+                            android:textSize="@dimen/_10sdp" />
+
+                        <TextView
+                            android:id="@+id/site_visit_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/myriad_pro_regular"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/customer_facing_team_test_project"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
                         android:layout_height="match_parent"
-                        android:layout_marginHorizontal="12dp"
                         android:layout_marginVertical="12dp">
 
                         <com.google.android.material.button.MaterialButton
@@ -400,7 +430,6 @@
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
                             android:text="@string/feedback"
-                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             app:cornerRadius="8dp"/>
@@ -414,13 +443,15 @@
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_weight="1"
-                            android:backgroundTint="@color/white"
                             android:elevation="0dp"
                             android:fontFamily="@font/myriad_pro_regular"
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
-                            android:text="@string/viewdetails"
-                            android:textAllCaps="false"
+                            android:textSize="12sp"
+                            android:text="Opportunity Detail"
+                            android:textAllCaps="true"
+                            android:backgroundTint="#F6C941"
+                            android:textStyle="bold"
                             android:textColor="@color/black"
                             app:cornerRadius="8dp"/>
                     </LinearLayout>

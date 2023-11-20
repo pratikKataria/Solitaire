@@ -34,8 +34,7 @@ class ApprovalFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_approval, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_approval, container, false)
         initView(binding.root)
         return binding.root
     }
@@ -52,6 +51,14 @@ class ApprovalFragment : BaseFragment() {
         }
         binding.icApprovalMenuFour.setOnClickListener {
             moveToCpCreationDetials("CP CREATION APPROVAL")
+        }
+
+        binding.icApprovalMenuFour.setOnClickListener {
+            moveToCpCreationDetials("CP CREATION APPROVAL")
+        }
+
+        binding.menuFive.setOnClickListener {
+            moveToCCRFragment("CAMPAIGN CR Approval Request")
         }
     }
 
@@ -79,6 +86,12 @@ class ApprovalFragment : BaseFragment() {
         navigateTo(R.id.action_approvalFragment_to_cpcreationApprovalDetailFragment, bundle)
     }
 
+    private fun moveToCCRFragment(type: String) {
+        val bundle = Bundle()
+        bundle.putString(Keys.APP_TYPE, type)
+        navigateTo(R.id.action_approvalFragment_to_CCRApprovalRequestFragment, bundle)
+    }
+
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onResume() {
@@ -86,9 +99,11 @@ class ApprovalFragment : BaseFragment() {
         commonClassForQuery = CommonClassForQuery.getInstance(activity, activity.getRestClient())!!
 
         commonClassForQuery.getCampaign(Query.CAMPAIGN_APPROVAL_LIST, campaignapprovalListListener)
-        commonClassForQuery.getApprovalWithoutLoader(Query.APPROVAL_LIST + Utils.buildQueryParameter("Approval Pending"), approvalListListener)
+        commonClassForQuery.getApprovalWithoutLoader(Query.APPROVAL_LIST, approvalListListenerTwo)
         commonClassForQuery.getSourceChanegApprovalWithoutLoader(Query.SOURCE_CHANGE_APPROVAL_LIST, sourcechangeapprovalListListener)
         commonClassForQuery.getCpCreationApprovalWithoutLoader(Query.CP_CREATION_APPROVAL_LIST, cpcreationapprovalListListener)
+        commonClassForQuery.getCpCreationApprovalWithoutLoader(Query.CP_CREATION_APPROVAL_LIST, cpcreationapprovalListListener)
+        commonClassForQuery.getCpCreationApprovalWithoutLoader(Query.CCR_APPROVAL_LIST, cpcreationapprovalListListener2)
 
     }
 
@@ -110,6 +125,24 @@ class ApprovalFragment : BaseFragment() {
                 projectListRecords.clear()
                 projectListRecords.addAll(data.records)
                 binding.newBookingApprovalCount.text = projectListRecords.size.toString()
+            }
+        }
+
+        override fun onError(obj: String) {}
+    }
+
+    private val approvalListListenerTwo = object : CommonClassForQuery.OnDataReceiveListener {
+        override fun onDataReceive(data: Any) {
+            if (data is Approval) {
+
+                projectListRecords.clear()
+
+                var count = 0;
+                for (x in data.records)
+                    if (x?.costSheets1R != null || x?.paymentPlansR != null) count++
+
+                binding.newBookingApprovalCount.text = count.toString()
+
             }
         }
 
@@ -141,6 +174,18 @@ class ApprovalFragment : BaseFragment() {
 
     }
 
+    private val cpcreationapprovalListListener2 = object : CommonClassForQuery.OnDataReceiveListener {
+        override fun onDataReceive(data: Any) {
+            if (data is CpCreationApproval) {
+                binding.ccrApproval.text = data.records.size.toString()
+            }
+        }
+
+        override fun onError(obj: String) {}
+
+
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -148,3 +193,4 @@ class ApprovalFragment : BaseFragment() {
     }
 
 }
+

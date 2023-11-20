@@ -50,6 +50,7 @@ import com.stetig.solitaire.R
 import com.stetig.solitaire.api.CommonClassForApi
 import com.stetig.solitaire.api.CommonClassForQuery
 import com.stetig.solitaire.api.Keys
+import com.stetig.solitaire.api.Query
 import com.stetig.solitaire.base.BaseActivity
 import com.stetig.solitaire.callutilities.CallStateandRecordingService
 import com.stetig.solitaire.data.AppVersionResponse
@@ -58,7 +59,9 @@ import com.stetig.solitaire.data.CallTaskRequest
 import com.stetig.solitaire.data.CreateTaskFromCall
 import com.stetig.solitaire.data.CreateTaskFromCallResponse
 import com.stetig.solitaire.data.Event
+import com.stetig.solitaire.data.ManualTaskListResponse
 import com.stetig.solitaire.data.Opportunity
+import com.stetig.solitaire.data.OpportunityByMobileNumberResponse
 import com.stetig.solitaire.data.ServerNotification
 import com.stetig.solitaire.data.UpdateTokenReq
 import com.stetig.solitaire.data.UpdateTokenRes
@@ -88,10 +91,11 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     var getTimeInMillis: Long = 0
     private var action: String = "Face to Face"
+    private lateinit var commonClassForQuery: CommonClassForQuery
     private var commonClassForApi: CommonClassForApi? = null
     val navHostFragment: NavHostFragment get() = supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment
     private val mMobilNumber: String get() = GetInCommingNumber.getBulletProofNumber(this, intent)
-    var timerTask: TimerTask? = null;
+    var timerTask: TimerTask? = null
     val TAG = "MainActivity"
 
     var callDispositionRequest = CallDispositionRequest()
@@ -436,12 +440,62 @@ class MainActivity : BaseActivity() {
 
         popUpBinding.opportunityOrCp.opportunity.setOnClickListener {
             callDispositionRequest.recordType = "Opportunity"
-            popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
-            popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
+            callTaskRequest.recordType = "Opportunity"
+
+
+            commonClassForQuery = CommonClassForQuery.getInstance(this@MainActivity, this@MainActivity.getRestClient())!!
+            commonClassForQuery.mobileNumberOnOpportunity(
+                Query.OPPORTUNITY_ON_MOBILE_NUMBER + Utils.buildQueryParameter(CountryCodeRemover.numberFormatter(mMobilNumber)),
+                object : CommonClassForQuery.OnDataReceiveListener {
+                    override fun onDataReceive(data: Any) {
+                        if (data is OpportunityByMobileNumberResponse) {
+
+                            if (data.records.isEmpty()) {
+                                popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
+                                popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
+                                return
+                            }
+
+                            popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
+                            popUpBinding.selectOpportunityLayout.llSelectOpty.visibility = VISIBLE
+
+                            val listOfRecords = data.records.map { it?.name ?: "" }
+                            listOfRecords.forEach {
+                                val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(this@MainActivity, R.layout._layout_spinner_item, listOfRecords)
+                                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.adapter = aa
+                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.onItemSelectedListener =
+                                    object : AdapterView.OnItemSelectedListener {
+                                        override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                                            callTaskRequest.opportunityId = data.records[position]?.id
+                                        }
+
+                                        override fun onNothingSelected(parent: AdapterView<*>?) {}
+                                    }
+                            }
+
+                            popUpBinding.selectOpportunityLayout.next.setOnClickListener {
+                                popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
+                                popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
+                            }
+//                        projectList.clear()
+//                        projectList.addAll(data.records)
+//                        adapter.notifyDataSetChanged()
+//                        activity.checkListIsEmpty(data.records)
+                        }
+                    }
+
+                    override fun onError(obj: String) {
+
+                    }
+                })
         }
 
         popUpBinding.opportunityOrCp.cp.setOnClickListener {
-            callDispositionRequest.recordType = "Channel Partner"
+            callDispositionRequest.recordType = "CP"
+            callTaskRequest.recordType = "CP"
             popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
             popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
         }
@@ -487,7 +541,7 @@ class MainActivity : BaseActivity() {
                         val listOfDisposition = statusMap["Hot"]
                         val adapter = ArrayAdapter(
                             this@MainActivity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
@@ -509,7 +563,7 @@ class MainActivity : BaseActivity() {
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -531,7 +585,7 @@ class MainActivity : BaseActivity() {
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -553,7 +607,7 @@ class MainActivity : BaseActivity() {
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -575,7 +629,7 @@ class MainActivity : BaseActivity() {
 
                         val adapter = ArrayAdapter(
                             this@MainActivity,
-                            android.R.layout.simple_spinner_item,
+                            R.layout._layout_spinner_item,
                             listOfDisposition ?: arrayOf()
                         )
 
@@ -601,7 +655,6 @@ class MainActivity : BaseActivity() {
             val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
             val auth = "Bearer " + account.authToken
             callTaskRequest.mobileNumber = CountryCodeRemover.numberFormatter(mMobilNumber)
-            callTaskRequest.recordType = "Opportunity"
             callTaskRequest.communicationtype = if (tempcom == "OutCall") "Outbound Call" else "Inbound call"
 //            callTaskRequest.communicationtype =
 //            callTaskRequest.rating = "Hot"

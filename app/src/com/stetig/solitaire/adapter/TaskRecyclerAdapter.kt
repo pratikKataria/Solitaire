@@ -1,10 +1,16 @@
 package com.stetig.solitaire.adapter
 
+import android.R.attr.bottom
+import android.R.attr.left
+import android.R.attr.right
+import android.R.attr.top
 import android.content.Context
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginLeft
 import androidx.recyclerview.widget.RecyclerView
 import com.stetig.solitaire.R
 import com.stetig.solitaire.activity.MainActivity
@@ -12,6 +18,7 @@ import com.stetig.solitaire.api.Keys
 import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.CardViewTaskBinding
 import com.stetig.solitaire.utils.Utils
+
 
 /**
  * Created by Pratik Kataria on 27-11-2020.
@@ -30,30 +37,47 @@ abstract class TaskRecyclerAdapter(
         val projectDetailCardViewHolder = holder as ProjectDetailCardViewHolder
         val record = projectList[position]
 
-        val whatNameOrProjectRName = record?.what?.name ?: record.projectR?.name
+        val whatNameOrProjectRName = record?.what?.name ?: record.customerNameR?.name
 
         projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(whatNameOrProjectRName)
 //        projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
-        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = if (record?.nextActionDate == null)  Utils.getFormattedDateWithTimeSF(record?.activityDate) else Utils.getFormattedDateWithTimeSF(record?.nextActionDate)
+        projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text =
+            if (record?.nextActionDate == null) Utils.getFormattedDateWithTimeSF(record?.activityDate) else Utils.getFormattedDateWithTimeSF(record?.nextActionDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateWithTimeSF(record?.createdDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(record?.typeofEnquiry)
 
+        if (record?.attributes?.type == "Site_Visit__c") {
+            projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.visibility = View.VISIBLE
+        } else {
+            projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.visibility = View.GONE
 
+        }
 
+        var completed = record?.taskStatus?.equals("Completed") == true || record?.taskStatus?.equals("Complete") == true
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.text = if (record?.attributes?.type == "Site_Visit__c") "FEEDBACK" else "MARK AS COMPLETE"
+        if (completed)
+            projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.backgroundTintList = context?.getResources()?.getColorStateList(R.color.light_grey)
         projectDetailCardViewHolder.cardViewProjectsBinding.activityDateLayoutLl.visibility = if (record?.attributes?.type == "Site_Visit__c") View.GONE else View.VISIBLE
 
         projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.setOnClickListener {
+
             if (record?.attributes?.type == "Site_Visit__c") {
                 val bundle = Bundle()
                 bundle.putString(Keys.TYPE_ENQUIRY, record?.typeofEnquiry)
                 bundle.putString(Keys.SITE_VISIT_ID, record?.id)
                 projectList[position].id?.let { it1 -> updateFeedbackForm(it1, bundle) }
-            } else {
+            } else if (!completed) {
                 projectList[position].id?.let { completeTask(it) }
 
             }
+        }
+
+        if (record?.attributes?.type != "Site_Visit__c") {
+            val params  =  projectDetailCardViewHolder.cardViewProjectsBinding.llOptyComplete.layoutParams
+            projectDetailCardViewHolder.cardViewProjectsBinding.llOptyComplete.gravity = Gravity.CENTER
+            params.width = 510
+
         }
 
         projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {

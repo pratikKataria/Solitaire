@@ -27,6 +27,10 @@ import com.google.gson.annotations.SerializedName
         val mobileNo2C: String?,
         @SerializedName("Project__r")
         val projectR: ProjectR?,
+        @SerializedName("Customer_Name__r")
+        val customerNameR: CustomerR?,
+        @SerializedName("Status")
+        val taskStatus: String?,
         @SerializedName("Site_Visit_Stage__c")
         val siteVisitStageC: String?,
         @SerializedName("What")
@@ -42,6 +46,20 @@ import com.google.gson.annotations.SerializedName
         )
 
         data class ProjectR(
+            @SerializedName("attributes")
+            val attributes: Attributes?,
+            @SerializedName("Name")
+            val name: String?
+        ) {
+            data class Attributes(
+                @SerializedName("type")
+                val type: String?,
+                @SerializedName("url")
+                val url: String?
+            )
+        }
+
+        data class CustomerR(
             @SerializedName("attributes")
             val attributes: Attributes?,
             @SerializedName("Name")

@@ -28,5 +28,5 @@
         android:id="@+id/menuFragment"
         android:icon="@drawable/ic_menu"
         android:checked="false"
-        android:title="Menu" />
+        android:title="Approvals" />
 </menu>

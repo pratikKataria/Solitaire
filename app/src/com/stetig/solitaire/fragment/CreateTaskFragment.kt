@@ -15,7 +15,10 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +35,7 @@ import com.stetig.solitaire.data.AllOpportunityDto
 import com.stetig.solitaire.data.CreateTask
 import com.stetig.solitaire.data.CreateTaskResponse
 import com.stetig.solitaire.data.ManualTaskListResponse
+import com.stetig.solitaire.data.Opportunity
 import com.stetig.solitaire.databinding.FragmentCreateTaskBinding
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
@@ -103,7 +107,7 @@ class CreateTaskFragment : BaseFragment() {
             val listOfTaskTypes = arrayOf("Follow Up", "Visit Proposed")
             val taskTypeAutoCompleteView = dialogView.findViewById(R.id.task_dropdown) as AutoCompleteTextView
             val taskTypeAutoCompleteAdapter = ArrayAdapter(
-                activity, android.R.layout.simple_spinner_item, listOfTaskTypes
+                activity, R.layout._layout_spinner_item, listOfTaskTypes
             )
             taskTypeAutoCompleteView.threshold = 3
             taskTypeAutoCompleteView.setAdapter(taskTypeAutoCompleteAdapter)
@@ -123,13 +127,12 @@ class CreateTaskFragment : BaseFragment() {
                 showDatePickerDialog(datePickerEditText)
             }
 
-            val adapter = ArrayAdapter(
-                activity,
-                android.R.layout.simple_spinner_item,
-                listOfOpportunities.map { it.oPPname })
+
+//            val adapter = ArrayAdapter(activity, R.layout._layout_spinner, listOfOpportunities.map { it.oPPname })
+            val customAdapter = CustomAdapter(activity, R.layout._layout_spinner, listOfOpportunities)
             val autoCompleteTextView = dialogView.findViewById(com.stetig.solitaire.R.id.autoCompleteTextView) as AutoCompleteTextView
             autoCompleteTextView.threshold = 3
-            autoCompleteTextView.setAdapter(adapter)
+            autoCompleteTextView.setAdapter(customAdapter)
             autoCompleteTextView.onItemClickListener =
                 AdapterView.OnItemClickListener { parent, view_, position, _ ->
                     val item = listOfOpportunities.get(position)
@@ -310,4 +313,30 @@ class CreateTaskFragment : BaseFragment() {
         }
         return formattedTime
     }
+
+    class CustomAdapter(context: Context, private val resource: Int, private val items: List<AllOpportunityDto.AllOpportunityDtoItem>) :
+        ArrayAdapter<AllOpportunityDto.AllOpportunityDtoItem>(context, resource, items) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
+            val item = items[position]
+            val textView = view.findViewById<TextView>(R.id.autoCompleteItem)
+            val projectName = view.findViewById<TextView>(R.id.projectName)
+            textView.text = item.oPPname
+            projectName.text = item.projectName
+
+            val itemContainer = view.findViewById<LinearLayout>(R.id.ll_spinner)
+            if (position % 2 == 0) {
+                // Set alternate background color for even-positioned items
+                itemContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.list_even_color))
+            } else {
+                // Set alternate background color for odd-positioned items
+                itemContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
+
+            return view
+        }
+    }
+
 }
+

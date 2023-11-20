@@ -26,5 +26,7 @@ public interface Endpoints {
         const val GET_ALL_OPTY          =  "opportunities/{id}"
         const val UPDATE_SM_ACTIVITY          =  "updateUserActivity"
         const val FEEDBACK_FROM          =  "FeedbackStatus"
+        const val CCR_APPROVAL          =  "CCR"
+        const val PAYMENT_PLAN_APPROVAL_REQUEST          =  "PaymentPlanApprovalRequest"
     }
 }

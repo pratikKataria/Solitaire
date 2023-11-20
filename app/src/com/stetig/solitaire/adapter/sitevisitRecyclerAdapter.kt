@@ -31,8 +31,8 @@ class sitevisitRecyclerAdapter(
         val projectDetailCardViewHolder = holder as ProjectDetailCardViewHolder
         val data = projectList[position]
 
-        println("data.attributes?.type.toString().lowercase() == \"task\" ${data.attributes?.type.toString().lowercase() == "task"}")
-        println("data.attributes?.type.toString().lowercase() == \"task\" ${data.attributes?.type.toString().lowercase() }")
+//        println("data.attributes?.type.toString().lowercase() == \"task\" ${data.attributes?.type.toString().lowercase() == "task"}")
+//        println("data.attributes?.type.toString().lowercase() == \"task\" ${data.attributes?.type.toString().lowercase() }")
         if (data.attributes?.type.toString().lowercase() == "task") {
             projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitAllotted.visibility = View.VISIBLE
             projectDetailCardViewHolder.cardViewProjectsBinding.sitevisitHeaderParentLayout.visibility = View.GONE
@@ -41,10 +41,11 @@ class sitevisitRecyclerAdapter(
 
 
             projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(whatNameOrProjectRName)
-//        projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
+            // projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
             projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text = if (data?.nextActionDate == null)  Utils.getFormattedDateWithTimeSF(data?.activityDate) else Utils.getFormattedDateWithTimeSF(data?.nextActionDate)
             projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateWithTimeSF(data?.createdDate)
             projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(data?.typeofenquiry)
+            projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitComment.text = Utils.checkValueOrGiveEmpty(data.description)
 
             projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {
 
@@ -66,9 +67,9 @@ class sitevisitRecyclerAdapter(
             projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitType.text = Utils.checkValueOrGiveEmpty(data.typeofvisit)
             projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitEnquiryType.text = Utils.checkValueOrGiveEmpty(data.typeofenquiry)
             projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitSourcingManager.text = Utils.checkValueOrGiveEmpty(data.oppsourcingmanager)
+            projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitComment.text = Utils.checkValueOrGiveEmpty(data.comment)
 
-            if (data.sitevisitstage == "Site visit Initiated")
-                projectDetailCardViewHolder.cardViewProjectsBinding.feedbackBtn.visibility = View.VISIBLE
+            if (data.sitevisitstage == "Site visit Initiated") projectDetailCardViewHolder.cardViewProjectsBinding.feedbackBtn.visibility = View.VISIBLE
 
             projectDetailCardViewHolder.cardViewProjectsBinding.feedbackBtn.setOnClickListener {
                 val bundle = Bundle()

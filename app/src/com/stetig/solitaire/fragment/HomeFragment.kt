@@ -45,11 +45,11 @@ class HomeFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
         binding.llTodaySv.setOnClickListener { moveToTask(0, true, "Proposed Site Visit") }
         binding.llTodayFu.setOnClickListener { moveToTask(1, true, "Follow Up") }
-        binding.llTodayF2f.setOnClickListener { moveToTask(2, true, "Aloted Site Visit") }
+        binding.llTodayF2f.setOnClickListener { moveToTask(2, true, "Allotted Site Visit") }
 
         binding.llAllSv.setOnClickListener { moveToTask(0, false, "Proposed Site Visit") }
         binding.llAllFu.setOnClickListener { moveToTask(1, false, "Follow Up") }
-        binding.llAllF2f.setOnClickListener { moveToTask(2, false, "Aloted Site Visit") }
+        binding.llAllF2f.setOnClickListener { moveToTask(2, false, "Allotted Site Visit") }
 
 //        binding.llQualification.setOnClickListener { moveToOpportunity(Query.QUALIFICATION) }
         binding.llNeedAnalysis.setOnClickListener { moveToOpportunity(Query.NEED_ANALYSIS) }

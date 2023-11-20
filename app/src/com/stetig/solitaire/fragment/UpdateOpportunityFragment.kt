@@ -78,12 +78,12 @@ class UpdateOpportunityFragment : BaseFragment(), OnItemSelectedListener {
         binding.name.text = oppName
         binding.projectName.text = projectName
 
-        val aa2: ArrayAdapter<*> = ArrayAdapter<Any?>(activity, android.R.layout.simple_spinner_item, stageList)
+        val aa2: ArrayAdapter<*> = ArrayAdapter<Any?>(activity, R.layout._layout_spinner_item, stageList)
         aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerStage.onItemSelectedListener = this
         binding.spinnerStage.adapter = aa2
 
-        val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(activity, android.R.layout.simple_spinner_item, closedLostReasons)
+        val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(activity, R.layout._layout_spinner_item, closedLostReasons)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCloseLost.onItemSelectedListener = this
         binding.spinnerCloseLost.adapter = aa

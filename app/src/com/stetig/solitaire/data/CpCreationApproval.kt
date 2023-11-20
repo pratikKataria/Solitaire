@@ -16,6 +16,21 @@ class CpCreationApproval(
         val ntsId: String?,
         @SerializedName("Name")
         val name: String?,
+        @SerializedName("Status")
+        val status: String?,
+
+        @SerializedName("Status__c")
+        val statusCCR: String?,
+
+        @SerializedName("Updated_Budgeted_Cost_in_Campaign__c")
+        val Updated_Budgeted_Cost_in_Campaign__c: String?,
+
+        @SerializedName("Updated_Campaign_Start_Date__c")
+        val Updated_Campaign_Start_Date__c: String?,
+
+        @SerializedName("Updated_Campaign_End_Date__c")
+        val Updated_Campaign_End_Date__c: String?,
+
         @SerializedName("CP_Sub_Type__c")
         val cpSubType: String?,
         @SerializedName("CP_Type__c")

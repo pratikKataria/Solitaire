@@ -19,6 +19,10 @@ interface ApiStructure {
     fun sendcpcreationApprovalRequest(@Body listBody: SendCpCreaitonApprovalRequest, @Header("Authorization") authToken: String?): Observable<CpCreationApprovalResponse?>
 
     @Headers("Content-Type: application/json")
+    @POST(Endpoints.CCR_APPROVAL)
+    fun sendCCRApproval(@Body listBody: SendCpCreaitonApprovalRequest, @Header("Authorization") authToken: String?): Observable<CpCreationApprovalResponse?>
+
+    @Headers("Content-Type: application/json")
     @POST(Endpoints.SOURCECHANGE_APPROVAL)
     fun sendSourceChangeApprovalRequest(@Body listBody: SendSourceChangeApprovalRequest, @Header("Authorization") authToken: String?): Observable<SendSourceChangeApprovalResponse?>
     @Headers("Content-Type: application/json")
@@ -76,8 +80,13 @@ interface ApiStructure {
     @Headers("Content-Type: application/json")
     @POST(Endpoints.UPDATE_SM_ACTIVITY)
     fun updateSMActivity(@Body smStatusRequest: SMStatusRequest, @Header("Authorization") authToken: String?): Observable<SMStatusResponse?>
+
     @Headers("Content-Type: application/json")
     @POST(Endpoints.FEEDBACK_FROM)
     fun updateFeedbackFromStatus(@Body smStatusRequest: FeedbackFromStatusUpdateRequest, @Header("Authorization") authToken: String?): Observable<SalesCallTaskResponse?>
+
+    @Headers("Content-Type: application/json")
+    @POST(Endpoints.PAYMENT_PLAN_APPROVAL_REQUEST)
+    fun getPaymentPlan(@Body request: CallTaskRequest, @Header("Authorization") authToken: String?): Observable<PaymentPlanResponse?>
 
 }

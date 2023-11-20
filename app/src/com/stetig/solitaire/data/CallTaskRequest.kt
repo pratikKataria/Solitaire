@@ -20,5 +20,7 @@ data class CallTaskRequest(
     @SerializedName("Rating")
     var rating: String? = null,
     @SerializedName("Record_Type")
-    var recordType: String? = null
+    var recordType: String? = null,
+    @SerializedName("OppId")
+    var opportunityId: String? = null
 )

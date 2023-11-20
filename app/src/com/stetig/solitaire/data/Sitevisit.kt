@@ -42,7 +42,11 @@ data class Sitevisit(
         @SerializedName("CreatedDate")
         val createdDate: String,
         @SerializedName("Site_Visit_Stage__c")
-        val sitevisitstage: String
+        val sitevisitstage: String,
+        @SerializedName("Description")
+        val description: String,
+        @SerializedName("SM_feedback_on_customer_Remarks__c")
+        val comment: String
     ) {
         data class Attributes(
             @SerializedName("type")

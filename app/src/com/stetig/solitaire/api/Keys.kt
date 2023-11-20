@@ -23,6 +23,8 @@ interface Keys {
         const val APP_TYPE = "app_type"
         const val SITE_TYPE = "site_type"
         const val OPP_ID = "opp_id"
+        const val PP_ID = "pp_id"
+        const val CS_ID = "cs_id"
         const val PROJECT = "project"
         const val CITIES = "city"
 
