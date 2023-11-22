@@ -65,31 +65,35 @@ class ApprovalFragment : BaseFragment() {
     private fun moveToFragmentDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
-        navigateTo(R.id.action_approvalFragment_to_approvalDetailFragment, bundle)
+        navigateTo(R.id.action_menuFragment_to_approvalDetailFragment, bundle)
     }
 
     private fun moveToCampaignDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
-        navigateTo(R.id.action_approvalFragment_to_campaignApprovalDetailFragment, bundle)
+//        navigateTo(R.id.action_approvalFragment_to_campaignApprovalDetailFragment, bundle)
+        navigateTo(R.id.action_menuFragment_to_campaignApprovalDetailFragment, bundle)
     }
 
     private fun moveToSourceChangeDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
-        navigateTo(R.id.action_approvalFragment_to_sourceChangeApprovalDetailFragment, bundle)
+//        navigateTo(R.id.action_approvalFragment_to_sourceChangeApprovalDetailFragment, bundle)
+        navigateTo(R.id.action_menuFragment_to_sourceChangeApprovalDetailFragment, bundle)
     }
 
     private fun moveToCpCreationDetials(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
-        navigateTo(R.id.action_approvalFragment_to_cpcreationApprovalDetailFragment, bundle)
+//        navigateTo(R.id.action_approvalFragment_to_cpcreationApprovalDetailFragment, bundle)
+        navigateTo(R.id.action_menuFragment_to_cpcreationApprovalFragment, bundle)
     }
 
     private fun moveToCCRFragment(type: String) {
         val bundle = Bundle()
         bundle.putString(Keys.APP_TYPE, type)
-        navigateTo(R.id.action_approvalFragment_to_CCRApprovalRequestFragment, bundle)
+//        navigateTo(R.id.action_approvalFragment_to_CCRApprovalRequestFragment, bundle)
+        navigateTo(R.id.action_menuFragment_to_CCRApprovalRequestFragment, bundle)
     }
 
 

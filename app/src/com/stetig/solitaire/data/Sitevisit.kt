@@ -45,6 +45,8 @@ data class Sitevisit(
         val sitevisitstage: String,
         @SerializedName("Description")
         val description: String,
+        @SerializedName("Subject")
+        val subject: String,
         @SerializedName("SM_feedback_on_customer_Remarks__c")
         val comment: String
     ) {

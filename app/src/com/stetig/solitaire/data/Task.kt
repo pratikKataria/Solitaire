@@ -17,8 +17,12 @@ import com.google.gson.annotations.SerializedName
         val createdDate: String?,
         @SerializedName("Customer_Name__c")
         val customerNameC: String?,
+        @SerializedName("Subject")
+        val Subject: String?,
+        @SerializedName("Description")
+        val Description: String?,
         @SerializedName("Call_Proposed_Date_Of_Visit__c")
-        val activityDate: String?,
+        val Call_Proposed_Date_Of_Visit__c: String?,
         @SerializedName("Next_Action_Date__c")
         val nextActionDate: String?,
         @SerializedName("Id")

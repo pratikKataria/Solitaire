@@ -98,9 +98,7 @@ class SitevisitFragment : BaseFragment() {
             }
         }
 
-        override fun onError(obj: String) {
-
-        }
+        override fun onError(obj: String) {   }
 
 
     }

@@ -42,15 +42,24 @@ abstract class TaskRecyclerAdapter(
         projectDetailCardViewHolder.cardViewProjectsBinding.name.text = Utils.checkValueOrGiveEmpty(whatNameOrProjectRName)
 //        projectDetailCardViewHolder.cardViewProjectsBinding.projectName.text = Utils.getFormattedDateSF(projectList[position].)
         projectDetailCardViewHolder.cardViewProjectsBinding.activityDate.text =
-            if (record?.nextActionDate == null) Utils.getFormattedDateWithTimeSF(record?.activityDate) else Utils.getFormattedDateWithTimeSF(record?.nextActionDate)
+            if (record?.nextActionDate == null) Utils.getFormattedDateWithTimeSF(record?.Call_Proposed_Date_Of_Visit__c) else Utils.getFormattedDateWithTimeSF(record?.nextActionDate)
         projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateWithTimeSF(record?.createdDate)
-        projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(record?.typeofEnquiry)
+        projectDetailCardViewHolder.cardViewProjectsBinding.tvSubject.text = Utils.checkValueOrGiveEmpty(record?.Subject)
+        projectDetailCardViewHolder.cardViewProjectsBinding.tvComments.text = Utils.checkValueOrGiveEmpty(record?.Description)
+
+        if (record.Call_Proposed_Date_Of_Visit__c != null) {
+            projectDetailCardViewHolder.cardViewProjectsBinding.tvNextActionDate.text = "Date of Visit: "
+        }
+
+        if (record?.attributes?.type == "Site_Visit__c") {
+            projectDetailCardViewHolder.cardViewProjectsBinding.llSubject.visibility = View.GONE
+            projectDetailCardViewHolder.cardViewProjectsBinding.llComments.visibility = View.GONE
+        }
 
         if (record?.attributes?.type == "Site_Visit__c") {
             projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.visibility = View.VISIBLE
         } else {
             projectDetailCardViewHolder.cardViewProjectsBinding.markAsComplete.visibility = View.GONE
-
         }
 
         var completed = record?.taskStatus?.equals("Completed") == true || record?.taskStatus?.equals("Complete") == true

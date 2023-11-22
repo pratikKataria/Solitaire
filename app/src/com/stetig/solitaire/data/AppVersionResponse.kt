@@ -1,9 +1,17 @@
 package com.stetig.solitaire.data
+import com.google.gson.annotations.SerializedName
+
 data class AppVersionResponse(
-    val androidVersion: String,
-    val androidVersionCode: Int,
-    val iosVersion: String,
-    val iosVersionCode: Int,
-    val message: String,
-    val returnCode: Boolean
+    @SerializedName("androidVersion")
+    val androidVersion: Any?,
+    @SerializedName("androidVersionCode")
+    val androidVersionCode: Int?,
+    @SerializedName("iosVersion")
+    val iosVersion: String?,
+    @SerializedName("iosVersionCode")
+    val iosVersionCode: Int?,
+    @SerializedName("message")
+    val message: String?,
+    @SerializedName("returnCode")
+    val returnCode: Boolean?
 )

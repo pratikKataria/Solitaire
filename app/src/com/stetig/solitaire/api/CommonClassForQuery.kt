@@ -124,7 +124,8 @@ class CommonClassForQuery private constructor() {
                 override fun onSuccess(request: RestRequest, response: RestResponse) {
                     Utils.hideProgressDialog(activity)
                     try {
-                        val projects: OpportunityByMobileNumberResponse? = Gson().fromJson<OpportunityByMobileNumberResponse>(response.asString(), OpportunityByMobileNumberResponse::class.java)
+                        val projects: OpportunityByMobileNumberResponse? =
+                            Gson().fromJson<OpportunityByMobileNumberResponse>(response.asString(), OpportunityByMobileNumberResponse::class.java)
                         sendDataToUIThread(onDataReceiveListener, projects)
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()
@@ -202,46 +203,48 @@ class CommonClassForQuery private constructor() {
                     try {
                         Log.d(javaClass.name, "exampleQuery: 44 convertion $query")
                         val taskCount: TaskCount = Gson().fromJson(response.asString(), TaskCount::class.java)
+                        taskCount.type = type!!
+                        sendDataToUIThread(onDataReceiveListener, taskCount)
                         when (type) {
-                            Query.SITE_VISIT -> {
-                                taskCount.type = Query.SITE_VISIT
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.FOLLOW_UP -> {
-                                taskCount.type = Query.FOLLOW_UP
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.FACE_TO_FACE -> {
-                                taskCount.type = Query.FACE_TO_FACE
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.NEGOTIATION -> {
-                                taskCount.type = Query.NEGOTIATION
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.NEED_ANALYSIS -> {
-                                taskCount.type = Query.NEED_ANALYSIS
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.PROPOSAL -> {
-                                taskCount.type = Query.PROPOSAL
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.BIP -> {
-                                taskCount.type = Query.BIP
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
-
-                            Query.QUALIFICATION -> {
-                                taskCount.type = Query.QUALIFICATION
-                                sendDataToUIThread(onDataReceiveListener, taskCount)
-                            }
+//                            Query.SITE_VISIT -> {
+//                                taskCount.type = Query.SITE_VISIT
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.FOLLOW_UP -> {
+//                                taskCount.type = Query.FOLLOW_UP
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.FACE_TO_FACE -> {
+//                                taskCount.type = Query.FACE_TO_FACE
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.NEGOTIATION -> {
+//                                taskCount.type = Query.NEGOTIATION
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.NEED_ANALYSIS -> {
+//                                taskCount.type = Query.NEED_ANALYSIS
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.PROPOSAL -> {
+//                                taskCount.type = Query.PROPOSAL
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.BIP -> {
+//                                taskCount.type = Query.BIP
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
+//
+//                            Query.QUALIFICATION -> {
+//                                taskCount.type = Query.QUALIFICATION
+//                                sendDataToUIThread(onDataReceiveListener, taskCount)
+//                            }
                         }
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()
@@ -373,6 +376,30 @@ class CommonClassForQuery private constructor() {
 
                 override fun onError(exception: Exception) {
                     Utils.hideProgressDialog(activity)
+                    onDataReceiveListener.onError(exception.message!!)
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getOpportunityWithoutLoader(query: String?, type: String, onDataReceiveListener: OnDataReceiveListener) {
+
+        try {
+            val restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(activity), query)
+            restClient!!.sendAsync(restRequest, object : AsyncRequestCallback {
+                override fun onSuccess(request: RestRequest, response: RestResponse) {
+                    try {
+                        val projects: Opportunity = Gson().fromJson(response.asString(), Opportunity::class.java)
+                        projects.type = type
+                        sendDataToUIThread(onDataReceiveListener, projects)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onError(exception: Exception) {
                     onDataReceiveListener.onError(exception.message!!)
                 }
             })

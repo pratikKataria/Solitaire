@@ -3,6 +3,7 @@ package com.stetig.solitaire.fragment
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -353,6 +354,7 @@ class FeedBackFragment : BaseFragment() {
 
                 // A chip has been selected
                 val selectedChip = group.findViewById<Chip>(checkedId)
+                binding.autodisposition.setText("Select Disposition")
 
                 // Change background color of selected chip
 //                selectedChip.setChipBackgroundColorResource(com.stetig.solitaire.R.color.selected_chip_background_color)

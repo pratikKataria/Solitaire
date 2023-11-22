@@ -35,7 +35,7 @@ import com.stetig.solitaire.data.AllOpportunityDto
 import com.stetig.solitaire.data.CreateTask
 import com.stetig.solitaire.data.CreateTaskResponse
 import com.stetig.solitaire.data.ManualTaskListResponse
-import com.stetig.solitaire.data.Opportunity
+import com.stetig.solitaire.data.OpportunityByMobileNumberResponse
 import com.stetig.solitaire.databinding.FragmentCreateTaskBinding
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
@@ -199,7 +199,7 @@ class CreateTaskFragment : BaseFragment() {
                 val displayTime = "${dayOfMonth.toString().padStart(2, '0')}-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "$selectedYear"
 
                 // Get the current date in the "yyyy-MM-dd" format
-                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH)
                 val currentDateFormatted = sdf.format(currentDate.time)
 
                 // Check if the selected date is not a past date

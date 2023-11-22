@@ -45,5 +45,11 @@ data class OpportunityByMobileNumberResponse(
                 val url: String?
             )
         }
+
+
+        override fun toString(): String {
+            return if (name == null) "" else "$name - ${projectR?.name}"
+        }
+
     }
 }

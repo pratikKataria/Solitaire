@@ -22,7 +22,7 @@ public interface Endpoints {
         const val NOTIFICATION_LIST     =  "NotificationList/"
         const val REGISTER_TOKEN        =  "Call_Sync_App/deviceToken/*"
         const val MARK_AS_READ          =  "MarkRead/"
-        const val APP_VERSION           =  "AppVersion/"
+        const val APP_VERSION           =  "appversion"
         const val GET_ALL_OPTY          =  "opportunities/{id}"
         const val UPDATE_SM_ACTIVITY          =  "updateUserActivity"
         const val FEEDBACK_FROM          =  "FeedbackStatus"

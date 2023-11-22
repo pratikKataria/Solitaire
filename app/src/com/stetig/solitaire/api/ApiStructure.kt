@@ -70,7 +70,7 @@ interface ApiStructure {
     fun updateFirebaseToken(@Body body: UpdateTokenReq?, @Header("Authorization") authToken: String?): Observable<UpdateTokenRes?>
 
     @Headers("Content-Type: application/json")
-    @POST(Endpoints.APP_VERSION)
+    @GET(Endpoints.APP_VERSION)
     fun checkAppVersion(@Header("Authorization") authToken: String?): Observable<AppVersionResponse?>
 
     @Headers("Content-Type: application/json")
@@ -88,5 +88,6 @@ interface ApiStructure {
     @Headers("Content-Type: application/json")
     @POST(Endpoints.PAYMENT_PLAN_APPROVAL_REQUEST)
     fun getPaymentPlan(@Body request: CallTaskRequest, @Header("Authorization") authToken: String?): Observable<PaymentPlanResponse?>
+
 
 }

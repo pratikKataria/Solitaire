@@ -26,6 +26,7 @@ import com.stetig.solitaire.utils.Utils
 import com.google.android.material.transition.MaterialSharedAxis
 import com.stetig.solitaire.data.ProjectLink
 import org.acra.ACRA.log
+import java.net.URLEncoder
 
 
 class ProjectDetailFragment : BaseFragment() {
@@ -151,13 +152,14 @@ class ProjectDetailFragment : BaseFragment() {
 //            startActivity(playStoreIntent)
 //            return
 //        }
+        val emailBody = buildEmailBody(getMailLinks())
 
         try {
             val emailAdd = if (email == null) "" else "$email"
-            val outlookUri = Uri.parse("ms-outlook://emails/new?to=$emailAdd&body=${getLinks()}")
+            val outlookUri = Uri.parse("ms-outlook://emails/new?to=$emailAdd&body=$emailBody")
             val outlookIntent = Intent(Intent.ACTION_VIEW, outlookUri)
             startActivity(outlookIntent)
-        } catch (xe : Exception) {
+        } catch (xe: Exception) {
             Toast.makeText(activity, "Please Install Microsoft Outlook", Toast.LENGTH_LONG).show()
         }
 
@@ -192,6 +194,16 @@ class ProjectDetailFragment : BaseFragment() {
         return s.toString()
     }
 
+    private fun getMailLinks(): List<String> {
+        val listOfLinks = arrayListOf<String>()
+        for (checkBox in checkBoxList) {
+            if (checkBox.isChecked && checkBox.tag.toString().isNotEmpty()) {
+                listOfLinks.add(checkBox.tag.toString())
+            }
+        }
+        return listOfLinks
+    }
+
     private fun getWhatsAppLinks(): String {
         val s = StringBuilder()
         for (checkBox in checkBoxList) {
@@ -212,6 +224,22 @@ class ProjectDetailFragment : BaseFragment() {
             return true
         }
         return empty
+    }
+
+    private fun buildEmailBody(links: List<String>): String {
+        val emailTemplate = StringBuilder()
+        emailTemplate.append("Hi,<br><br>")
+        emailTemplate.append("To download the brochure, simply click on the links below:<br><br>")
+
+        // Build HTML for each link
+        for ((index, link) in links.withIndex()) {
+            val encodedLink = URLEncoder.encode(link, "UTF-8")
+
+            emailTemplate.append("<br>${index+1}. Click the link to Download : <a href=\"$encodedLink\">Boucher Link</a>")
+            emailTemplate.append("<br>")
+        }
+
+        return emailTemplate.toString()
     }
 
 }

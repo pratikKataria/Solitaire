@@ -65,7 +65,6 @@ class ApprovalDetailFragment : BaseFragment() {
                 }
                 else -> {
                     Query.OPPORTUNITY_LIST + Utils.buildQueryParameter(type)
-
                 }
             }
             Log.e("", "onResume: ${Query.APPROVAL_LIST}")
@@ -82,10 +81,11 @@ class ApprovalDetailFragment : BaseFragment() {
                 data.records?.forEach {
                     if (it?.costSheets1R != null || it?.paymentPlansR != null) {
                         projectList.add(it)
-                        adapter.notifyDataSetChanged()
                         activity.checkListIsEmpty(projectList)
                     }
                 }
+                activity.checkListIsEmpty(projectList)
+                adapter.notifyDataSetChanged()
 
             }
         }

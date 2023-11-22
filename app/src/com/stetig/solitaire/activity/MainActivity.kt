@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -17,9 +18,11 @@ import android.preference.PreferenceManager
 import android.provider.Settings
 import android.util.Log
 import android.view.KeyEvent.KEYCODE_BACK
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -28,23 +31,23 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.google.android.gms.common.util.PlatformVersion
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-import com.gun0912.tedpermission.PermissionListener
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.stetig.solitaire.R
 import com.stetig.solitaire.api.CommonClassForApi
@@ -59,7 +62,6 @@ import com.stetig.solitaire.data.CallTaskRequest
 import com.stetig.solitaire.data.CreateTaskFromCall
 import com.stetig.solitaire.data.CreateTaskFromCallResponse
 import com.stetig.solitaire.data.Event
-import com.stetig.solitaire.data.ManualTaskListResponse
 import com.stetig.solitaire.data.Opportunity
 import com.stetig.solitaire.data.OpportunityByMobileNumberResponse
 import com.stetig.solitaire.data.ServerNotification
@@ -68,6 +70,7 @@ import com.stetig.solitaire.data.UpdateTokenRes
 import com.stetig.solitaire.databinding.ActivityMainBinding
 import com.stetig.solitaire.databinding.LayoutAlertDialogCallPopUpBinding
 import com.stetig.solitaire.databinding.LayoutAlertDialogUpdateVersionBinding
+import com.stetig.solitaire.fragment.CreateTaskFragment
 import com.stetig.solitaire.utils.Alarm
 import com.stetig.solitaire.utils.CallDuration
 import com.stetig.solitaire.utils.CountryCodeRemover
@@ -113,11 +116,7 @@ class MainActivity : BaseActivity() {
 
     val statusMap = mutableMapOf<String, Array<String>>(
         "Hot" to arrayOf(
-            "Booking in 3 - 5 days",
-            "Partial Swipe Done",
-            "PDC Cheque Received",
-            "Cheque Pick Up",
-            "Ancillary Service Calling Activity"
+            "Booking in 3 - 5 days", "Partial Swipe Done", "PDC Cheque Received", "Cheque Pick Up", "Ancillary Service Calling Activity"
         ),
         "Cold" to arrayOf(
             "Budget issue",
@@ -222,8 +221,7 @@ class MainActivity : BaseActivity() {
         val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         val versionBundle = Bundle()
-        val email =
-            SalesforceSDKManager.getInstance()?.userAccountManager?.currentUser?.username ?: return
+        val email = SalesforceSDKManager.getInstance()?.userAccountManager?.currentUser?.username ?: return
 
         val packageInfo = this.packageManager.getPackageInfo(this.packageName, 0)
         versionBundle.putString("user_email", email)
@@ -234,20 +232,17 @@ class MainActivity : BaseActivity() {
         val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
         val auth = "Bearer " + account.authToken
         if (account.username != null) {
-            commonClassForApi?.checkDeviceVersion(disposableObserver = object :
-                DisposableObserver<AppVersionResponse>() {
+            commonClassForApi?.checkDeviceVersion(disposableObserver = object : DisposableObserver<AppVersionResponse>() {
                 @RequiresApi(Build.VERSION_CODES.P)
                 override fun onNext(t: AppVersionResponse) {
-                    val pInfo: PackageInfo = this@MainActivity.getPackageManager()
-                        .getPackageInfo(this@MainActivity.packageName, 0)
+                    val pInfo: PackageInfo = this@MainActivity.getPackageManager().getPackageInfo(this@MainActivity.packageName, 0)
                     val currentVersionCode = PackageInfoCompat.getLongVersionCode(pInfo);
                     Log.e(
-                        TAG,
-                        "onNext: version update check currentVersionCode $currentVersionCode"
+                        TAG, "onNext: version update check currentVersionCode $currentVersionCode"
                     )
 
 
-                    if (currentVersionCode < t.androidVersionCode) {
+                    if (currentVersionCode < t.androidVersionCode!!) {
                         updateDialog()
                     }
 
@@ -278,9 +273,7 @@ class MainActivity : BaseActivity() {
             navHostFragment.navController.popBackStack()
             navHostFragment.navController.navigate(com.stetig.solitaire.R.id.homeFragment)
             navHostFragment.navController.navigate(
-                com.stetig.solitaire.R.id.notificationFragment,
-                Bundle(),
-                NavOptions.Builder().setLaunchSingleTop(true).build()
+                com.stetig.solitaire.R.id.notificationFragment, Bundle(), NavOptions.Builder().setLaunchSingleTop(true).build()
             )
         }
 
@@ -330,6 +323,7 @@ class MainActivity : BaseActivity() {
 //        FirebaseCrashlytics.getInstance().recordException(RuntimeException("Send Logs"))
         if (SalesforceSDKManager.getInstance().userAccountManager.currentUser == null) return
         updateToken()
+
     }
 
     private fun updateToken() {
@@ -360,26 +354,26 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    var updateTokenResDisposableObserver: DisposableObserver<UpdateTokenRes> =
-        object : DisposableObserver<UpdateTokenRes>() {
-            override fun onNext(updateTokenRes: UpdateTokenRes) {
-                Log.e(javaClass.name, "onNext: 494 $updateTokenRes")
-            }
+    var updateTokenResDisposableObserver: DisposableObserver<UpdateTokenRes> = object : DisposableObserver<UpdateTokenRes>() {
+        override fun onNext(updateTokenRes: UpdateTokenRes) {
+            Log.e(javaClass.name, "onNext: 494 $updateTokenRes")
+        }
 
-            override fun onError(e: Throwable) {
-                if (e is HttpException) {
-                    if (e.code() == 401) {
-                        SalesforceSDKManager.getInstance().logout(this@MainActivity)
-                    }
+        override fun onError(e: Throwable) {
+            if (e is HttpException) {
+                if (e.code() == 401) {
+                    SalesforceSDKManager.getInstance().logout(this@MainActivity)
                 }
             }
-
-            override fun onComplete() {}
         }
+
+        override fun onComplete() {}
+    }
 
 
     fun checkForCallPopUp() {
         if (SharedPrefs.getBooleanData(this, Keys.CALL_DETECTED)) {
+
             showPopUp(false, "")
         }
     }
@@ -444,8 +438,7 @@ class MainActivity : BaseActivity() {
 
 
             commonClassForQuery = CommonClassForQuery.getInstance(this@MainActivity, this@MainActivity.getRestClient())!!
-            commonClassForQuery.mobileNumberOnOpportunity(
-                Query.OPPORTUNITY_ON_MOBILE_NUMBER + Utils.buildQueryParameter(CountryCodeRemover.numberFormatter(mMobilNumber)),
+            commonClassForQuery.mobileNumberOnOpportunity(Query.OPPORTUNITY_ON_MOBILE_NUMBER + Utils.buildQueryParameter(CountryCodeRemover.numberFormatter(mMobilNumber)),
                 object : CommonClassForQuery.OnDataReceiveListener {
                     override fun onDataReceive(data: Any) {
                         if (data is OpportunityByMobileNumberResponse) {
@@ -459,22 +452,33 @@ class MainActivity : BaseActivity() {
                             popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
                             popUpBinding.selectOpportunityLayout.llSelectOpty.visibility = VISIBLE
 
-                            val listOfRecords = data.records.map { it?.name ?: "" }
-                            listOfRecords.forEach {
-                                val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(this@MainActivity, R.layout._layout_spinner_item, listOfRecords)
-                                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                            val customAdapter = CustomAdapter(this@MainActivity, R.layout._layout_spinner, data.records)
+                            val autoCompleteTextView = popUpBinding.selectOpportunityLayout.autoCompleteTextView
+                            autoCompleteTextView.threshold = 3
+                            autoCompleteTextView.setAdapter(customAdapter)
+                            popUpBinding.selectOpportunityLayout.autoCompleteTextView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                                    callTaskRequest.opportunityId = data.records[position]?.id
+                                }
 
-
-                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.adapter = aa
-                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.onItemSelectedListener =
-                                    object : AdapterView.OnItemSelectedListener {
-                                        override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                                            callTaskRequest.opportunityId = data.records[position]?.id
-                                        }
-
-                                        override fun onNothingSelected(parent: AdapterView<*>?) {}
-                                    }
+                                override fun onNothingSelected(parent: AdapterView<*>?) {}
                             }
+
+//                            val listOfRecords = data.records.map { "Opportunity: ${it?.name}\n Project Name: ${it?.projectR?.name}" ?: "" }
+//                            listOfRecords.forEach {
+//                                val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(this@MainActivity, R.layout._layout_spinner_item, listOfRecords)
+//                                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//
+//
+//                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.adapter = aa
+//                                popUpBinding.selectOpportunityLayout.opportunitySpinnerStage.onItemSelectedListener =
+//                                    object : AdapterView.OnItemSelectedListener {
+//                                        override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+//                                        }
+//
+//                                        override fun onNothingSelected(parent: AdapterView<*>?) {}
+//                                    }
+//                            }
 
                             popUpBinding.selectOpportunityLayout.next.setOnClickListener {
                                 popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
@@ -540,19 +544,16 @@ class MainActivity : BaseActivity() {
                     "Hot" -> {
                         val listOfDisposition = statusMap["Hot"]
                         val adapter = ArrayAdapter(
-                            this@MainActivity,
-                            R.layout._layout_spinner_item,
-                            listOfDisposition ?: arrayOf()
+                            this@MainActivity, R.layout._layout_spinner_item, listOfDisposition ?: arrayOf()
                         )
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
-                            }
+                            callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
+                        }
 
                         autoCompleteTextView.text.clear()
                         callTaskRequest.rating = selectedText
@@ -562,20 +563,17 @@ class MainActivity : BaseActivity() {
                         val listOfDisposition = statusMap["Warm"]
 
                         val adapter = ArrayAdapter(
-                            this@MainActivity,
-                            R.layout._layout_spinner_item,
-                            listOfDisposition ?: arrayOf()
+                            this@MainActivity, R.layout._layout_spinner_item, listOfDisposition ?: arrayOf()
                         )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
-                            }
+                            callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
+                        }
                         autoCompleteTextView.text.clear()
                         callTaskRequest.rating = selectedText
                     }
@@ -584,20 +582,17 @@ class MainActivity : BaseActivity() {
                         val listOfDisposition = statusMap["Cold"]
 
                         val adapter = ArrayAdapter(
-                            this@MainActivity,
-                            R.layout._layout_spinner_item,
-                            listOfDisposition ?: arrayOf()
+                            this@MainActivity, R.layout._layout_spinner_item, listOfDisposition ?: arrayOf()
                         )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
-                            }
+                            callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
+                        }
                         autoCompleteTextView.text.clear()
                         callTaskRequest.rating = selectedText
                     }
@@ -606,20 +601,17 @@ class MainActivity : BaseActivity() {
                         val listOfDisposition = statusMap["Booked"]
 
                         val adapter = ArrayAdapter(
-                            this@MainActivity,
-                            R.layout._layout_spinner_item,
-                            listOfDisposition ?: arrayOf()
+                            this@MainActivity, R.layout._layout_spinner_item, listOfDisposition ?: arrayOf()
                         )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
-                            }
+                            callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
+                        }
                         autoCompleteTextView.text.clear()
                         callTaskRequest.rating = selectedText
                     }
@@ -628,20 +620,17 @@ class MainActivity : BaseActivity() {
                         val listOfDisposition = statusMap["Lost"]
 
                         val adapter = ArrayAdapter(
-                            this@MainActivity,
-                            R.layout._layout_spinner_item,
-                            listOfDisposition ?: arrayOf()
+                            this@MainActivity, R.layout._layout_spinner_item, listOfDisposition ?: arrayOf()
                         )
 
                         val autoCompleteTextView = layoutProfessionalCallDetailBinding.autoCompleteTextView
                         autoCompleteTextView.threshold = 3
                         autoCompleteTextView.setAdapter(adapter)
-                        autoCompleteTextView.onItemClickListener =
-                            AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
 //                                val item = listOfOpportunities.get(position)
 //                                createTaskRequest.opp_Id = item.oppId;
-                                callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
-                            }
+                            callTaskRequest.dispositionPicklist = listOfDisposition?.get(position)
+                        }
                         autoCompleteTextView.text.clear()
                         callTaskRequest.rating = selectedText
                     }
@@ -757,24 +746,20 @@ class MainActivity : BaseActivity() {
 //            buildSendStatus(cal.time, "Proposal Sent", MANUAL_TASK, opportunityId)
 //        }
 
-        val aa: ArrayAdapter<*> =
-            ArrayAdapter<Any?>(
-                this@MainActivity,
-                com.stetig.solitaire.R.layout._layout_spinner_item,
-                closedLostReasons
-            )
+        val aa: ArrayAdapter<*> = ArrayAdapter<Any?>(
+            this@MainActivity, com.stetig.solitaire.R.layout._layout_spinner_item, closedLostReasons
+        )
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         popUpBinding.closeLost.updateOpportunitySpinnerStage.adapter = aa
-        popUpBinding.closeLost.updateOpportunitySpinnerStage.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?, view: View, position: Int, id: Long
-                ) {
-                    selected = closedLostReasons[position]
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+        popUpBinding.closeLost.updateOpportunitySpinnerStage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View, position: Int, id: Long
+            ) {
+                selected = closedLostReasons[position]
             }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
 
         popUpBinding.closeLost.no.setOnClickListener {
             popUpBinding.closeLost.closeLostLayout.visibility = GONE
@@ -813,8 +798,7 @@ class MainActivity : BaseActivity() {
         val day = currentDate.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-            this@MainActivity,
-            { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
+            this@MainActivity, { view: DatePicker, selectedYear: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = "$selectedYear-" + "${(monthOfYear + 1).toString().padStart(2, '0')}-" + "${dayOfMonth.toString().padStart(2, '0')}"
 
                 // Get the current date in the "yyyy-MM-dd" format
@@ -831,10 +815,7 @@ class MainActivity : BaseActivity() {
                     // Show an error message for selecting a past date
 //                    dateTextView.text = "Please select a future date"
                 }
-            },
-            year,
-            month,
-            day
+            }, year, month, day
         )
 
         // Set the minimum date to the current date to restrict past dates
@@ -847,8 +828,7 @@ class MainActivity : BaseActivity() {
 
     fun updateDialog() {
         val builder = MaterialAlertDialogBuilder(this, R.style.AlertDialog)
-        val updateVersionDialogBinding =
-            LayoutAlertDialogUpdateVersionBinding.inflate(layoutInflater, null, false)
+        val updateVersionDialogBinding = LayoutAlertDialogUpdateVersionBinding.inflate(layoutInflater, null, false)
         builder.setView(updateVersionDialogBinding.root)
         builder.setCancelable(false)
 
@@ -871,8 +851,7 @@ class MainActivity : BaseActivity() {
             } catch (anfe: ActivityNotFoundException) {
                 startActivity(
                     Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                        Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
                     )
                 )
             }
@@ -907,39 +886,38 @@ class MainActivity : BaseActivity() {
         commonClassForApi!!.callAttempt(closeLost, data, auth)
     }
 
-    private var closeLost: DisposableObserver<CreateTaskFromCallResponse> =
-        object : DisposableObserver<CreateTaskFromCallResponse>() {
-            override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
+    private var closeLost: DisposableObserver<CreateTaskFromCallResponse> = object : DisposableObserver<CreateTaskFromCallResponse>() {
+        override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
 
 
-                if (callStatusResponse.message.equals("Please update App to the latest version.")) {
-                    Utils.setToast(this@MainActivity, "Please update App to the latest version.")
-                }
-
-
-                if (callStatusResponse.opportunityId == null) {
-                    Utils.setToast(this@MainActivity, "Unable to tag opportunity")
-                } else {
-                    Utils.setToast(this@MainActivity, "Successful")
-                }
-
-                navHostFragment.navController.popBackStack(R.id.homeFragment, false)
-                try {
-                    if (alertDialog.isShowing()) {
-                        alertDialog.dismiss()
-                        Log.e(javaClass.name, "showPopUp: " + "dismissed")
-                    }
-                } catch (ignored: java.lang.Exception) {
-                    Log.e(javaClass.name, "showPopUp: " + ignored.message)
-                }
+            if (callStatusResponse.message.equals("Please update App to the latest version.")) {
+                Utils.setToast(this@MainActivity, "Please update App to the latest version.")
             }
 
-            override fun onError(e: Throwable) {
-                Log.e(javaClass.name, "onError: 337 " + e.message)
+
+            if (callStatusResponse.opportunityId == null) {
+                Utils.setToast(this@MainActivity, "Unable to tag opportunity")
+            } else {
+                Utils.setToast(this@MainActivity, "Successful")
             }
 
-            override fun onComplete() {}
+            navHostFragment.navController.popBackStack(R.id.homeFragment, false)
+            try {
+                if (alertDialog.isShowing()) {
+                    alertDialog.dismiss()
+                    Log.e(javaClass.name, "showPopUp: " + "dismissed")
+                }
+            } catch (ignored: java.lang.Exception) {
+                Log.e(javaClass.name, "showPopUp: " + ignored.message)
+            }
         }
+
+        override fun onError(e: Throwable) {
+            Log.e(javaClass.name, "onError: 337 " + e.message)
+        }
+
+        override fun onComplete() {}
+    }
 
     private val onOpportunityListListener = object : CommonClassForQuery.OnDataReceiveListener {
         override fun onDataReceive(data: Any) {
@@ -977,9 +955,7 @@ class MainActivity : BaseActivity() {
             popUpBinding.yesNoCallDetail.desc.requestFocus()
             popUpBinding.yesNoCallDetail.desc.setError("should not be empty or greater then 10")
             Toast.makeText(
-                this@MainActivity,
-                "comment should not be empty or greater then 10",
-                Toast.LENGTH_SHORT
+                this@MainActivity, "comment should not be empty or greater then 10", Toast.LENGTH_SHORT
             ).show()
             return
         }
@@ -1004,12 +980,7 @@ class MainActivity : BaseActivity() {
             2 -> {
                 val calendar = Calendar.getInstance()
                 val datePickerDialog = DatePickerDialog(
-                    this@MainActivity,
-                    R.style.MyDatePickerDialogTheme,
-                    customTimePicker,
-                    calendar[Calendar.YEAR],
-                    calendar[Calendar.MONTH],
-                    calendar[Calendar.DAY_OF_MONTH]
+                    this@MainActivity, R.style.MyDatePickerDialogTheme, customTimePicker, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH]
                 )
                 datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000;
                 datePickerDialog.show()
@@ -1090,8 +1061,7 @@ class MainActivity : BaseActivity() {
         val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         val versionBundle = Bundle()
-        val email =
-            SalesforceSDKManager.getInstance()?.userAccountManager?.currentUser?.username ?: return
+        val email = SalesforceSDKManager.getInstance()?.userAccountManager?.currentUser?.username ?: return
 
         val packageInfo = this.packageManager.getPackageInfo(this.packageName, 0)
         versionBundle.putString("user_email", email)
@@ -1102,19 +1072,16 @@ class MainActivity : BaseActivity() {
         val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
         val auth = "Bearer " + account.authToken
         if (account.username != null) {
-            commonClassForApi?.checkDeviceVersion(disposableObserver = object :
-                DisposableObserver<AppVersionResponse>() {
+            commonClassForApi?.checkDeviceVersion(disposableObserver = object : DisposableObserver<AppVersionResponse>() {
                 @RequiresApi(Build.VERSION_CODES.P)
                 override fun onNext(t: AppVersionResponse) {
-                    val pInfo: PackageInfo = this@MainActivity.getPackageManager()
-                        .getPackageInfo(this@MainActivity.packageName, 0)
+                    val pInfo: PackageInfo = this@MainActivity.getPackageManager().getPackageInfo(this@MainActivity.packageName, 0)
                     val currentVersionCode = PackageInfoCompat.getLongVersionCode(pInfo);
                     Log.e(
-                        TAG,
-                        "onNext: version update check currentVersionCode $currentVersionCode"
+                        TAG, "onNext: version update check currentVersionCode $currentVersionCode"
                     )
 
-                    if (currentVersionCode < t.androidVersionCode) {
+                    if (currentVersionCode < t.androidVersionCode!!) {
                         updateDialog()
                     } else {
                         commonClassForApi!!.callAttempt(disposableObserver, data, auth)
@@ -1138,18 +1105,14 @@ class MainActivity : BaseActivity() {
 
         // Create a TimePickerDialog and show it
         val timePickerDialog = TimePickerDialog(
-            this,
-            { view, hourOfDay, minute ->
+            this, { view, hourOfDay, minute ->
 
                 var time: String = hourOfDay.toString() + ":" + minute;
                 print("Time selected$time");
                 date.setText(convertTo12HourFormat(time))
                 callTaskRequest.calltime = "$hourOfDay:$minute:00"
 
-            },
-            hour,
-            minute,
-            false
+            }, hour, minute, false
         )
 
         timePickerDialog.show()
@@ -1171,33 +1134,31 @@ class MainActivity : BaseActivity() {
     }
 
 
-    var customTimePicker =
-        OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-            datePicker?.minDate = System.currentTimeMillis() - 1000;
-            val calendar = Calendar.getInstance()
-            val timePicker = TimePickerDialog(
-                this@MainActivity, R.style.MyDatePickerDialogTheme, { timePicker, i, i1 ->
-                    val calendar = Calendar.getInstance()
-                    calendar[year, month, dayOfMonth, i] = i1
-                    buildSendStatus(calendar.time, "Follow Up", _manual_task, opportunityId)
-                }, calendar[Calendar.HOUR], calendar[Calendar.MINUTE], false
-            )
-            timePicker.show()
-        }
+    var customTimePicker = OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+        datePicker?.minDate = System.currentTimeMillis() - 1000;
+        val calendar = Calendar.getInstance()
+        val timePicker = TimePickerDialog(
+            this@MainActivity, R.style.MyDatePickerDialogTheme, { timePicker, i, i1 ->
+                val calendar = Calendar.getInstance()
+                calendar[year, month, dayOfMonth, i] = i1
+                buildSendStatus(calendar.time, "Follow Up", _manual_task, opportunityId)
+            }, calendar[Calendar.HOUR], calendar[Calendar.MINUTE], false
+        )
+        timePicker.show()
+    }
 
-    private var f2f_sv_time_picker =
-        OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-            datePicker?.minDate = System.currentTimeMillis() - 1000;
-            val calendar = Calendar.getInstance()
-            val timePicker = TimePickerDialog(
-                this@MainActivity, R.style.MyDatePickerDialogTheme, { timePicker, i, i1 ->
-                    val calendar = Calendar.getInstance()
-                    calendar[year, month, dayOfMonth, i] = i1
-                    buildSendStatus(calendar.time, action, _manual_task, opportunityId)
-                }, calendar[Calendar.HOUR], calendar[Calendar.MINUTE], false
-            )
-            timePicker.show()
-        }
+    private var f2f_sv_time_picker = OnDateSetListener { datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+        datePicker?.minDate = System.currentTimeMillis() - 1000;
+        val calendar = Calendar.getInstance()
+        val timePicker = TimePickerDialog(
+            this@MainActivity, R.style.MyDatePickerDialogTheme, { timePicker, i, i1 ->
+                val calendar = Calendar.getInstance()
+                calendar[year, month, dayOfMonth, i] = i1
+                buildSendStatus(calendar.time, action, _manual_task, opportunityId)
+            }, calendar[Calendar.HOUR], calendar[Calendar.MINUTE], false
+        )
+        timePicker.show()
+    }
 
 
     private fun startCallHandlerService() {
@@ -1259,9 +1220,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
@@ -1298,97 +1257,82 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private var disposableObserver: DisposableObserver<CreateTaskFromCallResponse> =
-        object : DisposableObserver<CreateTaskFromCallResponse>() {
-            override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
-                _manual_task = false
+    private var disposableObserver: DisposableObserver<CreateTaskFromCallResponse> = object : DisposableObserver<CreateTaskFromCallResponse>() {
+        override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
+            _manual_task = false
 
-                if (callStatusResponse.message.equals("Please update App to the latest version.")) {
-                    Utils.setToast(this@MainActivity, "Please update App to the latest version.")
-                }
-
-
-                if (callStatusResponse.opportunityId == null) {
-                    Utils.setToast(this@MainActivity, "Unable to tag opportunity")
-                } else {
-                    Utils.setToast(this@MainActivity, "Successful")
-                }
-
-                if (callStatusResponse.opportunityId != null) {
-                    val notificationlist: ServerNotification.Notificationlist =
-                        ServerNotification.Notificationlist()
-                    notificationlist.setOppid(callStatusResponse.opportunityId)
-                    notificationlist.setNotificationid(callStatusResponse.id)
-                    notificationlist.setType("Reminder")
-                    notificationlist.setOppname("" + callStatusResponse.opportunityname)
-                    notificationlist.setTitle("Click to view opportunity details")
-                    UpcommingNotificationPrefs.saveData(
-                        this@MainActivity, callStatusResponse.id, Gson().toJson(notificationlist)
-                    )
-
-                    val event = Event(
-                        taskType + "-" + callStatusResponse.opportunityname,
-                        time,
-                        callStatusResponse.id,
-                        callStatusResponse.opportunityId
-                    )
-                    val sharedPreferences = getSharedPreferences("calendarEvents", MODE_PRIVATE)
-                    val randomInt = Random().nextInt(12112)
-                    sharedPreferences.edit()
-                        .putString(callStatusResponse.id + randomInt, Gson().toJson(event)).apply()
-
-                    val calendar = Calendar.getInstance()
-                    calendar.time = Date(getTimeInMillis)
-                    calendar.add(Calendar.MINUTE, -15)
-
-                    Alarm.setAlarm(
-                        application,
-                        calendar.time.time,
-                        callStatusResponse.id,
-                        callStatusResponse.opportunityId,
-                        callStatusResponse.opportunityname
-                    )
-                    Alarm.setAlarm(
-                        application,
-                        calendar.time.time,
-                        callStatusResponse.id,
-                        callStatusResponse.opportunityId,
-                        callStatusResponse.opportunityname
-                    )
-                }
-
-                try {
-                    alertDialog.dismiss()
-                } catch (e: Exception) {
-                }
+            if (callStatusResponse.message.equals("Please update App to the latest version.")) {
+                Utils.setToast(this@MainActivity, "Please update App to the latest version.")
             }
 
-            override fun onError(e: Throwable) {
-                Log.e(javaClass.name, "onError: 337 " + e.message)
+
+            if (callStatusResponse.opportunityId == null) {
+                Utils.setToast(this@MainActivity, "Unable to tag opportunity")
+            } else {
+                Utils.setToast(this@MainActivity, "Successful")
             }
 
-            override fun onComplete() {}
+            if (callStatusResponse.opportunityId != null) {
+                val notificationlist: ServerNotification.Notificationlist = ServerNotification.Notificationlist()
+                notificationlist.setOppid(callStatusResponse.opportunityId)
+                notificationlist.setNotificationid(callStatusResponse.id)
+                notificationlist.setType("Reminder")
+                notificationlist.setOppname("" + callStatusResponse.opportunityname)
+                notificationlist.setTitle("Click to view opportunity details")
+                UpcommingNotificationPrefs.saveData(
+                    this@MainActivity, callStatusResponse.id, Gson().toJson(notificationlist)
+                )
+
+                val event = Event(
+                    taskType + "-" + callStatusResponse.opportunityname, time, callStatusResponse.id, callStatusResponse.opportunityId
+                )
+                val sharedPreferences = getSharedPreferences("calendarEvents", MODE_PRIVATE)
+                val randomInt = Random().nextInt(12112)
+                sharedPreferences.edit().putString(callStatusResponse.id + randomInt, Gson().toJson(event)).apply()
+
+                val calendar = Calendar.getInstance()
+                calendar.time = Date(getTimeInMillis)
+                calendar.add(Calendar.MINUTE, -15)
+
+                Alarm.setAlarm(
+                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
+                )
+                Alarm.setAlarm(
+                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
+                )
+            }
+
+            try {
+                alertDialog.dismiss()
+            } catch (e: Exception) {
+            }
         }
 
-
-    private var disposableObserverCallTaskObserver: DisposableObserver<CreateTaskFromCallResponse> =
-        object : DisposableObserver<CreateTaskFromCallResponse>() {
-            override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
-
-                try {
-                    Utils.setToast(this@MainActivity, "Successful")
-                    alertDialog.dismiss()
-                } catch (e: Exception) {
-
-                }
-            }
-
-            override fun onError(e: Throwable) {
-                Log.e(javaClass.name, "onError: 337 " + e.message)
-            }
-
-            override fun onComplete() {}
+        override fun onError(e: Throwable) {
+            Log.e(javaClass.name, "onError: 337 " + e.message)
         }
+
+        override fun onComplete() {}
+    }
+
+
+    private var disposableObserverCallTaskObserver: DisposableObserver<CreateTaskFromCallResponse> = object : DisposableObserver<CreateTaskFromCallResponse>() {
+        override fun onNext(callStatusResponse: CreateTaskFromCallResponse) {
+
+            try {
+                Utils.setToast(this@MainActivity, "Successful")
+                alertDialog.dismiss()
+            } catch (e: Exception) {
+
+            }
+        }
+
+        override fun onError(e: Throwable) {
+            Log.e(javaClass.name, "onError: 337 " + e.message)
+        }
+
+        override fun onComplete() {}
+    }
 
     fun checkNotification() {
         try {
@@ -1407,9 +1351,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    public fun checkListIsEmpty(list: List<*>) =
-        if (list.isEmpty()) binding.noDataFound.visibility =
-            VISIBLE else binding.noDataFound.visibility = GONE
+    public fun checkListIsEmpty(list: List<*>) = if (list.isEmpty()) binding.noDataFound.visibility = VISIBLE else binding.noDataFound.visibility = GONE
 
     public fun hideNoDataText() {
         binding.noDataFound.visibility = GONE
@@ -1420,4 +1362,30 @@ class MainActivity : BaseActivity() {
         timerTask?.cancel()
         super.onDestroy()
     }
+
+
+    class CustomAdapter(context: Context, private val resource: Int, private val items: List<OpportunityByMobileNumberResponse.Record?>) :
+        ArrayAdapter<OpportunityByMobileNumberResponse.Record>(context, resource, items) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
+            val item = items[position]
+            val textView = view.findViewById<TextView>(R.id.autoCompleteItem)
+            val projectName = view.findViewById<TextView>(R.id.projectName)
+            textView.text = item?.name ?: ""
+            projectName.text = item?.projectR?.name ?: ""
+
+            val itemContainer = view.findViewById<LinearLayout>(R.id.ll_spinner)
+            if (position % 2 == 0) {
+                // Set alternate background color for even-positioned items
+                itemContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.list_even_color))
+            } else {
+                // Set alternate background color for odd-positioned items
+                itemContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
+
+            return view
+        }
+    }
+
 }

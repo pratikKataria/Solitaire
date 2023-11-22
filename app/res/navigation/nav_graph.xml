@@ -74,6 +74,21 @@
             android:id="@+id/action_menuFragment_to_approvalFragment"
             app:destination="@+id/approvalFragment"
             />
+        <action
+            android:id="@+id/action_menuFragment_to_approvalDetailFragment"
+            app:destination="@id/approvalDetailFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_campaignApprovalDetailFragment"
+            app:destination="@id/campaignApprovalDetailFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_sourceChangeApprovalDetailFragment"
+            app:destination="@id/sourceChangeApprovalDetailFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_cpcreationApprovalFragment"
+            app:destination="@id/cpcreationApprovalFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_CCRApprovalRequestFragment"
+            app:destination="@id/CCRApprovalRequestFragment" />
 
     </fragment>
     <fragment

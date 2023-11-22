@@ -2,7 +2,9 @@ package com.stetig.solitaire.data
 
 
 import com.google.gson.annotations.SerializedName
+
 data class Opportunity(
+    var type: String? = null,
     @SerializedName("done")
     val done: Boolean,
     @SerializedName("records")
@@ -60,6 +62,7 @@ data class Opportunity(
                 val url: String
             )
         }
+
         data class BookingR(
             @SerializedName("attributes")
             val attributes: Attributes,

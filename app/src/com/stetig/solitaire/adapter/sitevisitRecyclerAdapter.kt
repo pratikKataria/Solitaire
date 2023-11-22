@@ -46,6 +46,8 @@ class sitevisitRecyclerAdapter(
             projectDetailCardViewHolder.cardViewProjectsBinding.createdDate.text = Utils.getFormattedDateWithTimeSF(data?.createdDate)
             projectDetailCardViewHolder.cardViewProjectsBinding.typeEquiry.text = Utils.checkValueOrGiveEmpty(data?.typeofenquiry)
             projectDetailCardViewHolder.cardViewProjectsBinding.siteVisitComment.text = Utils.checkValueOrGiveEmpty(data.description)
+            projectDetailCardViewHolder.cardViewProjectsBinding.tvComments.text = Utils.checkValueOrGiveEmpty(data?.description)
+            projectDetailCardViewHolder.cardViewProjectsBinding.tvSubject.text = Utils.checkValueOrGiveEmpty(data?.subject)
 
             projectDetailCardViewHolder.cardViewProjectsBinding.opportunityDetail.setOnClickListener {
 

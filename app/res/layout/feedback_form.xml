@@ -38,6 +38,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Visited At" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,6 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Ethnicity" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +78,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Budget" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Zone" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,6 +123,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Talked about Competion" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,57 +132,62 @@
                 android:layout_height="wrap_content"
                 android:text="Visit Rating" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/feedbackchipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:chipSpacing="8dp"
-                app:chipSpacingHorizontal="8dp"
-                app:chipSpacingVertical="8dp"
-                app:singleLine="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipHot"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/feedbackchipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/chip_background_selector"
-                    android:text="Hot" />
+                    app:chipSpacing="8dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="8dp"
+                    app:singleLine="true"
+                    app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipWarm"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chip_background_selector"
-                    android:text="Warm" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipHot"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chip_background_selector"
+                        android:text="Hot" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipCold"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chip_background_selector"
-                    android:text="Cold" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipWarm"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chip_background_selector"
+                        android:text="Warm" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBooked"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chip_background_selector"
-                    android:text="Booked" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCold"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chip_background_selector"
+                        android:text="Cold" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipLost"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chip_background_selector"
-                    android:text="Lost" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBooked"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chip_background_selector"
+                        android:text="Booked" />
 
-            </com.google.android.material.chip.ChipGroup>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipLost"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chip_background_selector"
+                        android:text="Lost" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -195,7 +205,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="Disposition" />
+                    android:dropDownHeight="200dp"
+                    android:text="Select Disposition" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -214,6 +225,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Desired Possession" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
@@ -329,6 +341,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+
                     android:inputType="none"
                     android:text="Wholesaler/Retailer" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -350,6 +363,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Sub-category" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -370,6 +384,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Shop Ownship" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -486,6 +501,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
+
                     android:text="Leasing(Interseted)" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton

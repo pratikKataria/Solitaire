@@ -58,35 +58,33 @@
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/layout_padding"
+                        android:paddingBottom="@dimen/layout_padding">
 
-                    <!--            <LinearLayout-->
-                    <!--                android:layout_width="match_parent"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:layout_marginTop="6dp"-->
-                    <!--                android:orientation="horizontal"-->
-                    <!--                android:paddingTop="@dimen/layout_padding"-->
-                    <!--                android:paddingBottom="@dimen/layout_padding">-->
+                        <TextView
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dp"
+                            android:text="Subject:  "
+                            android:textColor="#848484"
+                            android:textSize="12sp" />
 
-                    <!--                <TextView-->
-                    <!--                    style="@style/SpecificTaskDetail"-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:fontFamily="@font/myriad_pro_regular"-->
-                    <!--                    android:minWidth="150dp"-->
-                    <!--                    android:text="Project: "-->
-                    <!--                    android:textColor="#848484"-->
-                    <!--                    android:textSize="12sp" />-->
-
-                    <!--                <TextView-->
-                    <!--                    android:id="@+id/projectName"-->
-                    <!--                    style="@style/SpecificTaskDetail"-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:text=""-->
-                    <!--                    android:textColor="@color/black"-->
-                    <!--                    android:textSize="12sp" />-->
-                    <!--            </LinearLayout>-->
-
+                        <TextView
+                            android:id="@+id/tv_subject"
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,38 +108,6 @@
                             android:layout_height="wrap_content"
                             android:text="2" />
                     </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/activity_date_layout_ll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/layout_padding"
-                        android:paddingBottom="@dimen/layout_padding">
-
-                        <TextView
-                            style="@style/SpecificTaskDetail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/myriad_pro_regular"
-                            android:minWidth="150dp"
-                            android:text="Activity date: "
-                            android:textColor="#848484"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/activity_date"
-                            style="@style/SpecificTaskDetail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -168,6 +134,64 @@
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/activity_date_layout_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/layout_padding"
+                        android:paddingBottom="@dimen/layout_padding">
+
+                        <TextView
+                            android:id="@+id/tv_next_action_Date"
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/myriad_pro_regular"
+                            android:minWidth="150dp"
+                            android:text="Next Action date: "
+                            android:textColor="#848484"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/activity_date"
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/layout_padding"
+                        android:paddingBottom="@dimen/layout_padding">
+
+                        <TextView
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/myriad_pro_regular"
+                            android:minWidth="150dp"
+                            android:text="Comments: "
+                            android:textColor="#848484"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_comments"
+                            style="@style/SpecificTaskDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
