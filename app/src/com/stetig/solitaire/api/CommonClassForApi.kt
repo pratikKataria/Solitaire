@@ -367,7 +367,7 @@ class CommonClassForApi private constructor() {
 
     fun getNotificationList(disposableObserver: DisposableObserver<ServerNotification>, sendCallStatus: NotificationReqModel, auth: String) {
         Utils.showProgressDialog(activity)
-        RestClient.getInstance().getService()!!.getNotificationList(sendCallStatus, auth)
+        RestClient.getInstance().getService()!!.getNotificationList(/*sendCallStatus,*/ auth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<ServerNotification?> {

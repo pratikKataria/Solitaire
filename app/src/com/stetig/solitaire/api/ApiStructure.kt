@@ -55,7 +55,7 @@ interface ApiStructure {
 
     @Headers("Content-Type: application/json")
     @POST(Endpoints.NOTIFICATION_LIST)
-    fun getNotificationList(@Body listBody: NotificationReqModel?, @Header("Authorization") authToken: String?): Observable<ServerNotification?>
+    fun getNotificationList(/*@Body listBody: NotificationReqModel?, */@Header("Authorization") authToken: String?): Observable<ServerNotification?>
 
     @Headers("Content-Type: application/json")
     @POST(Endpoints.MARK_AS_READ)

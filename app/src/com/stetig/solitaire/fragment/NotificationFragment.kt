@@ -72,8 +72,8 @@ class NotificationFragment : BaseFragment() {
         val notifications: HashMap<String, String> = NotificationPrefs.getAllData(activity)
         if (notifications != null) {
             for (key in notifications.keys) {
-                Log.e(javaClass.name, "onCreate: 59 $key")
-                tasks.add(0, Gson().fromJson(notifications[key], ServerNotification.Notificationlist::class.java))
+//                Log.e(javaClass.name, "onCreate: 59 $key")
+//                tasks.add(0, Gson().fromJson(notifications[key], ServerNotification.NotificationList::class.java))
             }
             recyclerAdapter?.notifyDataSetChanged()
         }
@@ -81,9 +81,9 @@ class NotificationFragment : BaseFragment() {
     }
 
 
-    var tasks: ArrayList<ServerNotification.Notificationlist> = ArrayList<ServerNotification.Notificationlist>()
+    var tasks: ArrayList<ServerNotification.NotificationList> = ArrayList<ServerNotification.NotificationList>()
 
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         fragmentProjectBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
         recyclerAdapter = object : NotificationRecyclerAdapter(activity, tasks) {
             override fun _markAsCompleted(nId: String?, oId: String?, type: String) {
@@ -120,8 +120,10 @@ class NotificationFragment : BaseFragment() {
 
     private var disposableObserver: DisposableObserver<ServerNotification> = object : DisposableObserver<ServerNotification>() {
         override fun onNext(callStatusResponse: ServerNotification) {
-            tasks.addAll(callStatusResponse.notificationlist)
+            tasks.clear()
+            tasks.addAll(callStatusResponse.notificationList)
             recyclerAdapter?.notifyDataSetChanged()
+            activity.checkListIsEmpty(tasks)
         }
 
         override fun onError(e: Throwable) {
@@ -144,7 +146,7 @@ class NotificationFragment : BaseFragment() {
         UpcommingNotificationPrefs.removeData(context, nId)
         val bundle = Bundle()
         bundle.putString(Keys.OPP_ID, oId)
-        activity.navHostFragment.navController.navigate(R.id.action_notificationFragment_to_opportunityDetailFragment, bundle)
+//        activity.navHostFragment.navController.navigate(R.id.action_notificationFragment_to_opportunityDetailFragment, bundle)
     }
 
     fun read(nId: String?, oId: String?) {
@@ -162,11 +164,20 @@ class NotificationFragment : BaseFragment() {
                             Utils.setToast(context, "No Opportunity Id found")
                             return
                         }
-//
-                        val bundle = Bundle()
-                        bundle.putString(Keys.OPP_ID, oId)
-                        (context as MainActivity).navHostFragment.navController.navigate(R.id.action_notificationFragment_to_opportunityDetailFragment, bundle)
-//
+                        try {
+                            val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+                            if (userAccount != null) {
+                                val userEmail = userAccount.username
+                                val authToken = "Bearer " + userAccount.authToken
+                                commonClassForApi?.getNotificationList(disposableObserver, NotificationReqModel(userEmail), authToken)
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }//
+//                        val bundle = Bundle()
+//                        bundle.putString(Keys.OPP_ID, oId)
+//                        (context as MainActivity).navHostFragment.navController.navigate(R.id.action_notificationFragment_to_opportunityDetailFragment, bundle)
+////
                     }
 
                     override fun onFailure(call: Call<MarkAsReadResponse?>, t: Throwable) {

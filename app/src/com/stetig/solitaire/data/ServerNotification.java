@@ -1,6 +1,8 @@
 package com.stetig.solitaire.data; /**
  * Created by Pratik Katariya on 14-10-2020
  */
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,14 +12,15 @@ import java.util.List;
  */
 public class ServerNotification {
 
+    @Expose
     @SerializedName("message")
     private String message;
+    @Expose
     @SerializedName("NotificationList")
-    private List<Notificationlist> notificationlist;
+    private List<ServerNotification.NotificationList> NotificationList;
+    @Expose
     @SerializedName("returnCode")
-    private int returncode;
-
-    public String remainder = "";
+    private boolean returnCode;
 
     public String getMessage() {
         return message;
@@ -27,113 +30,88 @@ public class ServerNotification {
         this.message = message;
     }
 
-    public List<Notificationlist> getNotificationlist() {
-        return notificationlist;
+    public List<ServerNotification.NotificationList> getNotificationList() {
+        return NotificationList;
     }
 
-    public void setNotificationlist(List<Notificationlist> notificationlist) {
-        this.notificationlist = notificationlist;
+    public void setNotificationList(List<ServerNotification.NotificationList> NotificationList) {
+        this.NotificationList = NotificationList;
     }
 
-    public int getReturncode() {
-        return returncode;
+    public boolean getReturnCode() {
+        return returnCode;
     }
 
-    public void setReturncode(int returncode) {
-        this.returncode = returncode;
+    public void setReturnCode(boolean returnCode) {
+        this.returnCode = returnCode;
     }
 
-    public static class Notificationlist {
+    public static class NotificationList {
+        @Expose
         @SerializedName("Body")
-        private String body;
+        private String Body;
+        @Expose
         @SerializedName("Is_Read")
-        private boolean isRead;
+        private boolean Is_Read;
+        @Expose
         @SerializedName("NotificationID")
-        private String notificationid;
-        @SerializedName("oppId")
-        private String oppid;
-        @SerializedName("Oppname")
-        private String oppname;
+        private String NotificationID;
+        @Expose
         @SerializedName("Published_date")
-        private String publishedDate;
-        @SerializedName("Title")
-        private String title;
-        @SerializedName("Type")
-        private String type;
-        @SerializedName("UserId")
-        private String userid;
-        public String remainder = "";
+        private String Published_date;
+        @Expose
+        @SerializedName("RecordId")
+        private String RecordId;
+        @Expose
+        @SerializedName("RecordName")
+        private String RecordName;
 
         public String getBody() {
-            return body;
+            return Body;
         }
 
-        public void setBody(String body) {
-            this.body = body;
+        public void setBody(String Body) {
+            this.Body = Body;
         }
 
-        public boolean getIsRead() {
-            return isRead;
+        public boolean getIs_Read() {
+            return Is_Read;
         }
 
-        public void setIsRead(boolean isRead) {
-            this.isRead = isRead;
+        public void setIs_Read(boolean Is_Read) {
+            this.Is_Read = Is_Read;
         }
 
-        public String getNotificationid() {
-            return notificationid;
+        public String getNotificationID() {
+            return NotificationID;
         }
 
-        public void setNotificationid(String notificationid) {
-            this.notificationid = notificationid;
+        public void setNotificationID(String NotificationID) {
+            this.NotificationID = NotificationID;
         }
 
-        public String getOppid() {
-            return oppid;
+        public String getPublished_date() {
+            return Published_date;
         }
 
-        public void setOppid(String oppid) {
-            this.oppid = oppid;
+        public void setPublished_date(String Published_date) {
+            this.Published_date = Published_date;
         }
 
-        public String getOppname() {
-            return oppname;
+        public String getRecordId() {
+            return RecordId;
         }
 
-        public void setOppname(String oppname) {
-            this.oppname = oppname;
+        public void setRecordId(String RecordId) {
+            this.RecordId = RecordId;
         }
 
-        public String getPublishedDate() {
-            return publishedDate;
+        public String getRecordName() {
+            return RecordName;
         }
 
-        public void setPublishedDate(String publishedDate) {
-            this.publishedDate = publishedDate;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getUserid() {
-            return userid;
-        }
-
-        public void setUserid(String userid) {
-            this.userid = userid;
+        public void setRecordName(String RecordName) {
+            this.RecordName = RecordName;
         }
     }
 }

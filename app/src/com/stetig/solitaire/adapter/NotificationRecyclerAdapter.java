@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public abstract class NotificationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private ArrayList<ServerNotification.Notificationlist> recordsArrayList;
+    private ArrayList<ServerNotification.NotificationList> recordsArrayList;
 
-    public NotificationRecyclerAdapter(Context context, ArrayList<ServerNotification.Notificationlist> cartList) {
+    public NotificationRecyclerAdapter(Context context, ArrayList<ServerNotification.NotificationList> cartList) {
         this.context = context;
         this.recordsArrayList = cartList;
     }
@@ -39,15 +39,15 @@ public abstract class NotificationRecyclerAdapter extends RecyclerView.Adapter<R
         CartProjectViewHolder currCardViewHolder = (CartProjectViewHolder) holder;
         try {
             if (recordsArrayList.get(position) != null) {
-                currCardViewHolder.binding.opportunityName.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getOppname()));
-                currCardViewHolder.binding.lstCallAtmStatus.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getType()));
+                currCardViewHolder.binding.opportunityName.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getRecordName()));
+                currCardViewHolder.binding.lstCallAtmStatus.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getNotificationID()));
             }
 
-            Log.e(getClass().getName(), "onBindViewHolder: " + recordsArrayList.get(position).getNotificationid());
+//            Log.e(getClass().getName(), "onBindViewHolder: " + recordsArrayList.get(position).getNotificationid());
 
             currCardViewHolder.binding.mtrlCard.setOnClickListener(n -> {
 
-                _markAsCompleted(recordsArrayList.get(position).getNotificationid(), recordsArrayList.get(position).getOppid(), recordsArrayList.get(position).getType());
+                _markAsCompleted(recordsArrayList.get(position).getNotificationID(), recordsArrayList.get(position).getRecordId(), "");
 
 //                OpportunityDetailsBottomSheet profileBottomSheet = new OpportunityDetailsBottomSheet(recordsArrayList.get(position).getOppid());
 //                AppCompatActivity appCompatActivity = (AppCompatActivity) context;

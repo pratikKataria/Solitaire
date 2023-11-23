@@ -1273,33 +1273,30 @@ class MainActivity : BaseActivity() {
             }
 
             if (callStatusResponse.opportunityId != null) {
-                val notificationlist: ServerNotification.Notificationlist = ServerNotification.Notificationlist()
-                notificationlist.setOppid(callStatusResponse.opportunityId)
-                notificationlist.setNotificationid(callStatusResponse.id)
-                notificationlist.setType("Reminder")
-                notificationlist.setOppname("" + callStatusResponse.opportunityname)
-                notificationlist.setTitle("Click to view opportunity details")
-                UpcommingNotificationPrefs.saveData(
-                    this@MainActivity, callStatusResponse.id, Gson().toJson(notificationlist)
-                )
-
-                val event = Event(
-                    taskType + "-" + callStatusResponse.opportunityname, time, callStatusResponse.id, callStatusResponse.opportunityId
-                )
-                val sharedPreferences = getSharedPreferences("calendarEvents", MODE_PRIVATE)
-                val randomInt = Random().nextInt(12112)
-                sharedPreferences.edit().putString(callStatusResponse.id + randomInt, Gson().toJson(event)).apply()
-
-                val calendar = Calendar.getInstance()
-                calendar.time = Date(getTimeInMillis)
-                calendar.add(Calendar.MINUTE, -15)
-
-                Alarm.setAlarm(
-                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
-                )
-                Alarm.setAlarm(
-                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
-                )
+//                val notificationlist = ServerNotification.NotificationList()
+//
+//                notificationlist.setOppid(callStatusResponse.opportunityId)
+//                notificationlist.setNotificationid(callStatusResponse.id)
+//                notificationlist.setType("Reminder")
+//                notificationlist.setOppname("")
+//                notificationlist.setTitle("Click to view opportunity details")
+//                UpcommingNotificationPrefs.saveData(this@MainActivity, callStatusResponse.id, Gson().toJson(notificationlist))
+//
+//                val event = Event(taskType + "-" + callStatusResponse.opportunityname, time, callStatusResponse.id, callStatusResponse.opportunityId)
+//                val sharedPreferences = getSharedPreferences("calendarEvents", MODE_PRIVATE)
+//                val randomInt = Random().nextInt(12112)
+//                sharedPreferences.edit().putString(callStatusResponse.id + randomInt, Gson().toJson(event)).apply()
+//
+//                val calendar = Calendar.getInstance()
+//                calendar.time = Date(getTimeInMillis)
+//                calendar.add(Calendar.MINUTE, -15)
+//
+//                Alarm.setAlarm(
+//                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
+//                )
+//                Alarm.setAlarm(
+//                    application, calendar.time.time, callStatusResponse.id, callStatusResponse.opportunityId, callStatusResponse.opportunityname
+//                )
             }
 
             try {
