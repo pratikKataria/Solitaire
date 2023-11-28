@@ -67,10 +67,7 @@ class TaskFragment : BaseFragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
-
         }
-
-
     }
 
 

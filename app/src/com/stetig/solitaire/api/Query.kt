@@ -123,7 +123,7 @@ interface Query {
 //        var TASK_AND_OPPORTUNITY_DETAIL = "Select Id, ActivityDate, WhatId, What.Name , CreatedDate FROM Task $WHERE $WHAT_ID_IN_TASK_FILTER $AND $RECORD_TYPE_ID_FILTER"
 
         var TODAY_OPPORTUNITY = "SELECT id, Name, closedate, Project__r.Name, StageName, Status__c,  Account_Mobile_Number__c, Sales_Call_Attempt_Date__c,Active_New__c from Opportunity WHERE Sales_Next_Action_Date__c = TODAY AND $OWNER_FILTER"
-        var ALL_MANUAL_TASK = "Select Id,whatId,Subject,Activitydate,What.Name,ProjectInterestedWeb__r.Name,createdDate,Task_Type__c from task $WHERE createdDate=Today AND OwnerId=${Utils.buildQueryParameter(USER_ID)}"
+        var ALL_MANUAL_TASK = "SELECT ID,what.Name,Call_Proposed_Date_Of_Visit__c, what.Id,CreatedDate, Status, Subject, Next_Action_Date__c ,ProjectInterestedWeb__c,Description FROM TASK WHERE (RecordTypeId = '012C3000000Aqq9IAC' OR RecordTypeId = '012C3000000ArizIAC') AND (Call_Attempt_Status__c = 'Follow up'  OR Call_Proposed_Date_Of_Visit__c !=null) AND (Next_Action_Date__c = Today  OR Call_Proposed_Date_Of_Visit__c >=Today)  AND  $OWNER_FILTER ORDER BY CreatedDate DESC"
 
         var CCR_APPROVAL_LIST = "Select Id,Name,Status__c,Updated_Budgeted_Cost_in_Campaign__c,Updated_Campaign_Start_Date__c,Updated_Campaign_End_Date__c from Campaign_Change_Request__c where (Status__c='Submitted for Approval' AND Level_1_Approver__c= ${Utils.buildQueryParameter(USER_ID)}) OR (Status__c= ${Utils.buildQueryParameter(USER_ID)} AND Level_2_Approver__c = ${Utils.buildQueryParameter(USER_ID)})"
         var CCR_APPROVAL_LIST_DETAIL = "Select Id,Name,Status__c,Updated_Budgeted_Cost_in_Campaign__c,Updated_Campaign_Start_Date__c,Updated_Campaign_End_Date__c from Campaign_Change_Request__c Where Id = "

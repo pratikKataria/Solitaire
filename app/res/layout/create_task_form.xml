@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_8sdp"
             android:layout_marginVertical="@dimen/_5sdp"
-            android:text="Due Date" />
+            android:text="Date" />
 
         <EditText
             android:id="@+id/due_date_c"
@@ -79,7 +79,7 @@
             android:clickable="false"
             android:editable="false"
             android:focusable="false"
-            android:hint="Due Date"
+            android:hint="Date"
             android:textColorHint="#AFAFAF" />
 
         <com.google.android.material.textfield.TextInputLayout

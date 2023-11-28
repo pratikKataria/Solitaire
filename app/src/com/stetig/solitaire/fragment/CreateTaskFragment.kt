@@ -36,6 +36,7 @@ import com.stetig.solitaire.data.CreateTask
 import com.stetig.solitaire.data.CreateTaskResponse
 import com.stetig.solitaire.data.ManualTaskListResponse
 import com.stetig.solitaire.data.OpportunityByMobileNumberResponse
+import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.FragmentCreateTaskBinding
 import com.stetig.solitaire.utils.Utils
 import io.reactivex.observers.DisposableObserver
@@ -49,7 +50,7 @@ class CreateTaskFragment : BaseFragment() {
     private lateinit var activity: MainActivity
     private lateinit var commonClassForQuery: CommonClassForQuery
     private lateinit var adapter: TaskListRecyclerAdapyer
-    private var projectList = mutableListOf<ManualTaskListResponse.Record?>()
+    private var projectList = mutableListOf<Task.Record?>()
     private var commonClassForApi: CommonClassForApi? = null
     private var listOfOpportunities: ArrayList<AllOpportunityDto.AllOpportunityDtoItem> =
         arrayListOf()
@@ -59,8 +60,7 @@ class CreateTaskFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_create_task, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_create_task, container, false)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         setupFloatingActionButton()
 //
@@ -74,8 +74,7 @@ class CreateTaskFragment : BaseFragment() {
 
     override fun initView(rootView: View?) {
         commonClassForApi = CommonClassForApi.getInstance(activity)
-        val userAccount =
-            SalesforceSDKManager.getInstance().userAccountManager.currentUser ?: return
+        val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser ?: return
         val auth = "Bearer " + userAccount.authToken
         commonClassForApi?.getAllOpportunities(disposableObserver, auth)
         initRecycler()
@@ -265,7 +264,7 @@ class CreateTaskFragment : BaseFragment() {
 
     private val onOpportunityListListener = object : CommonClassForQuery.OnDataReceiveListener {
         override fun onDataReceive(data: Any) {
-            if (data is ManualTaskListResponse) {
+            if (data is Task) {
                 projectList.clear()
                 projectList.addAll(data.records)
                 adapter.notifyDataSetChanged()

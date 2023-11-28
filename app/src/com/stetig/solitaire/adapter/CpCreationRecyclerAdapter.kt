@@ -35,7 +35,7 @@ class CpCreationRecyclerAdapter(private var context: Context, private var projec
         approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalSourcingManager.text = Utils.checkValueOrGiveEmpty(
             data?.sourcingManager?.name?:""
         )
-        approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalReqDate.text = Utils.checkValueOrGiveEmpty(
+        approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalReqDate.text = Utils.getFormattedDateWithTimeSF(
             data?.level2datetime?:""
         )
 

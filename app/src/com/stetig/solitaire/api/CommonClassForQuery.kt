@@ -417,7 +417,7 @@ class CommonClassForQuery private constructor() {
                 override fun onSuccess(request: RestRequest, response: RestResponse) {
                     Utils.hideProgressDialog(activity)
                     try {
-                        val projects: ManualTaskListResponse = Gson().fromJson(response.asString(), ManualTaskListResponse::class.java)
+                        val projects: Task = Gson().fromJson(response.asString(), Task::class.java)
                         sendDataToUIThread(onDataReceiveListener, projects)
                     } catch (e: Exception) {
                         e.printStackTrace()

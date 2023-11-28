@@ -40,7 +40,7 @@ public abstract class NotificationRecyclerAdapter extends RecyclerView.Adapter<R
         try {
             if (recordsArrayList.get(position) != null) {
                 currCardViewHolder.binding.opportunityName.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getRecordName()));
-                currCardViewHolder.binding.lstCallAtmStatus.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getNotificationID()));
+                currCardViewHolder.binding.body.setText(Utils.checkValueOrGiveDef(recordsArrayList.get(position).getBody()));
             }
 
 //            Log.e(getClass().getName(), "onBindViewHolder: " + recordsArrayList.get(position).getNotificationid());

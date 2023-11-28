@@ -67,15 +67,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Type: "
-                    android:fontFamily="@font/myriad_pro_semi_bold"
-                    android:textColor="#858585"
-                    android:textSize="@dimen/_10sdp" />
-
-                <TextView
-                    android:id="@+id/lst_call_atm_status"
+                    android:id="@+id/body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="2"

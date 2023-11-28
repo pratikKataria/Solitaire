@@ -42,35 +42,56 @@
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding">
 
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="6dp"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:paddingTop="@dimen/layout_padding"-->
-            <!--                android:paddingBottom="@dimen/layout_padding">-->
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="150dp"
+                    android:text="Subject:  "
+                    android:textColor="#848484"
+                    android:textSize="12sp" />
 
-            <!--                <TextView-->
-            <!--                    style="@style/SpecificTaskDetail"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@font/myriad_pro_regular"-->
-            <!--                    android:minWidth="150dp"-->
-            <!--                    android:text="Project: "-->
-            <!--                    android:textColor="#848484"-->
-            <!--                    android:textSize="12sp" />-->
+                <TextView
+                    android:id="@+id/tv_subject"
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding"
+                android:visibility="gone">
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/projectName"-->
-            <!--                    style="@style/SpecificTaskDetail"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text=""-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textSize="12sp" />-->
-            <!--            </LinearLayout>-->
+                <TextView
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="150dp"
+                    android:text="Subject: "
+                    android:textColor="#848484" />
 
+                <TextView
+                    android:id="@+id/list_item_specific_task_subject"
+                    style="@style/SpecificTaskDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,14 +104,14 @@
                     style="@style/SpecificTaskDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/myriad_pro_regular"
                     android:minWidth="150dp"
-                    android:text="Subject: "
+                    android:text="Created date: "
                     android:textColor="#848484"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/subject"
+                    android:id="@+id/created_date"
+                    style="@style/SpecificTaskDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -98,12 +119,13 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-
             <LinearLayout
+                android:id="@+id/ll_due_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:paddingTop="@dimen/layout_padding"
                 android:paddingBottom="@dimen/layout_padding">
 
@@ -113,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/myriad_pro_regular"
                     android:minWidth="150dp"
-                    android:text="Due date: "
+                    android:text="Next Action date: "
                     android:textColor="#848484"
                     android:textSize="12sp" />
 
@@ -127,12 +149,13 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-
             <LinearLayout
+                android:id="@+id/ll_visit_proposed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:paddingTop="@dimen/layout_padding"
                 android:paddingBottom="@dimen/layout_padding">
 
@@ -140,13 +163,14 @@
                     style="@style/SpecificTaskDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
                     android:minWidth="150dp"
-                    android:text="Task Type: "
+                    android:text="Visit Proposed Date: "
                     android:textColor="#848484"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/task_type"
+                    android:id="@+id/visit_proposed_date"
                     style="@style/SpecificTaskDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,9 +180,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llOptyComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
@@ -178,25 +204,26 @@
                     app:cornerRadius="6dp"
                     app:elevation="0dp" />
 
-<!--                <View-->
-<!--                    android:layout_width="10dp"-->
-<!--                    android:layout_height="2dp" />-->
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="2dp" />
 
-<!--                <com.google.android.material.button.MaterialButton-->
-<!--                    android:id="@+id/opportunityDetail"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="32dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:backgroundTint="#F1F1F1"-->
-<!--                    android:fontFamily="@font/myriad_pro_regular"-->
-<!--                    android:includeFontPadding="false"-->
-<!--                    android:insetTop="0dp"-->
-<!--                    android:insetBottom="0dp"-->
-<!--                    android:text="Opportunity Details"-->
-<!--                    android:textColor="#040404"-->
-<!--                    android:textSize="10sp"-->
-<!--                    app:cornerRadius="6dp"-->
-<!--                    app:elevation="0dp" />-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/opportunityDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#F6C941"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:includeFontPadding="false"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Opportunity Details"
+                    android:textColor="#040404"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="6dp"
+                    app:elevation="0dp" />
             </LinearLayout>
 
             <View

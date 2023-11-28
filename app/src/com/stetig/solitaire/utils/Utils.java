@@ -1932,6 +1932,26 @@ public class Utils {
         return "No Available";
     }
 
+    public static String getFormattedDateStringOnlyDate(String parm) {
+
+        if (parm == null) return "No Available";
+
+        if (parm != null) {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = null;
+            try {
+                date = inputFormat.parse(parm);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return "No Available";
+            }
+            SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
+            return formate.format(date);
+        }
+        return "No Available";
+    }
+
     public static String getFormattedDateWithTimeSF(String parm) {
 
         if (parm == null) return "No Available";

@@ -75,24 +75,18 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                 val record = data.records[0]
 
                 binding.reraNo.text = Utils.checkValueOrGiveEmpty(record?.mahaRERAno)
-                binding.reraExpDate.text =
-                    Utils.checkValueOrGiveEmpty(record?.RERAexpData)
-                binding.cpType.text =
-                    Utils.checkValueOrGiveEmpty(record?.cpType)
+                binding.reraExpDate.text = Utils.checkValueOrGiveEmpty(record?.RERAexpData)
+                binding.cpType.text = Utils.checkValueOrGiveEmpty(record?.cpType)
                 binding.spSubType.text  =Utils.checkValueOrGiveEmpty(record?.cpSubType)
                 binding.zone.text = Utils.checkValueOrGiveEmpty(record?.zone)
-                binding.activitiesPlanned.text =
-                    Utils.checkValueOrGiveEmpty(record?.level1submissiondatetime)
-                binding.officeLocation.text =
-                    Utils.checkValueOrGiveEmpty(record?.officelocation)
+                binding.activitiesPlanned.text = Utils.checkValueOrGiveEmpty(record?.level1submissiondatetime)
+                binding.officeLocation.text = Utils.checkValueOrGiveEmpty(record?.officelocation)
                 binding.expertise.text  =Utils.checkValueOrGiveEmpty(record?.expertise)
 
 
                 binding.approveBtn.setOnClickListener {
-                    val userAccount =
-                        SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                    val commonClassForApi: CommonClassForApi =
-                        CommonClassForApi.getInstance(activity)!!
+                    val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+                    val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
                     val data = SendCpCreaitonApprovalRequest(
                         cpId = data.records[0]?.id.toString(),
@@ -103,10 +97,8 @@ class CpCreationApprovalSubDetailFragment : BaseFragment() {
                 }
 
                 binding.rejectBtn.setOnClickListener {
-                    val userAccount =
-                        SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                    val commonClassForApi: CommonClassForApi =
-                        CommonClassForApi.getInstance(activity)!!
+                    val userAccount = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+                    val commonClassForApi: CommonClassForApi = CommonClassForApi.getInstance(activity)!!
                     val auth = "Bearer " + userAccount.authToken
                     val data = SendCpCreaitonApprovalRequest(
                         cpId = data.records[0]?.id.toString(),

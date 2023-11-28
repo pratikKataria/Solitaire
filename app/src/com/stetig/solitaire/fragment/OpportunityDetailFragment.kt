@@ -65,7 +65,7 @@ class OpportunityDetailFragment : BaseFragment() {
                 binding.mobileNumberText.text = Utils.checkValueOrGiveDef(opty.accountMobileNumberC)
                 binding.createdDate.text = Utils.getFormattedDateSF(opty.createdDate)
                 binding.stage.text = Utils.checkValueOrGiveDef(opty.stageName)
-                binding.expDate.text = Utils.checkValueOrGiveDef(opty.closeDate)
+                binding.expDate.text = Utils.getFormattedDateStringOnlyDate(opty.closeDate)
                 binding.lastCallStatus.text = Utils.checkValueOrGiveDef(opty.salesCallAttemptStatusC)
                 binding.lastCallDescription.text = Utils.checkValueOrGiveDef(opty.salesCallDescriptionC)
 

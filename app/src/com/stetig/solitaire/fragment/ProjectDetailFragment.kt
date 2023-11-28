@@ -126,6 +126,12 @@ class ProjectDetailFragment : BaseFragment() {
     }
 
     private fun shareViaWhatsApp() {
+
+        if (getWhatsAppLinks().isEmpty()) {
+            Toast.makeText(activity, "Please select at least one Brochure", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (Utils.isWhatsAppInstalled(getActivity(), "com.whatsapp")) {
             val whatsAppQuery =
                 if (number == null) "http://api.whatsapp.com/send?text=${getWhatsAppLinks()}" else "http://api.whatsapp.com/send?phone=+91$number &text= ${getLinks()}"
@@ -137,10 +143,14 @@ class ProjectDetailFragment : BaseFragment() {
         }
     }
 
-    //    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000001Gp1E&d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM&asPdf=false
-//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh%26ids=068C3000001Gp1E%26d=%2Fa%2FC3000000Cr0X%2FxOoRdyp8QyQrVW.UA_3E01mTeaEBgZhAB2isb7LnqWM%26asPdf=false
-//    https://solitaire--dev.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC30000006cdh&ids=068C3000003O2rn&d=%2Fa%2FC3000000So8L%2FdpxCdLr4vl952tLqLNWxr6bbB5y7bxbhDJyhYDIOI2g&asPdf=false
     private fun shareViaEmail() {
+
+
+        if (getMailLinks().isEmpty()) {
+            Toast.makeText(activity, "Please select at least one Brochure", Toast.LENGTH_LONG).show()
+            return
+        }
+
 
         val outlookPackageName = "com.microsoft.office.outlook"
         val playStoreUri = Uri.parse("market://details?id=$outlookPackageName")

@@ -37,8 +37,7 @@ class CpCreationApprovalDetailFragment : BaseFragment() {
 
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_cp_creation_approval, container, false)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         initView(rootView = binding.root)

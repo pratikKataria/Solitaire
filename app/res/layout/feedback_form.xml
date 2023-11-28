@@ -169,8 +169,8 @@
                         android:background="@drawable/chip_background_selector"
                         android:text="Cold" />
 
+<!--                    extra-->
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chipBooked"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -178,7 +178,6 @@
                         android:text="Booked" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chipLost"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

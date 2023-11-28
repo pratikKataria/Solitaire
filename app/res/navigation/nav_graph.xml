@@ -276,8 +276,10 @@
         android:id="@+id/createdtask"
         android:name="com.stetig.solitaire.fragment.CreateTaskFragment"
         android:label="CreateTaskFragment"
-        tools:layout="@layout/fragment_create_task"
-        >
+        tools:layout="@layout/fragment_create_task">
+        <action
+            android:id="@+id/action_createdtask_to_opportunityDetailFragment"
+            app:destination="@id/opportunityDetailFragment" />
     </fragment>
 
 <!--    <fragment-->

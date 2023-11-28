@@ -449,6 +449,13 @@ class MainActivity : BaseActivity() {
                                 return
                             }
 
+                            if (data.records.size == 1) {
+                                callTaskRequest.opportunityId = data.records[0]?.id
+                                popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
+                                popUpBinding.yesNoCallDetail.detailRootLayout.visibility = VISIBLE
+                                return
+                            }
+
                             popUpBinding.opportunityOrCp.rootLayout.visibility = GONE
                             popUpBinding.selectOpportunityLayout.llSelectOpty.visibility = VISIBLE
 
@@ -456,12 +463,9 @@ class MainActivity : BaseActivity() {
                             val autoCompleteTextView = popUpBinding.selectOpportunityLayout.autoCompleteTextView
                             autoCompleteTextView.threshold = 3
                             autoCompleteTextView.setAdapter(customAdapter)
-                            popUpBinding.selectOpportunityLayout.autoCompleteTextView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                                    callTaskRequest.opportunityId = data.records[position]?.id
-                                }
-
-                                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                            popUpBinding.selectOpportunityLayout.autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view_, position, _ ->
+                                print("selected Opportunity" + data.records[position]?.id)
+                                callTaskRequest.opportunityId = data.records[position]?.id
                             }
 
 //                            val listOfRecords = data.records.map { "Opportunity: ${it?.name}\n Project Name: ${it?.projectR?.name}" ?: "" }
