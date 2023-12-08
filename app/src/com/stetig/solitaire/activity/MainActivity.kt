@@ -269,7 +269,7 @@ class MainActivity : BaseActivity() {
             checkPermissions()
         }
         binding.toolBarLayout.imageViewNotification.setOnClickListener {
-//            navHostFragment.navController.popBackStack(R.id.homeFragment, false)
+            // navHostFragment.navController.popBackStack(R.id.homeFragment, false)
             navHostFragment.navController.popBackStack()
             navHostFragment.navController.navigate(com.stetig.solitaire.R.id.homeFragment)
             navHostFragment.navController.navigate(
@@ -318,7 +318,6 @@ class MainActivity : BaseActivity() {
         startCallHandlerService()
         checkForCallPopUp()
         checkNotification()
-//        checkPermissions()
 
 //        FirebaseCrashlytics.getInstance().recordException(RuntimeException("Send Logs"))
         if (SalesforceSDKManager.getInstance().userAccountManager.currentUser == null) return

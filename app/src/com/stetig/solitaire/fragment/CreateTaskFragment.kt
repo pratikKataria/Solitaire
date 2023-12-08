@@ -17,6 +17,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -34,8 +35,6 @@ import com.stetig.solitaire.api.Query
 import com.stetig.solitaire.data.AllOpportunityDto
 import com.stetig.solitaire.data.CreateTask
 import com.stetig.solitaire.data.CreateTaskResponse
-import com.stetig.solitaire.data.ManualTaskListResponse
-import com.stetig.solitaire.data.OpportunityByMobileNumberResponse
 import com.stetig.solitaire.data.Task
 import com.stetig.solitaire.databinding.FragmentCreateTaskBinding
 import com.stetig.solitaire.utils.Utils
@@ -151,18 +150,30 @@ class CreateTaskFragment : BaseFragment() {
 //                    opp_Id = "Cost sheet",
 //                )
 //                commonClassForApi.ApprovalRequest(disposableObserver,data,auth)
-                val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
-                commonClassForApi?.createTask(
-                    disposableObserverTaskFromCallResponse,
-                    createTaskRequest,
-                    "Bearer " + account.authToken
-                )
+
+
+
             }
             builder.setNegativeButton("Cancel") { dialog, which ->
                 dialog.cancel()
             }
             val alertDialog: AlertDialog = builder.create()
             alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
+                if (createTaskRequest.opp_Id == null) {
+                    Toast.makeText(context, "Please Select Opportunity", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    alertDialog.dismiss()
+                    val account = SalesforceSDKManager.getInstance().userAccountManager.currentUser
+                    commonClassForApi?.createTask(
+                        disposableObserverTaskFromCallResponse,
+                        createTaskRequest,
+                        "Bearer " + account.authToken
+                    )
+                }
+
+            })
 
         }
     }

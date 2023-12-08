@@ -36,7 +36,7 @@ class CpCreationRecyclerAdapter(private var context: Context, private var projec
             data?.sourcingManager?.name?:""
         )
         approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalReqDate.text = Utils.getFormattedDateWithTimeSF(
-            data?.level2datetime?:""
+            data?.level1submissiondatetime?:""
         )
 
         approvalDetailCardViewHolder.cardViewApprovalBinding.cpApprovalLinearLayout.setOnClickListener {

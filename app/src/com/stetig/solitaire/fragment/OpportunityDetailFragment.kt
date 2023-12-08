@@ -61,7 +61,7 @@ class OpportunityDetailFragment : BaseFragment() {
 
                 val opty = data.records[0]
                 binding.optDetailsName.text = Utils.checkValueOrGiveDef(opty.name)
-                binding.optDetailsProjectSelected.text = Utils.checkValueOrGiveDef(opty.projectTypeC)
+                binding.optDetailsProjectSelected.text = Utils.checkValueOrGiveDef(opty?.projectR?.name)
                 binding.mobileNumberText.text = Utils.checkValueOrGiveDef(opty.accountMobileNumberC)
                 binding.createdDate.text = Utils.getFormattedDateSF(opty.createdDate)
                 binding.stage.text = Utils.checkValueOrGiveDef(opty.stageName)

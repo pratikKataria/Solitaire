@@ -455,6 +455,7 @@
                             android:insetBottom="0dp"
                             android:text="@string/feedback"
                             android:textAllCaps="false"
+                            android:visibility="gone"
                             android:textColor="@color/white"
                             app:cornerRadius="8dp"/>
 

@@ -41,6 +41,8 @@ data class Opportunity(
         val accountMobileNumberC: String,
         @SerializedName("Configuration__c")
         val configurationC: String,
+        @SerializedName("Project__r")
+        val projectR: ProjectR,
     ) {
         data class Attributes(
             @SerializedName("type")
