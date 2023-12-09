@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <servers>
-    <server name="solitaire Login" url="https://solitaire--dev.sandbox.lightning.force.com/" />
+<!--    <server name="solitaire Login" url="https://solitaire&#45;&#45;dev.sandbox.lightning.force.com/" />--> SB
+    <server name="solitaire Login" url="https://solitaire.my.salesforce.com" /> <!-- PD-->
     <server name="Sandbox" url="https://test.salesforce.com" />
 </servers>

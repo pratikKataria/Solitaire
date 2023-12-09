@@ -21,8 +21,8 @@ public class RestClient {
     private static int CONNECT_TIME_OUT = 60;
     private static int READ_TIME_OUT = 60;
 
-//    private static String BASE_URL = "https://solitaire-developers.my.salesforce.com/services/apexrest/solitaire_Call_Sync_App/";/*production v2*/
-    private static String BASE_URL = "https://solitaire--dev.sandbox.my.salesforce.com/services/apexrest/";/*Dev v2*/
+    private static String BASE_URL = "https://solitaire.my.salesforce.com/services/apexrest/";/*production v2*/
+//    private static String BASE_URL = "https://solitaire--dev.sandbox.my.salesforce.com/services/apexrest/";/*Dev v2*/
 
     private static Activity mActivity;
 
