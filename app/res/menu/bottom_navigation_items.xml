@@ -7,7 +7,7 @@
         android:id="@+id/createdtask"
         android:icon="@drawable/ic_task"
         android:checked="false"
-        android:title="Task" />
+        android:title="Tasks" />
     <item
         android:id="@+id/projectFragment"
         android:icon="@drawable/ic_project"
