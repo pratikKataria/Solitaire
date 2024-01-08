@@ -15,16 +15,16 @@
 
     <string name="scheduled_visit">Scheduled</string>
     <string name="ongoing_visit">Ongoing</string>
-    <string name="past_visit">Past</string>
-
+    <string name="past_visit">Completed Site Visits</string>
+<!--    <string name="past_visit">Past</string>-->
     <string name="bip">BIP</string>
     <string name="opportunities_in_qualification">Opportunities in Qualification</string>
     <string name="_0">0</string>
     <string name="left_image">left_image</string>
     <string name="tasks_for_today">Today\'s Task</string>
-    <string name="site_visit">Proposed Site Visits</string>
+    <string name="site_visit">Proposed Site Visit</string>
     <string name="follow_up">Follow Ups</string>
-    <string name="face_to_face">Allotted Site Visits</string>
+    <string name="face_to_face">Aloted Site Visit</string>
     <string name="all_tasks">All tasks</string>
     <string name="stage_wise_opportunities">Stage-wise opportunities</string>
     <string name="status_wise_opportunities">Status-wise opportunities</string>
@@ -32,11 +32,11 @@
     <string name="my_task_for_today">My task for today</string>
     <string name="image_desc">image_desc</string>
     <string name="active_opportunities">Active opportunities</string>
-    <string name="expiring_opportunities_for_next_7_days">Expiring opportunities for next 7 days</string>
+    <string name="expiring_opportunities_for_next_7_days">Opportunity Expiring In Next 7 Days</string>
     <string name="logout">Logout</string>
+    <string name="app_version">App Version</string>
     <string name="profile">profile</string>
     <string name="qualification">Qualification</string>
-    <string name="bookingconfirmed">Booking Confirmed</string>
     <string name="project_details">project details</string>
     <string name="city">City</string>
     <string name="name">Name</string>

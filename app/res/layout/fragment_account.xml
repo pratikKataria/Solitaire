@@ -203,6 +203,24 @@
                 android:fontFamily="@font/myriad_pro_regular"
                 android:text="@string/logout" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayoutAppVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="17dp">
+            <TextView
+                android:id="@+id/appVersion_text"
+                style="@style/AccountActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="40dp"
+               android:textColor="#F5F5F5"
+            android:text="@string/app_version"/>
+        </LinearLayout>
 
     </LinearLayout>
 </layout>
