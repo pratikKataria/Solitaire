@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_12sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/myriad_pro_semi_bold"
+            android:text="Premission Consent"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_20sdp" />
+
+        <TextView
+            android:id="@+id/permission_subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="We assured that, we prioritize your privacy and will only use this permission for the intended purpose. Your personal information is treated with the utmost care, and we do not store or misuse any sensitive data.Granting this permission ensures a seamless and efficient experience within the app."
+            android:textColor="#343431"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/callpermission_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/myriad_pro_semi_bold"
+            android:text="Call Permission"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_16sdp" />
+
+        <TextView
+            android:id="@+id/callpermission_subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Granting this permission enables the app to intercept and handle outgoing calls. The
+app requires this capability to monitor and document outgoing calls initiated by
+your internal teams. Through processing outgoing calls, the app can gather crucial
+details, including call duration and timing, thereby ensuring that professional calls
+are executed punctually."
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_10sdp" />
+
+
+        <TextView
+            android:id="@+id/callLog_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:fontFamily="@font/myriad_pro_semi_bold"
+            android:text="Call Log Permission"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_16sdp" />
+
+        <TextView
+            android:id="@+id/callLog_subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="2.1 The app requires access to the call log on your device. By using our app, you acknowledge and consent to the app accessing and collecting information from your call log.\n\n2.2  We collect call log information for the explicit purpose of logging call duration and time for professional use. This access allows us to enhance the professional experience within our app and provide valuable features tailored to your professional needs.\nThe app logs call duration to assist in professional time management and to provide users with insights into their communication patterns.\nAccess to the call log enables us to timestamp communication activities, aiding in professional record-keeping and facilitating a more organized and efficient workflow.\nWe prioritize the security and privacy of your call log information. This data is treated with the utmost confidentiality and is utilized exclusively for the professional purposes outlined in this privacy policy"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_10sdp" />
+
+
+        <TextView
+            android:id="@+id/image_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:fontFamily="@font/myriad_pro_semi_bold"
+            android:text="Image Upload"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_16sdp" />
+
+        <TextView
+            android:id="@+id/image_subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Solitaire requires access to your device's photos and media files to enable you to upload images and enhance your experience within the app. This permission allows you to effortlessly share and contribute visual content, such as photos or documents.
+We respect your privacy and want to assure you that we handle your images with the utmost care.\n\nThe app will only access the selected images you choose to upload, and we do not store or share your personal media without your explicit consent.
+Granting this permission ensures that you can seamlessly share and engage with visual content, making the app more versatile and enjoyable for you. If you have any concerns or questions regarding the use of this permission, please refer to our Privacy Policy or contact our support team at [your contact information].
+"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/_10sdp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_meat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:text="By checking the box i agree to provide the premissions" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/grantBtn"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="@dimen/_80sdp"
+            android:backgroundTint="@color/black"
+            android:elevation="0dp"
+            android:fontFamily="@font/myriad_pro_regular"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Grant"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+</layout>
+
