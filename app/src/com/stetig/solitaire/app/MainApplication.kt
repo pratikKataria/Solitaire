@@ -34,7 +34,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.salesforce.androidsdk.mobilesync.app.MobileSyncSDKManager
 import com.stetig.solitaire.BuildConfig
-import com.stetig.solitaire.R
 import com.stetig.solitaire.activity.MainActivity
 import org.acra.config.mailSender
 import org.acra.config.toast

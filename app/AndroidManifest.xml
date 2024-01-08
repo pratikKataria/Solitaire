@@ -96,6 +96,9 @@
 		android:name="com.stetig.solitaire.C2D_MESSAGE"
 		android:protectionLevel="signature"
 		tools:ignore="ManifestOrder" />
+	<uses-feature
+		android:name="android.hardware.telephony"
+		android:required="false" />
 
 	<queries>
 		<package android:name="com.whatsapp" />
