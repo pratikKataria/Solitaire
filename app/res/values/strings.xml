@@ -37,6 +37,7 @@
     <string name="app_version">App Version</string>
     <string name="profile">profile</string>
     <string name="qualification">Qualification</string>
+    <string name="bookingconfirmed">Booking Confirmed</string>
     <string name="project_details">project details</string>
     <string name="city">City</string>
     <string name="name">Name</string>
@@ -86,6 +87,8 @@
     <string name="campaign_approval_req">Campaign approval requests</string>
     <string name="source_change_approval_req">Source Change approval requests</string>
     <string name="channel_partner_creation_approval_req">Channel Partner creation approval requests</string>
+    <string name="app_permissions">App Permissions</string>
+    <string name="allow_all_permission">Allow All Permission</string>
 
 
     <string-array name="visitedat_dropdown_values">

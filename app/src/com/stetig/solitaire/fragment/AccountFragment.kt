@@ -59,7 +59,7 @@ class AccountFragment : BaseFragment() {
     private var onDataReceiveListener = object : CommonClassForQuery.OnDataReceiveListener {
         @SuppressLint("SetTextI18n")
         override fun onDataReceive(data: Any) {
-            val packageInfo = packageManager.getPackageInfo(packageName, 0)
+            val packageInfo = requireActivity().packageManager.getPackageInfo(requireActivity().packageName, 0)
             val versionName = packageInfo.versionName
             val versionCode = PackageInfoCompat.getLongVersionCode(packageInfo)
             if (data is AccountDetail && data.records.isNotEmpty()) {

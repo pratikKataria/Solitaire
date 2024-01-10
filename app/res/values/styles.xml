@@ -171,6 +171,11 @@
         <item name="android:textAppearance">@style/ChipStyle</item>
     </style>
 
+    <style name="WideDialogSecond" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
     <style name="ChipStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorAccent</item>

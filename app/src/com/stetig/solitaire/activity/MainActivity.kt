@@ -70,6 +70,7 @@ import com.stetig.solitaire.data.UpdateTokenRes
 import com.stetig.solitaire.databinding.ActivityMainBinding
 import com.stetig.solitaire.databinding.LayoutAlertDialogCallPopUpBinding
 import com.stetig.solitaire.databinding.LayoutAlertDialogUpdateVersionBinding
+import com.stetig.solitaire.dialog.PermissionDialog
 import com.stetig.solitaire.fragment.CreateTaskFragment
 import com.stetig.solitaire.utils.Alarm
 import com.stetig.solitaire.utils.CallDuration
@@ -78,6 +79,7 @@ import com.stetig.solitaire.utils.GetInCommingNumber
 import com.stetig.solitaire.utils.SharedPrefs
 import com.stetig.solitaire.utils.UpcommingNotificationPrefs
 import com.stetig.solitaire.utils.Utils
+import com.stetig.solitaire.utils.checkAllPermissionAllow
 import io.reactivex.observers.DisposableObserver
 import retrofit2.HttpException
 import java.text.SimpleDateFormat
@@ -262,11 +264,15 @@ class MainActivity : BaseActivity() {
         commonClassForApi = CommonClassForApi.getInstance(this)
 
         setupNavigation()
-        checkForOverlay()
+        /*checkForOverlay()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             checkPermissions2()
         } else {
             checkPermissions()
+        }
+        */
+        if (!checkAllPermissionAllow()) {
+            PermissionDialog(this).show()
         }
         binding.toolBarLayout.imageViewNotification.setOnClickListener {
             // navHostFragment.navController.popBackStack(R.id.homeFragment, false)

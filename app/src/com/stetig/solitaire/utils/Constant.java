@@ -15,3 +15,4 @@ public interface Constant {
     String CALL_DURATION = "call_duration";
     String CALL_DURATION_SECONDS = "CDS";
 }
+
